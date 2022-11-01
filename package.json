@@ -8,6 +8,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@iconify-json/mdi": "^1.1.34",
     "@intlify/nuxt3": "^0.2.4",
     "@nuxtjs/apollo": "^5.0.0-alpha.3",
     "@nuxtjs/tailwindcss": "^6.1.2",
@@ -15,6 +16,8 @@
     "@vueuse/core": "^9.4.0",
     "@vueuse/nuxt": "^9.4.0",
     "nuxt": "3.0.0-rc.12",
+    "unplugin-icons": "^0.14.13",
+    "unplugin-vue-components": "^0.22.9",
     "vue-gtag-next": "^1.14.0"
   },
   "dependencies": {

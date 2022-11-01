@@ -1,5 +1,7 @@
 <template>
-  <div class="text-red-500">Home</div>
+  <div class="text-red-500">
+    <i-mdi-clover />
+  </div>
 </template>
 
 <script lang="ts" setup>

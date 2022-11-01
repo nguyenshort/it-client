@@ -1,4 +1,8 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
+import Icons from "unplugin-icons/vite"
+import Components from 'unplugin-vue-components/vite'
+import IconsResolver from 'unplugin-icons/resolver'
+
 export default defineNuxtConfig({
     modules: ['@nuxtjs/tailwindcss', '@nuxtjs/apollo', '@vueuse/nuxt', '@intlify/nuxt3'],
     apollo: {
@@ -36,5 +40,20 @@ export default defineNuxtConfig({
                 }
             }
         }
+    },
+    vite: {
+        plugins: [
+            Components({
+                types: [],
+                resolvers: [
+                    IconsResolver({
+                        prefix: 'i'
+                    }),
+                ]
+            }),
+            Icons({
+                autoInstall: true
+            })
+        ]
     }
 })
