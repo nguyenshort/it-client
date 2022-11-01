@@ -8,12 +8,15 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     IBxBxsCategoryAlt: typeof import('~icons/bx/bxs-category-alt')['default']
+    IIconoirChatBubble: typeof import('~icons/iconoir/chat-bubble')['default']
     IIcOutlineAlternateEmail: typeof import('~icons/ic/outline-alternate-email')['default']
     IIcRoundVpnKey: typeof import('~icons/ic/round-vpn-key')['default']
     IIcSharpSettings: typeof import('~icons/ic/sharp-settings')['default']
+    ILucideSearch: typeof import('~icons/lucide/search')['default']
     IMaterialSymbolsArrowCircleRight: typeof import('~icons/material-symbols/arrow-circle-right')['default']
     IMaterialSymbolsClose: typeof import('~icons/material-symbols/close')['default']
     IMdiPencilCircle: typeof import('~icons/mdi/pencil-circle')['default']
+    IOcticonIssueDraft16: typeof import('~icons/octicon/issue-draft16')['default']
     IRiCompass3Fill: typeof import('~icons/ri/compass3-fill')['default']
     IRiUser4Fill: typeof import('~icons/ri/user4-fill')['default']
     ITablerSearch: typeof import('~icons/tabler/search')['default']

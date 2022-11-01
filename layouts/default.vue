@@ -7,6 +7,7 @@
       <nuxt-page />
     </div>
     <lazy-modal-auth />
+    <lazy-includes-spotlight />
   </div>
 </template>
 

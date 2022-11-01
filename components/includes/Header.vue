@@ -32,6 +32,7 @@
         <form
             class="h-full w-[280px]"
             action="/search"
+            @click="$modal().open('spotlight')"
         >
           <div
               class="flex h-full w-full cursor-pointer items-center rounded-full border pl-4 transition hover:border-primary-500 hover:bg-primary-50 hover:text-primary-500 focus:outline-0"
@@ -47,7 +48,7 @@
 
         <div class="ml-6 text-[15px] font-semibold">Blog</div>
 
-        <button class="ml-6" @click="$router.push('/private')">
+        <button class="ml-6" @click="$modal().open('spotlight')">
           <i-ic-sharp-settings class="text-[20px]"/>
         </button>
       </div>
