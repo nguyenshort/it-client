@@ -1,6 +1,7 @@
-import {defineNuxtPlugin} from "#imports"
+import {defineNuxtPlugin, useKoki} from "#imports"
 import {initializeApp} from "@firebase/app";
 import {getAnalytics} from "@firebase/analytics";
+import {getAuth} from "firebase/auth";
 
 export default defineNuxtPlugin(nuxtApp => {
 
@@ -15,12 +16,27 @@ export default defineNuxtPlugin(nuxtApp => {
         measurementId: "G-4G3BL27GFH"
     }
 
-    const ctx = initializeApp(firebaseConfig)
-    const analytics = getAnalytics(ctx)
+    const app = initializeApp(firebaseConfig)
+    const analytics = getAnalytics(app)
+    const auth = getAuth(app)
+    const kokiApp = useKoki()
+
+    nuxtApp.hooks.hook('app:mounted', () => {
+        // Listen to Supabase auth changes
+        auth.onIdTokenChanged(async (user) => {
+            if (user) {
+                kokiApp.token = await user.getIdToken()
+                await kokiApp.getUser()
+            }
+            else {
+                kokiApp.token = ''
+            }
+        })
+    })
 
     return {
         provide: {
-            firebase: ctx,
+            firebase: app,
             analytics
         }
     }
