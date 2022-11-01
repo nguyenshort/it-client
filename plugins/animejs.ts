@@ -6,7 +6,7 @@ export const ANIME_CONSTANT = Symbol.for('animejs')
 export default defineNuxtPlugin(nuxtApp => {
     return {
         provide: {
-            [ANIME_CONSTANT]: anime
+            anime
         }
     }
 })

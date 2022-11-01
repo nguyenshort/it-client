@@ -6,6 +6,7 @@
     <div class='w-full mx-auto min-h-[52vh] max-w-bootstrap px-4'>
       <nuxt-page />
     </div>
+    <lazy-modal-auth />
   </div>
 </template>
 

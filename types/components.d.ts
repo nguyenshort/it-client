@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    IMaterialSymbolsClose: typeof import('~icons/material-symbols/close')['default']
     IRiCompass3Fill: typeof import('~icons/ri/compass3-fill')['default']
   }
 }
