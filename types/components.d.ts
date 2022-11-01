@@ -7,6 +7,6 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    IMdiClover: typeof import('~icons/mdi/clover')['default']
+    IRiCompass3Fill: typeof import('~icons/ri/compass3-fill')['default']
   }
 }

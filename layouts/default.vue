@@ -1,7 +1,11 @@
 <template>
-  <div id="default">
+  <div
+      class="text-gray-600 min-h-screen"
+  >
     <lazy-includes-header />
-    <nuxt-page />
+    <div class='w-full mx-auto min-h-[52vh] max-w-bootstrap px-4'>
+      <nuxt-page />
+    </div>
   </div>
 </template>
 

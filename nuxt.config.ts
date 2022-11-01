@@ -1,10 +1,38 @@
-// https://v3.nuxtjs.org/api/configuration/nuxt.config
-import Icons from "unplugin-icons/vite"
 import Components from 'unplugin-vue-components/vite'
+import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
+import path from 'path'
 
+import EnvGenerator from './utils/vite/env'
+
+// https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-    modules: ['@nuxtjs/tailwindcss', '@nuxtjs/apollo', '@vueuse/nuxt', '@intlify/nuxt3'],
+    app: {
+        head: {
+            meta: [
+                { name: "viewport", content: "width=device-width, initial-scale=1" },
+                { charset: "utf-8" },
+                { name: 'author', content: 'Yuan - A Queer Developer' }
+            ],
+            script: [],
+            link: [
+                { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+                { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+                { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,500,600,700' },
+                { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Merriweather:700,400,400' },
+                { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600&display=swap' }
+            ]
+        }
+    },
+    modules: ['@nuxtjs/tailwindcss', '@nuxtjs/apollo', '@vueuse/nuxt', '@intlify/nuxt3', [
+        '@pinia/nuxt',
+        {
+            autoImports: ['defineStore'],
+        }
+    ]],
+    alias: {
+        pinia: '/node_modules/@pinia/nuxt/node_modules/pinia/dist/pinia.mjs',
+    },
     apollo: {
         clients: {
             default: './apollo/shinzo/index.ts'
@@ -41,6 +69,14 @@ export default defineNuxtConfig({
             }
         }
     },
+    runtimeConfig: {
+        // Private config that is only available on the server
+        apiSecret: '123',
+        // Config within public will be also exposed to the client
+        public: {
+            apiBase: '/api'
+        }
+    },
     vite: {
         plugins: [
             Components({
@@ -48,12 +84,14 @@ export default defineNuxtConfig({
                 resolvers: [
                     IconsResolver({
                         prefix: 'i'
-                    }),
-                ]
+                    })
+                ],
+                dts: path.resolve(__dirname, 'types/components.d.ts')
             }),
             Icons({
                 autoInstall: true
-            })
+            }),
+            EnvGenerator()
         ]
     }
 })

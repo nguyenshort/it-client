@@ -1,11 +1,13 @@
 <template>
   <div class="text-red-500">
-    <i-mdi-clover />
+    <lazy-home-banner />
   </div>
 </template>
 
 <script lang="ts" setup>
-import {useAsyncQuery, useNuxtApp} from "#imports";
+import {useAsyncQuery, useKoki, useNuxtApp} from "#imports"
+
+const kokiApp = useKoki()
 
 const query = gql`
   query getShips($limit: Int!) {
