@@ -1,71 +1,142 @@
 <template>
-  <div class='menu-item _has_sub'>
+  <div
+      class='menu-item _has_sub categories'
+      @mouseenter="showCategories"
+      @mouseleave="hideCategories"
+  >
     <button class='flex items-center'>
-      <i-ri-compass-3-fill class='text-[23px]' />
-      <h5 class='mb-0 text-current font-semibold ml-2 text-[15px]'>
-        Technology
-      </h5>
+      <i-bx-bxs-category-alt class='text-[23px]' />
+      <h5 class='mb-0 text-current font-semibold ml-2 text-[15px]'>Category</h5>
     </button>
 
-    <div class='absolute sub-menu w-[580px] h-[312px] top-full z-20'>
+    <div class='absolute sub-menu w-[150px] h-[312px] top-full z-20'>
       <div
           class='sub-menu-content'
-          @mouseleave='activeParent = parents[0]'
       >
-        <div class='relative flex w-full h-full rounded-lg overflow-hidden'>
-          <div class='h-full bg-zinc-900 w-[120px] py-1 flex-shrink-0'>
-            <ul class='parents'>
-              <li
-                  v-for='parent in parents'
-                  :key='parent'
-                  :class='{
-            active: activeParent === parent,
-          }'
-                  @mouseenter='activeParent = parent'
-              >
-                <a>
-                  {{ parent }}
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class='dynamic-menu-content w-full h-full bg-zinc-800 relative overflow-hidden'>
-
-            <ul
-                v-for='([name, group], index) in Object.entries(languages)'
-                :key='index'
-                :data-name='name'
-                class='langs-group'
-                :class='{
-             active: activeParent.toLowerCase() === name.toLowerCase(),
-          }'
-            >
-              <li
-                  v-for='lang in group'
-                  :key='lang'
-                  class='w-1/3'
-              >
-                <a>{{ lang }}</a>
-              </li>
-            </ul>
-
-          </div>
-        </div>
+        <ul ref="categoriesRef">
+          <li
+              v-for="category in categories"
+              :key="category.id"
+          >
+            <router-link to="/">
+              <component :is="category.icon" />
+              <span>{{ category.name }}</span>
+            </router-link>
+          </li>
+        </ul>
       </div>
     </div>
 
   </div>
 </template>
 
-<script lang='ts' setup>
-const parents = ref<string[]>(['Backend', 'Frontend', 'Mobile'])
-const activeParent = ref<string>('Backend')
+<script lang="ts" setup>
 
-const languages = ref<Record<string, string[]>>({
-  backend: ['JavaScript', 'TypeScript', 'Python', 'PHP', 'C#', 'C++', 'Go', 'Ruby', 'Rust', 'Objective-C', 'MongoDB', 'Java'],
-  frontend: ['React', 'Vue', 'Angular', 'Svelte', 'Jquery', 'Vanali'],
-  mobile: ['Android', 'iOS', 'Flutter', 'React Native', 'Swift', 'Kotlin'],
-})
+import MdiWeb from '~icons/mdi/web'
+import UilMobileVibrate from '~icons/uil/mobile-vibrate'
+import PhFigmaLogo from '~icons/ph/figma-logo'
+import NimbusMarketing from '~icons/nimbus/marketing'
+import ClarityBlocksGroupSolid from '~icons/clarity/blocks-group-solid'
+import ClarityInternetOfThingsSolid from '~icons/clarity/internet-of-things-solid'
+import MdiAppleIcloud from '~icons/mdi/apple-icloud'
+import UilServers from '~icons/uil/servers'
+import PhDatabaseFill from '~icons/ph/database-fill'
+import {nextTick, shallowRef, useNuxtApp} from "#imports";
+
+
+const categories = shallowRef<any[]>([
+  {
+    id: '1',
+    name: 'Mobile',
+    slug: 'mobile',
+    icon: UilMobileVibrate
+  },
+  {
+    id: '2',
+    name: 'Web',
+    slug: 'web',
+    icon: MdiWeb
+  },
+  {
+    id: '3',
+    name: 'Design',
+    slug: 'design',
+    icon: PhFigmaLogo
+  },
+  {
+    id: '4',
+    name: 'Marketing',
+    slug: 'marketing',
+    icon: NimbusMarketing
+  },
+  {
+    id: '5',
+    name: 'Blockchain',
+    slug: 'marketing',
+    icon: ClarityBlocksGroupSolid
+  },
+  {
+    id: '6',
+    name: 'IoT',
+    slug: 'iot',
+    icon: ClarityInternetOfThingsSolid
+  },
+  {
+    id: '7',
+    name: 'Cloud',
+    slug: 'cloud',
+    icon: MdiAppleIcloud
+  },
+  {
+    id: '8',
+    name: 'DevOps',
+    slug: 'devops',
+    icon: UilServers
+  },
+  {
+    id: '10',
+    name: 'Data Science',
+    slug: 'data-science',
+    icon: PhDatabaseFill
+  }
+])
+
+const categoriesRef = ref<HTMLUListElement>()
+const { $anime } = useNuxtApp()
+
+const showCategories = () => {
+  nextTick(() => $anime({
+    targets: categoriesRef.value?.querySelectorAll('li'),
+    translateY: [-30, 0],
+    opacity: [0, 1],
+    //duration: 300,
+    // easing: 'easeOutQuad',
+    delay: (el, i) => 100 + 30 * i
+  }))
+}
+
+const hideCategories = () => {
+  categoriesRef.value?.querySelectorAll('li').forEach((li) => {
+    li.style.opacity = '0'
+    li.style.transform = 'translateY(-30px)'
+  })
+}
+
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.menu-item.categories {
+  ul {
+    background: #18181b;
+    @apply mb-0 rounded-lg py-2 overflow-hidden;
+    li {
+      a {
+        @apply flex items-center py-2 px-3 text-white transition hover:bg-primary-500;
+        span {
+          @apply ml-2;
+        }
+      }
+    }
+  }
+}
+</style>

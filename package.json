@@ -9,6 +9,8 @@
     "build:env": "sed 's/=.*/=/' .env > .env.example"
   },
   "devDependencies": {
+    "@iconify-json/bx": "^1.1.4",
+    "@iconify-json/clarity": "^1.1.4",
     "@iconify-json/ic": "^1.1.9",
     "@iconify-json/material-symbols": "^1.1.21",
     "@iconify-json/mdi": "^1.1.34",

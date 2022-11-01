@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    IBxBxsCategoryAlt: typeof import('~icons/bx/bxs-category-alt')['default']
     IIcOutlineAlternateEmail: typeof import('~icons/ic/outline-alternate-email')['default']
     IIcRoundVpnKey: typeof import('~icons/ic/round-vpn-key')['default']
     IIcSharpSettings: typeof import('~icons/ic/sharp-settings')['default']

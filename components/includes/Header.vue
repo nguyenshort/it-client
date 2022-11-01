@@ -13,19 +13,19 @@
       </div>
 
       <div class="menu-list mr-auto flex h-full flex-shrink-0 items-center text-gray-500">
-        <lazy-menu-tech />
-        <lazy-menu-categories />
+        <lazy-menu-tech/>
+        <lazy-menu-categories/>
         <div class="menu-item">
           <router-link
               to="/studio"
-                      class="flex items-center text-gray-500 hover:text-gray-500"
-                  >
-                    <i-mdi-pencil-circle class="text-[23px]" />
-                    <h5 class="mb-0 ml-2 text-[15px] font-semibold text-current">
-                      Studio
-                    </h5>
-                  </router-link>
-                </div>
+              class="flex items-center text-gray-500 hover:text-gray-500"
+          >
+            <i-mdi-pencil-circle class="text-[23px]"/>
+            <h5 class="mb-0 ml-2 text-[15px] font-semibold text-current">
+              Studio
+            </h5>
+          </router-link>
+        </div>
       </div>
 
       <div class="flex h-full w-full justify-end py-3.5 pr-3">
@@ -36,7 +36,7 @@
           <div
               class="flex h-full w-full cursor-pointer items-center rounded-full border pl-4 transition hover:border-primary-500 hover:bg-primary-50 hover:text-primary-500 focus:outline-0"
           >
-            <i-tabler-search class="flex-shrink-0 text-current" />
+            <i-tabler-search class="flex-shrink-0 text-current"/>
             <span class="ml-2 text-current">Tìm kiếm...</span>
           </div>
         </form>
@@ -48,7 +48,7 @@
         <div class="ml-6 text-[15px] font-semibold">Blog</div>
 
         <button class="ml-6" @click="$router.push('/private')">
-          <i-ic-sharp-settings class="text-[20px]" />
+          <i-ic-sharp-settings class="text-[20px]"/>
         </button>
       </div>
 
@@ -71,12 +71,15 @@
   .header-logo .logo img {
     @apply block w-[50px];
   }
+
   .header-user {
     @apply flex flex-shrink-0 items-center;
   }
+
   .menu-list > .menu-item {
     @apply relative ml-7 first:ml-0;
   }
+
   .menu-list > .menu-item > button {
     @apply hover:text-primary-500;
   }
@@ -94,9 +97,11 @@
     height: calc(100% - 15px);
     top: 15px;
   }
+
   .sub-menu-content {
     @apply before:absolute;
   }
+
   .sub-menu-content:before {
     bottom: 100%;
     left: 14px;
@@ -111,6 +116,7 @@
     @apply relative block text-[16px] font-medium text-gray-300 transition;
     padding: 12px 16px;
   }
+
   .parents > li.active > a {
     @apply bg-primary-500 text-white;
   }
@@ -118,6 +124,7 @@
   .langs-group {
     @apply absolute top-0 left-0 z-0 flex w-full scale-90 flex-wrap px-2 py-3 opacity-0 transition;
   }
+
   .langs-group.active {
     @apply z-10 scale-100 opacity-100;
   }
@@ -125,6 +132,7 @@
   .langs-group > li {
     @apply py-1 pr-8;
   }
+
   .langs-group > li > a {
     @apply block overflow-hidden rounded-md px-3 py-1 text-gray-300 transition hover:bg-primary-600;
   }
