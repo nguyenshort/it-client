@@ -33,6 +33,16 @@ export default defineNuxtConfig({
     alias: {
         pinia: '/node_modules/@pinia/nuxt/node_modules/pinia/dist/pinia.mjs',
     },
+    imports: {
+        autoImport: true,
+        imports: [
+            { name: 'useAuth', from: '@vueuse/firebase' },
+            { name: 'getDatabase', from: 'firebase/database' },
+            { name: 'ref', from: 'firebase/database', as: 'dbRef' },
+            { name: 'set', from: 'firebase/database', as: 'dbSet' },
+            { name: 'onValue', from: 'firebase/database', as: 'dbOnValue' }
+        ]
+    },
     apollo: {
         clients: {
             default: './apollo/shinzo/index.ts'

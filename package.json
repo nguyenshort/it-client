@@ -9,6 +9,7 @@
     "build:env": "sed 's/=.*/=/' .env > .env.example"
   },
   "devDependencies": {
+    "@iconify-json/ic": "^1.1.9",
     "@iconify-json/material-symbols": "^1.1.21",
     "@iconify-json/ri": "^1.1.3",
     "@intlify/nuxt3": "^0.2.4",
@@ -26,7 +27,10 @@
     "vue-gtag-next": "^1.14.0"
   },
   "dependencies": {
+    "@formkit/auto-animate": "^1.0.0-beta.3",
+    "@nguyenshort/vue-lottie": "^1.0.0",
     "@pinia/nuxt": "^0.4.3",
+    "@vueuse/firebase": "^9.4.0",
     "animejs": "^3.2.1",
     "dayjs": "^1.11.6",
     "firebase": "^9.13.0"

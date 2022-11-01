@@ -12,7 +12,7 @@
         </nuxt-link>
       </div>
 
-      <div @click="$modal().open('authModal')">ok</div>
+      <div @click="$modal().open('auth')">ok</div>
 
       <div class="menu-list mr-auto flex h-full flex-shrink-0 items-center text-gray-500">
         <lazy-menu-tech />

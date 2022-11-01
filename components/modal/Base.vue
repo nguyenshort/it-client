@@ -35,7 +35,7 @@
         <div class="px-7">
           <h4
               v-if="title"
-              class="font-semibold text-gray-600 text-lg lg:text-2xl mb-3"
+              class="font-bold text-gray-700 text-lg lg:text-2xl mb-3"
           >
             {{ title }}
           </h4>
@@ -123,10 +123,12 @@ watch(_visible, (value) => {
   }
 })
 
+// Init, Dispose from mitter
+const mitter = useEventBus<string>('modal')
+
 // Đóng modal
 const dispose = () => {
-  emit('dispose', data.value)
-  _visible.value = false
+  mitter.emit(`Modal-${props.event}-Dispose`, data.value)
 }
 
 // Mở modal
@@ -138,20 +140,18 @@ const init = () => {
 // Init value => mở modal để value default là true
 onMounted(() => nextTick(() => props.visible && init() ))
 
-// Init, Dispose from mitter
-const mitter = useEventBus<string>('modal')
-
 // Khi mound component nếu có event => lắng nghe event
 
 onMounted(() => {
   if(props.event) {
 
     mitter.on((event, payload) => {
-      if(event === props.event) {
+      if(event === `Modal-${props.event}`) {
         data.value = payload
         init()
-      } else if (event === props.event + 'Dispose') {
-        dispose()
+      } else if (event === `Modal-${props.event}-Dispose`) {
+        emit('dispose', data.value)
+        _visible.value = false
       }
     })
   }
@@ -175,9 +175,3 @@ defineExpose({
   init
 })
 </script>
-
-<style>
-.__base-content > form {
-  margin-bottom: -1.25rem;
-}
-</style>

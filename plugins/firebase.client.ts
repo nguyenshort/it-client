@@ -2,9 +2,6 @@ import {defineNuxtPlugin} from "#imports"
 import {initializeApp} from "@firebase/app";
 import {getAnalytics} from "@firebase/analytics";
 
-export const FIREBASE_CONTEXT_CONSTANT = Symbol.for('firebase')
-export const FIREBASE_ANALYTICS_CONSTANT = Symbol.for('firebase_analytics')
-
 export default defineNuxtPlugin(nuxtApp => {
 
     const firebaseConfig = {
@@ -23,8 +20,8 @@ export default defineNuxtPlugin(nuxtApp => {
 
     return {
         provide: {
-            [FIREBASE_CONTEXT_CONSTANT]: ctx,
-            [FIREBASE_ANALYTICS_CONSTANT]: analytics
+            firebase: ctx,
+            analytics
         }
     }
 })
