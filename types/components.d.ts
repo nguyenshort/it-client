@@ -9,9 +9,12 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     IIcOutlineAlternateEmail: typeof import('~icons/ic/outline-alternate-email')['default']
     IIcRoundVpnKey: typeof import('~icons/ic/round-vpn-key')['default']
+    IIcSharpSettings: typeof import('~icons/ic/sharp-settings')['default']
     IMaterialSymbolsArrowCircleRight: typeof import('~icons/material-symbols/arrow-circle-right')['default']
     IMaterialSymbolsClose: typeof import('~icons/material-symbols/close')['default']
+    IMdiPencilCircle: typeof import('~icons/mdi/pencil-circle')['default']
     IRiCompass3Fill: typeof import('~icons/ri/compass3-fill')['default']
     IRiUser4Fill: typeof import('~icons/ri/user4-fill')['default']
+    ITablerSearch: typeof import('~icons/tabler/search')['default']
   }
 }

@@ -73,7 +73,7 @@
           </p>
         </div>
 
-        <form-button type="primary" block>
+        <form-button type="primary" block class="mt-4">
           <template #icon>
             <i-material-symbols-arrow-circle-right />
           </template>
