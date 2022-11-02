@@ -11,6 +11,7 @@
     <div class='h-7'></div>
     <lazy-home-done />
     <div class='h-7'></div>
+    <lazy-home-show-case />
   </div>
 </template>
 

@@ -4,8 +4,8 @@
 
       <div class="flex">
         <div class="w-[300px] flex-shrink-0 flex flex-col">
-          <h1 class="text-current font-semibold text-[45px] mb-0">IT Square</h1>
-          <sub class="text-gray-400 mt-0.5 opacity-50 font-light">Learning with practice</sub>
+          <h1 class="text-current font-semibold text-[45px]">IT Square</h1>
+          <sub class="text-gray-400 mt-8 opacity-50 font-light">Learning with practice</sub>
 
           <div class="logo-icon mt-auto">
             <button>
@@ -25,7 +25,7 @@
             </button>
           </div>
 
-          <h4 class="text-gray-400 text-xs font-light mt-4">
+          <h4 class="text-gray-400 text-[10px] mt-4">
             © 2022 IT Square
           </h4>
 
@@ -45,7 +45,7 @@
                 v-for="(child, index2) in menu.child"
                 :key="index2"
               >
-                <h3 class="text-gray-400 font-light">{{ child }}</h3>
+                <h3 class="text-gray-400 text-[13px] mb-2.5">{{ child }}</h3>
               </li>
             </ul>
 
