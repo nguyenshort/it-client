@@ -8,6 +8,9 @@
     <client-only>
       <lazy-home-running />
     </client-only>
+    <div class='h-7'></div>
+    <lazy-home-done />
+    <div class='h-7'></div>
   </div>
 </template>
 

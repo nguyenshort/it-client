@@ -122,6 +122,14 @@ export default defineNuxtConfig({
               return { name: 'GridItem', from: 'vue3-grid-layout' }
             }
           },
+          (componentName) => {
+            // where `componentName` is always CapitalCase
+            if (componentName.toLowerCase() === 'swiper') {
+              return { name: 'Swiper', from: 'swiper/vue' }
+            } else if (componentName.toLowerCase() === 'swiperslide') {
+              return { name: 'SwiperSlide', from: 'swiper/vue' }
+            }
+          },
         ],
         dts: path.resolve(__dirname, 'types/components.d.ts')
       }),

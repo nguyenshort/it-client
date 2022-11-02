@@ -1,59 +1,92 @@
 <template>
   <lazy-template-session title="Running Project">
-    <grid-layout
-      v-model:layout="layout"
-      class="m-[-10px]"
-      :responsive-layouts="layout"
-      :cols="cols"
-      :col-num="24"
-      :row-height="30"
-      :vertical-compact="true"
-      :use-css-transforms="true"
-      :responsive="true"
-      :is-draggable="false"
-      :is-resizable="false"
-    >
-      <grid-item
-        v-for="(item, index) in layout"
-        :key="index"
-        :x="item.x"
-        :y="item.y"
-        :w="item.w"
-        :h="item.h"
-        :i="item.i"
+    <div class="h-[510px]">
+      <swiper
+        :slides-per-view="3"
+        :grid="{
+          rows: 2
+        }"
+        :space-between="20"
+        :pagination="{
+          clickable: true
+        }"
+        :modules="[Grid]"
       >
-        <component :is="item.component === 'RunningVertical' ? RunningVertical : RunningHorizontal" />
-      </grid-item>
-    </grid-layout>
+        <swiper-slide v-for="index in 10" :key="index">
+          <div class="w-full h-full bg-white border-b border-primary-500 border-b-[5px] overflow-hidden rounded-lg bg-white p-5">
+
+            <div class="flex pb-5 border-b border-gray-200 justify-between">
+              <div>
+                <h2 class="font-semibold text-[16px]">Design UI Todo App</h2>
+                <h5 class="text-[12px] font-semibold text-gray-500 mt-1">Friday, 08 Junly 2022</h5>
+              </div>
+
+              <a
+                href="javascript:void(0)"
+                class="block w-[35px] aspect-1 overflow-hidden flex-shrink-0"
+              >
+                <img class="w-full h-full object-contain" src="/images/done/kdn.png" alt=""/>
+              </a>
+
+            </div>
+
+            <div class="mt-2.5 text-[14px] font-semibold">Description: </div>
+            <p class="mt-1.5 text-[14px] line-clamp-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquam ducimus earum excepturi iure libero natus optio quisquam recusandae, temporibus. Consequatur, eligendi vel. Accusamus aspernatur cupiditate doloremque, illum ipsum qui?</p>
+
+            <div class="mt-2.5 text-[14px] font-semibold">Teams: </div>
+
+            <div class="flex h-[35px] mt-2.5 justify-between">
+              <div
+                class="relative h-[35px"
+                :style='{
+                  width: `${4 * 25}px`,
+                }'
+              >
+                <button
+                  v-for="index4 in 3"
+                  :key="index4"
+                  class="absolute top-0 left-0 h-[35px] w-[35px] overflow-hidden rounded-full border-2 border-white"
+                  :style="{
+                  transform: 'translateX(' + (index4 - 1) * 25 + 'px)',
+                  zIndex: index4
+                }"
+                >
+                  <img
+                    class="h-full w-full transform object-cover transition hover:scale-105"
+                    src="/images/avatar.jpeg"
+                    alt=""
+                  />
+                </button>
+              </div>
+
+              <button class='flex items-center text-gray-500'>
+                <i-ep-flag class='text-[12px]' />
+                <span class='ml-1 text-[12px]'>Jan 14</span>
+              </button>
+
+            </div>
+
+          </div>
+        </swiper-slide>
+      </swiper>
+    </div>
   </lazy-template-session>
 </template>
 
 <script lang="ts" setup>
-import { ref } from "#imports";
-import RunningVertical from '../template/RunningVertical.vue'
-import RunningHorizontal from '../template/RunningHorizontal.vue'
-
-
-interface GridItem {
-  x: number
-  y: number
-  w: number
-  h: number
-  i: string
-  component: any
-}
-
-const cols = { lg: 24, md: 20, sm: 12, xs: 8, xxs: 4 }
-
-const layout = ref<GridItem[]>([
-  { x: 0, y: 0, w: 5, h: 10, i: '0', component: 'RunningVertical' },
-  { x: 5, y: 0, w: 6, h: 5, i: '1', component: 'RunningHorizontal' },
-  { x: 12, y: 0, w: 9, h: 5, i: '2', component: 'RunningHorizontal' },
-  { x: 5, y: 5, w: 10, h: 5, i: '3', component: 'RunningHorizontal' },
-  { x: 15, y: 5, w: 5, h: 10, i: '4', component: 'RunningVertical' },
-  { x: 0, y: 10, w: 8, h: 5, i: '5', component: 'RunningHorizontal' },
-  { x: 8, y: 10, w: 7, h: 5, i: '6', component: 'RunningHorizontal' },
-])
+import { Grid } from 'swiper'
+import 'swiper/css/grid'
 </script>
 
-<style scoped></style>
+<style scoped>
+.swiper {
+  width: 100%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.swiper-slide {
+  height: calc((100% - 20px) / 2) !important;
+}
+</style>

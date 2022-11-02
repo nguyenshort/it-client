@@ -43,7 +43,7 @@
         <div class="w-10 h-10 flex-shrink-0 border border-white shadow-md rounded-full overflow-hidden">
           <img alt="" :src='project.user.avatar' class='w-full h-full' />
         </div>
-        <h4 class='mx-3 font-semibold w-full mb-0'>{{ project.name }}</h4>
+        <h4 class='mx-3 font-semibold w-full mb-0 text-[14px]'>{{ project.name }}</h4>
       </div>
 
       <div class='flex flex-wrap mt-4 -mx-1.5 -mb-1.5'>
