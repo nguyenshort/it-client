@@ -113,7 +113,15 @@ export default defineNuxtConfig({
         resolvers: [
           IconsResolver({
             prefix: 'i'
-          })
+          }),
+          (componentName) => {
+            // where `componentName` is always CapitalCase
+            if (componentName.toLowerCase() === 'gridlayout') {
+              return { name: 'GridLayout', from: 'vue3-grid-layout' }
+            } else if (componentName.toLowerCase() === 'griditem') {
+              return { name: 'GridItem', from: 'vue3-grid-layout' }
+            }
+          },
         ],
         dts: path.resolve(__dirname, 'types/components.d.ts')
       }),

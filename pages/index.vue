@@ -5,7 +5,9 @@
     <div class='h-7'></div>
     <lazy-home-broad />
     <div class='h-7'></div>
-    <lazy-home-running />
+    <client-only>
+      <lazy-home-running />
+    </client-only>
   </div>
 </template>
 

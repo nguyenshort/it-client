@@ -7,12 +7,16 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    GridItem: typeof import('vue3-grid-layout')['GridItem']
+    GridLayout: typeof import('vue3-grid-layout')['GridLayout']
     IAntDesignLikeFilled: typeof import('~icons/ant-design/like-filled')['default']
     IBxBxsCategoryAlt: typeof import('~icons/bx/bxs-category-alt')['default']
+    IEpFlag: typeof import('~icons/ep/flag')['default']
     IIconoirChatBubble: typeof import('~icons/iconoir/chat-bubble')['default']
     IIcOutlineAlternateEmail: typeof import('~icons/ic/outline-alternate-email')['default']
     IIcRoundVpnKey: typeof import('~icons/ic/round-vpn-key')['default']
     IIcSharpSettings: typeof import('~icons/ic/sharp-settings')['default']
+    IIcTwotoneFiberSmartRecord: typeof import('~icons/ic/twotone-fiber-smart-record')['default']
     IIonChatbubbleEllipses: typeof import('~icons/ion/chatbubble-ellipses')['default']
     IIonHeart: typeof import('~icons/ion/heart')['default']
     ILucideSearch: typeof import('~icons/lucide/search')['default']
@@ -25,6 +29,9 @@ declare module '@vue/runtime-core' {
     IMdiDotsVertical: typeof import('~icons/mdi/dots-vertical')['default']
     IMdiPencilCircle: typeof import('~icons/mdi/pencil-circle')['default']
     IOcticonIssueDraft16: typeof import('~icons/octicon/issue-draft16')['default']
+    IPhFireSimpleDuotone: typeof import('~icons/ph/fire-simple-duotone')['default']
+    IPhPushPinFill: typeof import('~icons/ph/push-pin-fill')['default']
+    IRadixIconsDotFilled: typeof import('~icons/radix-icons/dot-filled')['default']
     IRiCompass3Fill: typeof import('~icons/ri/compass3-fill')['default']
     IRiUser4Fill: typeof import('~icons/ri/user4-fill')['default']
     ITablerSearch: typeof import('~icons/tabler/search')['default']
