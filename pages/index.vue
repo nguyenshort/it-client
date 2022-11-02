@@ -1,6 +1,11 @@
 <template>
-  <div class="text-red-500">
+  <div>
+    <div class='h-7'></div>
     <lazy-home-banner />
+    <div class='h-7'></div>
+    <lazy-home-broad />
+    <div class='h-7'></div>
+    <lazy-home-running />
   </div>
 </template>
 

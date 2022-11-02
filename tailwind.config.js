@@ -1,3 +1,4 @@
+/** @type {import('tailwindcss').Config} */
 export default {
   content: [
     'components/**/*.{vue,js,ts}',
@@ -31,5 +32,10 @@ export default {
         }
       }
     }
-  }
+  },
+  plugins: [
+    require('@tailwindcss/aspect-ratio'),
+    require('@tailwindcss/typography'),
+    require('tailwind-scrollbar-hide')
+  ]
 }
