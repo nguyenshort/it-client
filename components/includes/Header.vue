@@ -53,7 +53,7 @@
         </button>
       </div>
 
-      <form-button @click="$modal().open('auth')" class="flex-shrink-0">
+      <form-button class="flex-shrink-0" @click="$modal().open('auth')">
         <span class="text-sm font-bold">
             Đăng Nhập
         </span>
@@ -64,7 +64,15 @@
   <div class="h-[70px]"></div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { nextTick, onMounted, useKoki } from "#imports";
+
+const kokiApp = useKoki()
+
+onMounted(() => nextTick(() => {
+  window.copyJWT = () => kokiApp.token
+}))
+</script>
 
 <style lang="scss">
 #site-header {
@@ -135,7 +143,7 @@
   }
 
   .langs-group > li > a {
-    @apply block overflow-hidden rounded-md px-3 py-1 text-gray-300 transition hover:bg-primary-600;
+    @apply block overflow-hidden rounded-md px-3 py-1 text-gray-200 transition hover:bg-primary-600;
   }
 }
 </style>
