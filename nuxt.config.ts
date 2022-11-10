@@ -4,6 +4,7 @@ import IconsResolver from 'unplugin-icons/resolver'
 import path from 'path'
 
 import EnvGenerator from './utils/vite/env'
+import GraphqlGenerator from './utils/vite/graphql'
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
@@ -136,7 +137,8 @@ export default defineNuxtConfig({
       Icons({
         autoInstall: true
       }),
-      EnvGenerator()
+      EnvGenerator(),
+      GraphqlGenerator()
     ]
   }
 })
