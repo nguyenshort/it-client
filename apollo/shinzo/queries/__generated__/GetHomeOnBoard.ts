@@ -17,6 +17,13 @@ export interface GetHomeOnBoard_projects_owner {
   slug: string;
 }
 
+export interface GetHomeOnBoard_projects_category {
+  __typename: "Category";
+  id: string;
+  name: string;
+  slug: string;
+}
+
 export interface GetHomeOnBoard_projects_roles_user {
   __typename: "User";
   id: string;
@@ -38,8 +45,10 @@ export interface GetHomeOnBoard_projects {
   name: string;
   covers: string[];
   owner: GetHomeOnBoard_projects_owner;
+  category: GetHomeOnBoard_projects_category;
   bookmarks: number;
   comments: number;
+  content: string | null;
   roles: GetHomeOnBoard_projects_roles[];
   status: ProjectStatus;
   slug: string;

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-export const SORT_COUPONS = gql`
+export const GET_HOME_BOARD = gql`
   query GetHomeOnBoard($filter: GetProjectsFilter!) {
     projects(filter: $filter) {
       id
@@ -12,8 +12,14 @@ export const SORT_COUPONS = gql`
         avatar
         slug
       }
+      category {
+        id
+        name
+        slug
+      }
       bookmarks
       comments
+      content
       roles {
         id
         name
