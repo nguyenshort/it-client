@@ -14,7 +14,7 @@
               href="javascript:void(0)"
               class="block w-[35px] aspect-1 overflow-hidden flex-shrink-0"
             >
-              <img class="w-full h-full object-contain" :src="project.logo" alt=""/>
+              <img class="w-full h-full object-contain" :src="'http://localhost:5001' + project.logo" alt=""/>
             </a>
           </div>
 
@@ -22,21 +22,21 @@
             <h2 class="text-[15px] font-semibold text-gray-700 mb-0">{{ project.name }}</h2>
 
             <div class="mt-1 flex items-center">
-              <a :href="project.link" target="_blank" class="flex items-center">
+              <a v-if="project.link" :href="project.link" target="_blank" class="flex items-center">
                 <span>
                   <i-ph-link-simple-fill/>
                 </span>
                 <span class="ml-1">{{ project.link }}</span>
               </a>
 
-              <span class="h-[15px] w-px bg-gray-200 block mx-3"></span>
+              <span v-if="project.link" class="h-[15px] w-px bg-gray-200 block mx-3"></span>
 
               <div class="flex items-center text-xs text-gray-500">
                 <span>
                   <i-iconoir-chat-bubble/>
                 </span>
                 <span class="ml-1 relative mt-0.5">
-                  {{ project.comment }} bình luận
+                  {{ project.comments }} bình luận
                 </span>
               </div>
 
@@ -47,7 +47,7 @@
                   <i-octicon-issue-draft-16/>
                 </span>
                 <span class="ml-1 relative mt-0.5">
-                  {{ project.issues }} issues
+                  {{ project.bookmarks }} issues
                 </span>
               </div>
 
@@ -120,38 +120,20 @@
 </template>
 
 <script lang="ts" setup>
+import { computed, reactive, useAsyncQuery } from "#imports";
+import { ProjectStatus } from "~/__generated__/shinzoTypes";
+import { GET_HOME_DONE } from "~/apollo/shinzo/queries/coupon.query";
+import { GetHomeDone, GetHomeDoneVariables } from "~/apollo/shinzo/queries/__generated__/GetHomeDone";
 
-import { ref } from "#imports";
-
-interface DoneProject {
-  id: string
-  time: string
-  name: string
-  comment: number
-  link: string
-  issues: number
-  logo: string
-}
-
-const projects = ref<DoneProject[]>([
-  {
-    id: '1',
-    time: '30 ngày',
-    name: 'Auto Green Home',
-    comment: 30,
-    link: 'https://shopee.vn/',
-    issues: 50,
-    logo: '/images/done/dribbble.png'
-  },
-  {
-    id: '2',
-    time: '40 ngày',
-    name: 'Auto Crawl Data',
-    comment: 20,
-    link: 'https://kdnautoleech.com/',
-    issues: 120,
-    logo: '/images/done/kdn.png'
+const variables = reactive<GetHomeDoneVariables>({
+  filter: {
+    limit: 4,
+    offset: 0,
+    sort: 'updatedAt',
+    status:ProjectStatus.DONE
   }
-])
+})
+const { data } = await useAsyncQuery<GetHomeDone>(GET_HOME_DONE, variables)
+const projects = computed(() => data.value?.projects || [])
 
 </script>

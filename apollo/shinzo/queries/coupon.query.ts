@@ -5,7 +5,7 @@ export const GET_HOME_BOARD = gql`
     projects(filter: $filter) {
       id
       name
-      covers
+      cover
       owner {
         id
         name
@@ -32,6 +32,55 @@ export const GET_HOME_BOARD = gql`
       }
       status
       slug
+    }
+  }
+`
+
+export const GET_HOME_RUNNING = gql`
+  query GetHomeRunning($filter: GetProjectsFilter!) {
+    projects(filter: $filter) {
+      id
+      name
+      logo
+      status
+      content
+      estimate
+      roles {
+        id
+        name
+        user {
+          id
+          name
+          avatar
+          slug
+        }
+      }
+      createdAt
+    }
+  }
+`
+
+export const GET_HOME_DONE = gql`
+  query GetHomeDone($filter: GetProjectsFilter!) {
+    projects(filter: $filter) {
+      id
+      name
+      slug
+      logo
+      link
+      comments
+      bookmarks
+      estimate
+      roles {
+        id
+        name
+        user {
+          id
+          name
+          slug
+          avatar
+        }
+      }
     }
   }
 `

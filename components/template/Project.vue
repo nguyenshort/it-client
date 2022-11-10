@@ -47,7 +47,7 @@
       <client-only>
         <img
           class="transition hover:scale-105 absolute w-full h-full z-10 top-0 left-0 object-cover"
-          :src=" 'http://localhost:5001' + project.covers[0]"
+          :src=" 'http://localhost:5001' + project.cover"
           alt=""
         />
       </client-only>

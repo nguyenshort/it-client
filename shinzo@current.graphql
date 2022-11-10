@@ -72,12 +72,15 @@ input CreateCommentInput {
 
 input CreateProjectInput {
   category: ID!
-  content: String!
-  covers: [String!]!
+  content: String = ""
+  cover: String!
   estimate: [Float!]!
   files: [ID!] = []
+  link: String = ""
+  logo: String = ""
   name: String!
-  technologies: [ID!]!
+  status: ProjectStatus = PREPARE
+  technologies: [ID!] = []
 }
 
 input CreateRoleInput {
@@ -173,11 +176,13 @@ type Project {
   category: Category!
   comments: Float!
   content: String
-  covers: [String!]!
+  cover: String!
   createdAt: Float!
   estimate: [Float!]!
   files: [String!]!
   id: ID!
+  link: String
+  logo: String
   name: String!
   owner: User!
   roles: [Role!]!
@@ -191,6 +196,7 @@ type Project {
 enum ProjectActive {
   ACTIVE
   DISABLED
+  DRAFT
 }
 
 enum ProjectStatus {
@@ -295,13 +301,16 @@ input UpdateCommentInput {
 
 input UpdateProjectInput {
   category: ID
-  content: String
-  covers: [String!]
+  content: String = ""
+  cover: String
   estimate: [Float!]
   files: [ID!] = []
   id: ID!
+  link: String = ""
+  logo: String = ""
   name: String
-  technologies: [ID!]
+  status: ProjectStatus = PREPARE
+  technologies: [ID!] = []
 }
 
 input UpdateRoleInput {

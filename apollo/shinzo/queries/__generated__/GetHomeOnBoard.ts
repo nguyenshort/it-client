@@ -43,7 +43,7 @@ export interface GetHomeOnBoard_projects {
   __typename: "Project";
   id: string;
   name: string;
-  covers: string[];
+  cover: string;
   owner: GetHomeOnBoard_projects_owner;
   category: GetHomeOnBoard_projects_category;
   bookmarks: number;
