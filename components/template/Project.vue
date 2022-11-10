@@ -27,7 +27,7 @@
               </span>
             </button>
 
-            <button class="flex items-center">
+            <button v-if="false" class="flex items-center">
               <i-material-symbols-share />
             </button>
           </div>
