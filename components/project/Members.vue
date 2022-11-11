@@ -2,18 +2,33 @@
   <div>
     <h3 class="text-[20px] font-semibold text-gray-700 mb-0">
       Thành Viên
-      <span class="text-[14px] text-gray-500">({{ members.length }})</span>
+      <span class="text-[14px] text-gray-500">({{ project.roles.length }})</span>
     </h3>
 
     <ul class="mt-3">
+
+      <li class="flex items-center mb-4 last:mb-0">
+        <div>
+          <div class="w-14 h-14 rounded-full overflow-hidden cutsom-shadow border-[3px] border-white">
+            <img class="w-full h-full object-cover" :src="project.owner.avatar" alt="" />
+          </div>
+        </div>
+
+        <div class="ml-3">
+          <h4 class="font-semibold text-gray-700 mb-0.5 text-[15px]">{{ project.owner.name }}</h4>
+          <span class="bg-rose-500 px-2 py-0.5 rounded-full text-white text-[12px]">owner</span>
+        </div>
+
+      </li>
+
       <li
-        v-for="member in members"
+        v-for="member in project.roles.filter((role) => role.user)"
         :key="member.id"
         class="flex items-center mb-4 last:mb-0"
       >
         <div>
           <div class="w-14 h-14 rounded-full overflow-hidden cutsom-shadow border-[3px] border-white">
-            <img class="w-full h-full object-cover" :src="member.avatar" alt="" />
+            <img class="w-full h-full object-cover" :src="member.user.name" alt="" />
           </div>
         </div>
 
@@ -21,8 +36,7 @@
           <h4 class="font-semibold text-gray-700 mb-0.5 text-[15px]">{{ member.name }}</h4>
           <span
             class="text-[13px] text-gray-500 mb-0 capitalize mt-1 role"
-            :class="[member.role]"
-          >{{ member.role }}</span>
+          >{{ member.name }}</span>
         </div>
 
       </li>
@@ -73,6 +87,11 @@
 <script lang="ts" setup>
 import {computed} from "vue";
 import { ref } from "#imports";
+import { GetProject_project } from "~/apollo/shinzo/queries/__generated__/GetProject";
+
+defineProps<{
+  project: GetProject_project
+}>()
 
 interface Member {
   id: string
@@ -127,13 +146,5 @@ const showRoles = computed(() => {
 </script>
 
 <style scoped>
-.role.admin, .role.leader {
-  @apply bg-gray-100 w-auto px-2 py-0.5 rounded-full text-white text-[12px] selection:bg-transparent;
-}
-.role.admin {
-  @apply bg-primary-500;
-}
-.role.leader {
-  @apply bg-indigo-500;
-}
+.role.owner {}
 </style>

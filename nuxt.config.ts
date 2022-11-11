@@ -107,6 +107,15 @@ export default defineNuxtConfig({
       apiBase: '/api'
     }
   },
+  hooks: {
+    'pages:extend' (routes) {
+      routes.forEach((route) => {
+        if (route.path === '/projects') {
+          route.path = '/projects/:id'
+        }
+      })
+    }
+  },
   vite: {
     plugins: [
       Components({

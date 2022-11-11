@@ -30,6 +30,7 @@ declare module '@vue/runtime-core' {
     IIonMdHome: typeof import('~icons/ion/md-home')['default']
     ILucideSearch: typeof import('~icons/lucide/search')['default']
     IMaterialSymbolsAdd: typeof import('~icons/material-symbols/add')['default']
+    IMaterialSymbolsAddCircleRounded: typeof import('~icons/material-symbols/add-circle-rounded')['default']
     IMaterialSymbolsArrowCircleRight: typeof import('~icons/material-symbols/arrow-circle-right')['default']
     IMaterialSymbolsArrowForwardRounded: typeof import('~icons/material-symbols/arrow-forward-rounded')['default']
     IMaterialSymbolsBookmarkAddRounded: typeof import('~icons/material-symbols/bookmark-add-rounded')['default']

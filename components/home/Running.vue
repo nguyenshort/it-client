@@ -13,12 +13,10 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, reactive, useAsyncQuery, useNuxtApp } from "#imports";
+import { computed, reactive, useAsyncQuery } from "#imports";
 import { ProjectStatus } from "~/__generated__/shinzoTypes";
 import { GET_HOME_RUNNING } from "~/apollo/shinzo/queries/coupon.query";
 import { GetHomeRunning, GetHomeRunningVariables } from "~/apollo/shinzo/queries/__generated__/GetHomeRunning"
-
-const { $dayjs } = useNuxtApp()
 
 const variables = reactive<GetHomeRunningVariables>({
   filter: {

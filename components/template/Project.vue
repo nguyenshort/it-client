@@ -4,7 +4,7 @@
     class="rounded-lg overflow-hidden bg-white custom-shadow project-item block"
   >
     <div
-      class="w-full aspect-w-5 aspect-h-3 overflow-hidden relative project-avatar"
+      class="w-full aspect-w-12 aspect-h-7 overflow-hidden relative project-avatar"
     >
       <div
         class="absolute w-full h-full top-0 left-0 bg-gradient-to-b from-transparent via-transparent to-slate-900 z-20"

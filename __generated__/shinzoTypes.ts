@@ -14,6 +14,11 @@ export enum ProjectStatus {
   STUCK = "STUCK",
 }
 
+export enum StepStatus {
+  DONE = "DONE",
+  WAITING = "WAITING",
+}
+
 export interface GetProjectsFilter {
   category?: string | null;
   limit: number;
