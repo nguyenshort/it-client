@@ -41,7 +41,7 @@ export const GET_HOME_RUNNING = gql`
     projects(filter: $filter) {
       id
       name
-        slug
+      slug
       logo
       status
       content
@@ -82,6 +82,42 @@ export const GET_HOME_DONE = gql`
           avatar
         }
       }
+    }
+  }
+`
+
+export const EXAMPLE_PROJECTS = gql`
+  query ExampleProjects($filter: ExampleProjectsFilter!) {
+    exampleProjects(filter: $filter) {
+      id
+      name
+      cover
+      owner {
+        id
+        name
+        avatar
+        slug
+      }
+      category {
+        id
+        name
+        slug
+      }
+      bookmarks
+      comments
+      content
+      roles {
+        id
+        name
+        updatedAt
+        user {
+          id
+          name
+          slug
+        }
+      }
+      status
+      slug
     }
   }
 `

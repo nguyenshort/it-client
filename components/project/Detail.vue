@@ -1,10 +1,5 @@
 <template>
   <div>
-    <div class="flex items-center text-green-500">
-      <i-material-symbols-verified />
-      <span class="text-[13px] font-medium ml-1">100% Vốn nước ngoài</span>
-    </div>
-
     <h4 class="text-[26px] font-semibold capitalize mt-3 mb-4 text-gray-800">
       {{ project.name }}
     </h4>

@@ -2,44 +2,133 @@
   <div>
     <h3 class="text-[20px] font-semibold text-gray-700 mb-0">
       Thành Viên
-      <span class="text-[14px] text-gray-500">({{ project.roles.length }})</span>
+      <span class="text-[14px] text-gray-500"
+        >({{ project.roles.length + 1 }})</span
+      >
     </h3>
 
-    <ul class="mt-3">
-
-      <li class="flex items-center mb-4 last:mb-0">
+    <div class="mt-3">
+      <div class="flex items-center mb-4 last:mb-0">
         <div>
-          <div class="w-14 h-14 rounded-full overflow-hidden cutsom-shadow border-[3px] border-white">
-            <img class="w-full h-full object-cover" :src="project.owner.avatar" alt="" />
+          <div
+            class="w-12 h-12 rounded-full overflow-hidden cutsom-shadow border border-white"
+          >
+            <img
+              class="w-full h-full object-cover"
+              :src="project.owner.avatar"
+              alt=""
+            />
           </div>
         </div>
 
         <div class="ml-3">
-          <h4 class="font-semibold text-gray-700 mb-0.5 text-[15px]">{{ project.owner.name }}</h4>
-          <span class="bg-rose-500 px-2 py-0.5 rounded-full text-white text-[12px]">owner</span>
-        </div>
-
-      </li>
-
-      <li
-        v-for="member in project.roles.filter((role) => role.user)"
-        :key="member.id"
-        class="flex items-center mb-4 last:mb-0"
-      >
-        <div>
-          <div class="w-14 h-14 rounded-full overflow-hidden cutsom-shadow border-[3px] border-white">
-            <img class="w-full h-full object-cover" :src="member.user.name" alt="" />
-          </div>
-        </div>
-
-        <div class="ml-3">
-          <h4 class="font-semibold text-gray-700 mb-0.5 text-[15px]">{{ member.name }}</h4>
+          <h4 class="font-semibold text-gray-700 mb-px text-[15px]">
+            {{ project.owner.name }}
+          </h4>
           <span
-            class="text-[13px] text-gray-500 mb-0 capitalize mt-1 role"
-          >{{ member.name }}</span>
+            class="bg-rose-500 px-2 py-px rounded-full text-white text-[10px] font-semibold"
+            >owner</span
+          >
+        </div>
+      </div>
+
+      <div>
+        <div v-if="project.roles.length">
+          <div
+            v-for="member in project.roles.slice(0, 5)"
+            :key="member.id"
+            class="flex items-center mb-4 last:mb-0"
+          >
+            <template v-if="member.user">
+              <div>
+                <div
+                  class="w-12 h-12 rounded-full overflow-hidden cutsom-shadow border border-white"
+                >
+                  <img
+                    class="w-full h-full object-cover"
+                    :src="member.user.name"
+                    alt=""
+                  />
+                </div>
+              </div>
+
+              <div class="ml-3">
+                <h4 class="font-semibold text-gray-700 mb-0.5 text-[15px]">
+                  {{ member.name }}
+                </h4>
+                <span
+                  class="bg-rose-500 px-2 py-px rounded-full text-white text-[10px] font-semibold"
+                  >{{ member.name }}</span
+                >
+              </div>
+            </template>
+
+            <template v-else>
+              <div>
+                <div
+                  class="w-12 h-12 rounded-full overflow-hidden cutsom-shadow border border-dashed flex items-center justify-center text-gray-400"
+                >
+                  <i-material-symbols-add />
+                </div>
+              </div>
+
+              <div class="ml-3">
+                <h4 class="font-semibold text-gray-700 mb-0.5 text-[15px]">
+                  {{ member.name }}
+                </h4>
+                <span
+                  class="bg-primary-500 px-2 py-px rounded-full text-white text-[10px] font-semibold"
+                  >Hiring</span
+                >
+              </div>
+            </template>
+          </div>
         </div>
 
-      </li>
+        <div v-else class="text-center pt-5">
+          <div style="width: 300px; height: 250px" class="mx-auto">
+            <vue-lottie-player
+              width="300px"
+              height="250px"
+              loop
+              path="https://assets4.lottiefiles.com/packages/lf20_ij2ngolf.json"
+            />
+            <div class="text-sm text-gray-400">
+              Chúng tôi sẽ open thành viên sớm nhất có thể.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        v-if="project.roles.length > 5"
+        class="flex flex-wrap justify-between mt-5 -mx-1.5 -mb-1.5"
+      >
+        <button
+          v-for="(role, index2) in project.roles.slice(5, 10)"
+          :key="index2"
+          class="w-12"
+        >
+          <div
+            class="w-12 h-12 rounded-full overflow-hidden cutsom-shadow border border-dashed flex items-center justify-center text-gray-400"
+          >
+            <i-material-symbols-add />
+          </div>
+          <h4 class="text-[10px] mt-0.5">{{ role.name }}</h4>
+        </button>
+
+        <button
+          v-if="project.roles.length > 10"
+          class="w-12"
+        >
+          <div
+            class="w-12 h-12 rounded-full overflow-hidden cutsom-shadow border border-dashed flex items-center justify-center text-white bg-primary-600"
+          >
+            <span>+<span class="text-[12px]">{{ project.roles.length - 10 }}</span></span>
+          </div>
+          <h4 class="text-[10px] mt-0.5 opacity-0">x</h4>
+        </button>
+      </div>
 
       <!--      <li>-->
       <!--        <div class="flex items-center">-->
@@ -55,96 +144,19 @@
 
       <!--        </div>-->
       <!--      </li>-->
-
-    </ul>
-
-    <div class='flex flex-wrap mt-4 -mx-1.5 -mb-1.5'>
-      <button
-        v-for='(role, index2) in showRoles'
-        :key='index2'
-        class='w-2/12 px-1.5 pb-1.5 text-center transition hover:scale-105'
-      >
-        <div class='w-full aspect-1 rounded-full border border-dashed flex items-center justify-center text-gray-400'>
-          <i-material-symbols-add  />
-        </div>
-        <h4 class='text-[10px] mt-0.5'>{{ role }}</h4>
-      </button>
-
-      <button
-        v-if='roles.length > 6'
-        class='w-2/12 px-1.5 pb-1.5 text-center transition hover:scale-105'
-      >
-        <div class='w-full aspect-1 rounded-full border border-dashed flex items-center justify-center text-white bg-primary-600'>
-          <span>+<span class='text-[12px]'>{{ roles.length - 5 }}</span></span>
-        </div>
-        <h4 class='text-[10px] mt-0.5 opacity-0'>x</h4>
-      </button>
-
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import {computed} from "vue";
-import { ref } from "#imports";
-import { GetProject_project } from "~/apollo/shinzo/queries/__generated__/GetProject";
+import { GetProject_project } from '~/apollo/shinzo/queries/__generated__/GetProject'
 
 defineProps<{
   project: GetProject_project
 }>()
-
-interface Member {
-  id: string
-  name: string
-  avatar: string
-  role: string
-}
-
-const members = ref<Member[]>([
-  {
-    id: '1',
-    name: 'Đinh Thị Đông Phương',
-    avatar: 'https://i.pravatar.cc/150?img=1',
-    role: 'admin',
-  },
-  {
-    id: '2',
-    name: 'Anh Tiến',
-    avatar: 'https://i.pravatar.cc/150?img=2',
-    role: 'leader',
-  },
-  {
-    id: '3',
-    name: 'Văn Chiến',
-    avatar: 'https://i.pravatar.cc/150?img=3',
-    role: 'tester',
-  },
-  {
-    id: '4',
-    name: 'Nam',
-    avatar: 'https://i.pravatar.cc/150?img=4',
-    role: 'developer',
-  },
-  {
-    id: '5',
-    name: 'Yuan',
-    avatar: '/images/avatar.jpeg',
-    role: 'developer',
-  }
-])
-
-const roles = ref<string[]>(['Leader', 'MO', 'Des'].concat(Array(9).fill('Dev')))
-
-const showRoles = computed(() => {
-  if(roles.value.length > 6) {
-    return roles.value.slice(0, 5)
-  }
-  return roles.value
-})
-
-
 </script>
 
 <style scoped>
-.role.owner {}
+.role.owner {
+}
 </style>

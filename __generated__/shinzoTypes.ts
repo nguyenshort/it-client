@@ -19,6 +19,15 @@ export enum StepStatus {
   WAITING = "WAITING",
 }
 
+export interface ExampleProjectsFilter {
+  category?: string | null;
+  exclude?: string[] | null;
+  limit: number;
+  name?: string | null;
+  status?: ProjectStatus | null;
+  technologies?: string[] | null;
+}
+
 export interface GetProjectsFilter {
   category?: string | null;
   limit: number;

@@ -15,12 +15,13 @@
     <div class="flex mt-3 -mx-4">
       <div class="w-4/5 px-4">
         <lazy-project-banner :project="project" />
-        <lazy-project-detail class="mt-5" :project="project" />
+        <lazy-project-detail class="mt-7" :project="project" />
         <lazy-project-progress class="mt-10" :project="project" />
         <lazy-project-comments class="mt-10" />
       </div>
       <div class="w-1/3 min-h-screen px-4">
         <lazy-project-members :project="project" />
+        <lazy-project-others class="mt-12" :exclude="[project?.id]" />
         <!--        <project-members />-->
         <!--        <project-other class="mt-6" />-->
       </div>
