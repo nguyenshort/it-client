@@ -1,6 +1,7 @@
 import { defineApolloClient } from '@nuxtjs/apollo'
 
 export default defineApolloClient({
+    // @ts-ignore
     httpEndpoint: process.env.NUXT_PUBLIC_API_GRAPHQL_ENDPOINT,
     browserHttpEndpoint: '',
     wsEndpoint: '',

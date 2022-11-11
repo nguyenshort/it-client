@@ -14,18 +14,10 @@
 
     <div class="flex mt-3 -mx-4">
       <div class="w-4/5 px-4">
-        <lazy-project-banner />
+        <lazy-project-banner :project="project" />
         <lazy-project-detail class="mt-5" :project="project" />
-        <lazy-project-progress class="mt-10" />
+        <lazy-project-progress class="mt-10" :project="project" />
         <lazy-project-comments class="mt-10" />
-        <!--        <projects-banners />-->
-        <!--        <project-detail class="mt-6" />-->
-
-        <!--        <project-progress class="mt-7" />-->
-
-        <!--        &lt;!&ndash;        <project-budget class="mt-6" />&ndash;&gt;-->
-
-        <!--        <project-comments class="mt-8" />-->
       </div>
       <div class="w-1/3 min-h-screen px-4">
         <lazy-project-members :project="project" />

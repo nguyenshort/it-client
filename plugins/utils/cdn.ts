@@ -1,9 +1,13 @@
 //CDN
+import { useRuntimeConfig } from "#imports";
+
 export enum CDNLocation {
   LOCAL
 }
 
 export const $cdn = (path: string, location = CDNLocation.LOCAL) => {
+  const runtime = useRuntimeConfig()
+
   if (!path) {
     return ''
   }
@@ -16,7 +20,7 @@ export const $cdn = (path: string, location = CDNLocation.LOCAL) => {
 
   switch (location) {
     case CDNLocation.LOCAL:
-      _path = 'import.meta.env.VITE_IT_CDN' + path
+      _path = runtime.cdnEndpoint + path
       break
   }
 

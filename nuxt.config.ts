@@ -104,7 +104,8 @@ export default defineNuxtConfig({
     apiSecret: '123',
     // Config within public will be also exposed to the client
     public: {
-      apiBase: '/api'
+      apiBase: '/api',
+      cdnEndpoint: 'http://localhost:5001/'
     }
   },
   hooks: {
