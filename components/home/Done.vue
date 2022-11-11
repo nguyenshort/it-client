@@ -26,7 +26,7 @@
             </nuxt-link>
 
             <div class="mt-1 flex items-center">
-              <a v-if="project.link" :href="project.link" target="_blank" class="flex items-center">
+              <a v-if="project.link" :href="project.link" target="_blank" class="flex items-center text-sm">
                 <span>
                   <i-ph-link-simple-fill/>
                 </span>
