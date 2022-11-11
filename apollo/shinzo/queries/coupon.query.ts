@@ -41,6 +41,7 @@ export const GET_HOME_RUNNING = gql`
     projects(filter: $filter) {
       id
       name
+        slug
       logo
       status
       content

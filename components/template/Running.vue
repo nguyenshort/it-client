@@ -5,9 +5,11 @@
   >
     <div class="flex justify-between">
       <div>
-        <h2 class="font-semibold text-[16px]">
-          {{ project.name }}
-        </h2>
+        <nuxt-link :to="$link().product(project)">
+          <h2 class="font-semibold text-[16px]">
+            {{ project.name }}
+          </h2>
+        </nuxt-link>
         <h5 class="text-[12px] font-semibold text-gray-500 mt-1">
           {{ $dayjs(project.createdAt).format('LL') }}
         </h5>

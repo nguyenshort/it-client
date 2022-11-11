@@ -1,6 +1,6 @@
 <template>
   <router-link
-    to="/"
+    :to="$link().product(project)"
     class="rounded-lg overflow-hidden bg-white custom-shadow project-item block"
   >
     <div

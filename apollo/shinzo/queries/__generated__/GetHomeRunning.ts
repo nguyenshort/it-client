@@ -28,6 +28,7 @@ export interface GetHomeRunning_projects {
   __typename: "Project";
   id: string;
   name: string;
+  slug: string;
   logo: string | null;
   status: ProjectStatus;
   content: string | null;

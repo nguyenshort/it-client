@@ -10,16 +10,20 @@
         <div class="custom-shadow rounded-lg flex overflow-hidden items-center">
 
           <div class="pl-6 py-5">
-            <a
-              href="javascript:void(0)"
+            <nuxt-link
+              :to="$link().product(project)"
               class="block w-[35px] aspect-1 overflow-hidden flex-shrink-0"
             >
               <img class="w-full h-full object-contain" :src="'http://localhost:5001' + project.logo" alt=""/>
-            </a>
+            </nuxt-link>
           </div>
 
           <div class="px-6 py-5 flex flex-col">
-            <h2 class="text-[15px] font-semibold text-gray-700 mb-0">{{ project.name }}</h2>
+            <nuxt-link
+              :to="$link().product(project)"
+            >
+              <h2 class="text-[15px] font-semibold text-gray-700 mb-0">{{ project.name }}</h2>
+            </nuxt-link>
 
             <div class="mt-1 flex items-center">
               <a v-if="project.link" :href="project.link" target="_blank" class="flex items-center">
