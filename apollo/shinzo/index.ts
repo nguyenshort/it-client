@@ -1,8 +1,16 @@
 import { defineApolloClient } from '@nuxtjs/apollo'
+import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
+
+declare module '#app' {
+    interface NuxtApp {
+        $apollo: {
+            defaultClient: ApolloClient<NormalizedCacheObject>
+        }
+    }
+}
 
 export default defineApolloClient({
-    // @ts-ignore
-    httpEndpoint: process.env.NUXT_PUBLIC_API_GRAPHQL_ENDPOINT,
+    httpEndpoint: process.env.NUXT_PUBLIC_API_GRAPHQL_ENDPOINT as string,
     browserHttpEndpoint: '',
     wsEndpoint: '',
     httpLinkOptions: {},
@@ -11,7 +19,7 @@ export default defineApolloClient({
     connectToDevTools: false,
     defaultOptions: {},
     inMemoryCacheOptions: {},
-    tokenName: 'apollo:<client-name>.token',
+    tokenName: 'apollo:koki.token',
     tokenStorage: 'cookie',
     authType: 'Bearer',
     authHeader: 'Authorization'

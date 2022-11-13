@@ -9,6 +9,7 @@
     <lazy-includes-footer />
     <lazy-modal-auth />
     <lazy-includes-spotlight />
+    <lazy-modal-setting />
   </div>
 </template>
 

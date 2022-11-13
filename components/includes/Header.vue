@@ -48,16 +48,21 @@
 
         <div class="ml-6 text-[15px] font-semibold">Blog</div>
 
-        <button class="ml-6" @click="$modal().open('spotlight')">
+        <button class="ml-6" @click="$modal().open('setting')">
           <i-ic-sharp-settings class="text-[20px]"/>
         </button>
       </div>
 
-      <form-button class="flex-shrink-0" @click="$modal().open('auth')">
+      <form-button v-if="!kokiApp.auth" class="flex-shrink-0" @click="$modal().open('auth')">
         <span class="text-sm font-bold">
             Đăng Nhập
         </span>
       </form-button>
+
+      <div v-else class="flex-shrink-0 w-[40px] h-[40px] rounded-full overflow-hidden custom-shadow">
+        <img :src="kokiApp.user?.avatar"  alt="" class="w-full h-full object-cover" />
+      </div>
+
     </div>
   </div>
 
@@ -65,7 +70,7 @@
 </template>
 
 <script lang="ts" setup>
-import { nextTick, onMounted, useKoki } from "#imports";
+import { nextTick, onMounted, useKoki } from "#imports"
 
 const kokiApp = useKoki()
 

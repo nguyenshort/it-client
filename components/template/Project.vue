@@ -1,7 +1,7 @@
 <template>
   <router-link
     :to="$link().product(project)"
-    class="rounded-lg overflow-hidden bg-white custom-shadow project-item block"
+    class="rounded-lg overflow-hidden bg-white custom-shadow project-item block transition duration-300 hover:shadow-none"
   >
     <div
       class="w-full aspect-w-12 aspect-h-7 overflow-hidden relative project-avatar"

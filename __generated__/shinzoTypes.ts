@@ -19,6 +19,11 @@ export enum StepStatus {
   WAITING = "WAITING",
 }
 
+export enum UserRole {
+  SP_ADMIN = "SP_ADMIN",
+  USER = "USER",
+}
+
 export interface ExampleProjectsFilter {
   category?: string | null;
   exclude?: string[] | null;

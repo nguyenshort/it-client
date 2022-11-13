@@ -43,6 +43,20 @@
       </div>
     </div>
 
+    <div class="text-center py-10">
+      <div style="width: 300px; height: 250px" class="mx-auto">
+        <vue-lottie-player
+          width="300px"
+          height="250px"
+          loop
+          path="https://assets6.lottiefiles.com/packages/lf20_akvycwlq.json"
+        />
+        <div class="text-sm text-gray-400">
+          Hãy đánh giá dự án của chúng tôi.
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 

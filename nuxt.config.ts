@@ -105,6 +105,7 @@ export default defineNuxtConfig({
     // Config within public will be also exposed to the client
     public: {
       apiBase: '/api',
+      apiGraphQL: 'http://localhost:5001/graphql',
       cdnEndpoint: 'http://localhost:5001/'
     }
   },

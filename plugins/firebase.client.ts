@@ -2,6 +2,7 @@ import {defineNuxtPlugin, useKoki} from "#imports"
 import {initializeApp} from "@firebase/app";
 import {getAnalytics} from "@firebase/analytics";
 import {getAuth} from "firebase/auth";
+import { useNuxtApp } from "#app";
 
 export default defineNuxtPlugin(nuxtApp => {
 
@@ -26,9 +27,21 @@ export default defineNuxtPlugin(nuxtApp => {
         auth.onIdTokenChanged(async (user) => {
             if (user) {
                 kokiApp.token = await user.getIdToken()
-                await kokiApp.getUser()
-            }
-            else {
+                if(kokiApp.token) {
+                    try {
+                        await $fetch('/api/auth', {
+                            method: 'POST',
+                            body: {
+                                token: kokiApp.token
+                            }
+                        })
+                        await kokiApp.getUser()
+                    } catch (e) {
+                        //
+                        kokiApp.token = ''
+                    }
+                }
+            } else {
                 kokiApp.token = ''
             }
         })
