@@ -75,26 +75,31 @@ export const GET_HOME_RUNNING = gql`
 `
 
 export const GET_HOME_DONE = gql`
+  fragment ProjectDoneDoc on Project {
+    id
+    name
+    slug
+    logo
+    link
+    comments
+    bookmarks
+    estimate
+    roles {
+      id
+      name
+      user {
+        id
+        name
+        slug
+        avatar
+      }
+    }
+  }
+
   query GetHomeDone($filter: GetProjectsFilter!) {
     projects(filter: $filter) {
       id
-      name
-      slug
-      logo
-      link
-      comments
-      bookmarks
-      estimate
-      roles {
-        id
-        name
-        user {
-          id
-          name
-          slug
-          avatar
-        }
-      }
+      ...ProjectDoneDoc
     }
   }
 `
