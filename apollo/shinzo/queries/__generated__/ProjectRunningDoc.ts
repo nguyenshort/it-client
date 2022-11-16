@@ -3,13 +3,11 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { GetProjectsFilter } from "./../../../../__generated__/shinzoTypes";
-
 // ====================================================
-// GraphQL query operation: GetHomeRunning
+// GraphQL fragment: ProjectRunningDoc
 // ====================================================
 
-export interface GetHomeRunning_projects_owner {
+export interface ProjectRunningDoc_owner {
   __typename: "User";
   id: string;
   name: string;
@@ -17,7 +15,7 @@ export interface GetHomeRunning_projects_owner {
   avatar: string | null;
 }
 
-export interface GetHomeRunning_projects_roles_user {
+export interface ProjectRunningDoc_roles_user {
   __typename: "User";
   id: string;
   name: string;
@@ -25,29 +23,21 @@ export interface GetHomeRunning_projects_roles_user {
   slug: string;
 }
 
-export interface GetHomeRunning_projects_roles {
+export interface ProjectRunningDoc_roles {
   __typename: "Role";
   id: string;
   name: string;
-  user: GetHomeRunning_projects_roles_user | null;
+  user: ProjectRunningDoc_roles_user | null;
 }
 
-export interface GetHomeRunning_projects {
+export interface ProjectRunningDoc {
   __typename: "Project";
   id: string;
   name: string;
   slug: string;
   logo: string | null;
   content: string | null;
-  owner: GetHomeRunning_projects_owner;
-  roles: GetHomeRunning_projects_roles[];
+  owner: ProjectRunningDoc_owner;
+  roles: ProjectRunningDoc_roles[];
   createdAt: number;
-}
-
-export interface GetHomeRunning {
-  projects: GetHomeRunning_projects[];
-}
-
-export interface GetHomeRunningVariables {
-  filter: GetProjectsFilter;
 }

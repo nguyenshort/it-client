@@ -7,7 +7,6 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "build:env": "sed 's/=.*/=/' .env > .env.example",
-    "tailwind": "npx tailwindcss -i ./assets/css/tailwind.css -o ./public/css/output.css --watch",
     "apollo:codegen:shinzo": "npx apollo codegen:generate --localSchemaFile=shinzo@current.graphql --target=typescript --tagName=gql --includes=./apollo/shinzo/**/*.ts --globalTypesFile=__generated__/shinzoTypes.ts",
     "apollo:download": "npx apollo client:download-schema --endpoint=http://localhost:5001/graphql shinzo@current.graphql"
   },
@@ -53,7 +52,6 @@
     "sass": "^1.55.0",
     "shelljs": "^0.8.5",
     "tailwind-scrollbar-hide": "^1.1.7",
-    "tailwindcss": "^3.2.1",
     "unplugin-icons": "^0.14.13",
     "unplugin-vue-components": "^0.22.9",
     "vue-gtag-next": "^1.14.0"

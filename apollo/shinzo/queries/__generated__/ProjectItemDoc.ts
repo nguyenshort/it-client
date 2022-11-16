@@ -3,13 +3,11 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { GetProjectsFilter } from "./../../../../__generated__/shinzoTypes";
-
 // ====================================================
-// GraphQL query operation: GetHomeOnBoard
+// GraphQL fragment: ProjectItemDoc
 // ====================================================
 
-export interface GetHomeOnBoard_projects_owner {
+export interface ProjectItemDoc_owner {
   __typename: "User";
   id: string;
   name: string;
@@ -17,46 +15,38 @@ export interface GetHomeOnBoard_projects_owner {
   slug: string;
 }
 
-export interface GetHomeOnBoard_projects_category {
+export interface ProjectItemDoc_category {
   __typename: "Category";
   id: string;
   name: string;
   slug: string;
 }
 
-export interface GetHomeOnBoard_projects_roles_user {
+export interface ProjectItemDoc_roles_user {
   __typename: "User";
   id: string;
   name: string;
   slug: string;
 }
 
-export interface GetHomeOnBoard_projects_roles {
+export interface ProjectItemDoc_roles {
   __typename: "Role";
   id: string;
   name: string;
   updatedAt: number;
-  user: GetHomeOnBoard_projects_roles_user | null;
+  user: ProjectItemDoc_roles_user | null;
 }
 
-export interface GetHomeOnBoard_projects {
+export interface ProjectItemDoc {
   __typename: "Project";
   id: string;
   name: string;
   cover: string;
-  owner: GetHomeOnBoard_projects_owner;
-  category: GetHomeOnBoard_projects_category;
+  owner: ProjectItemDoc_owner;
+  category: ProjectItemDoc_category;
   bookmarks: number;
   comments: number;
   content: string | null;
-  roles: GetHomeOnBoard_projects_roles[];
+  roles: ProjectItemDoc_roles[];
   slug: string;
-}
-
-export interface GetHomeOnBoard {
-  projects: GetHomeOnBoard_projects[];
-}
-
-export interface GetHomeOnBoardVariables {
-  filter: GetProjectsFilter;
 }

@@ -21,7 +21,7 @@
       >
         <img
           class="w-full h-full object-contain"
-          :src="'http://localhost:5001' + project.logo"
+          :src="$cdn(project.logo)"
           alt=""
         />
       </a>
@@ -45,30 +45,58 @@
       {{ project.content }}
     </p>
 
-    <div class="mt-2.5 text-[14px] font-semibold">Teams:</div>
+    <div class="pt-3">
+      <div class="text-[13px] font-semibold">Teams</div>
 
-    <div class="flex mt-2.5 justify-between">
-      <lazy-includes-group-avatar
-        :avatars="Array(10).fill('/images/avatar.jpeg')"
-      />
+      <div class="flex items-center justify-between">
+        <div
+          class="w-9 h-9 flex-shrink-0 border border-white shadow-md rounded-full overflow-hidden mt-1.5"
+        >
+          <img alt="" :src="$cdn(owner.avatar)" class="w-full h-full" />
+        </div>
 
-      <button class="flex items-center text-gray-500">
-        <i-ep-flag class="text-[12px]" />
-        <span class="ml-1 text-[12px]">
-          {{ $dayjs(project.estimate[1]).format('L') }}
-        </span>
-      </button>
+        <lazy-includes-group-avatar
+          v-if="filledRoles.length"
+          :avatars="filledRoles.map((role) => role.user.avatar)"
+        />
+
+        <button
+          v-else-if="project.roles.length"
+          class="flex items-center bg-gradient-to-r from-primary-500 to-primary-600 text-white px-3 py-1.5 rounded-full shadow-lg shadow-primary-200"
+        >
+          <span class="text-xs font-semibold mr-1">Tham Gia</span>
+          <i-material-symbols-add-circle-rounded />
+        </button>
+
+        <button
+          v-else
+          class="flex items-center bg-gradient-to-r from-indigo-500 to-indigo-600 text-white px-3 py-1.5 rounded-full shadow-lg shadow-primary-200"
+        >
+          <span class="text-xs font-semibold mr-1">Xin Chờ</span>
+          <i-mdi-clock-time-eight-outline />
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { nextTick, ref, useElementVisibility, useNuxtApp, watch } from "#imports";
-import { GetHomeRunning_projects } from '~/apollo/shinzo/queries/__generated__/GetHomeRunning'
+import {
+  computed,
+  nextTick,
+  ref,
+  useElementVisibility,
+  useNuxtApp,
+  watch
+} from '#imports'
+import { ProjectRunningDoc } from '~/apollo/shinzo/queries/__generated__/ProjectRunningDoc'
 
-defineProps<{
-  project: GetHomeRunning_projects
+const props = defineProps<{
+  project: ProjectRunningDoc
 }>()
+const roles = computed(() => props.project.roles)
+const filledRoles = computed(() => roles.value.filter((role) => role.user))
+const owner = computed(() => props.project.owner)
 
 const { $dayjs, $anime } = useNuxtApp()
 

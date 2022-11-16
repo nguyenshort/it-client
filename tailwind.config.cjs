@@ -15,7 +15,11 @@ module.exports = {
   theme: {
     extend: {
       maxWidth: {
-        bootstrap: "1100px",
+        bootstrap: '1100px'
+      },
+      boxShadow: {
+        default:
+          '0 24px 20px -18px rgb(69 104 129 / 0%), 0 9px 45px 0 rgb(114 119 160 / 12%)'
       },
       colors: {
         primary: {
@@ -37,6 +41,6 @@ module.exports = {
     require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/typography'),
     require('tailwind-scrollbar-hide'),
-    require('@tailwindcss/line-clamp'),
+    require('@tailwindcss/line-clamp')
   ]
 }

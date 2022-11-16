@@ -1,7 +1,7 @@
 <template>
   <router-link
     :to="$link().product(project)"
-    class="rounded-lg overflow-hidden bg-white custom-shadow project-item block transition duration-300 hover:shadow-none"
+    class="rounded-lg overflow-hidden bg-white shadow-default project-item block transition duration-300 hover:shadow-none"
   >
     <div
       class="w-full aspect-w-12 aspect-h-7 overflow-hidden relative project-avatar"
@@ -44,27 +44,28 @@
           </button>
         </div>
       </div>
-      <client-only>
-        <img
-          class="transition hover:scale-105 absolute w-full h-full z-10 top-0 left-0 object-cover"
-          :src=" 'http://localhost:5001' + project.cover"
-          alt=""
-        />
-      </client-only>
+      <img
+        class="transition hover:scale-105 absolute w-full h-full z-10 top-0 left-0 object-cover"
+        :src="$cdn(project.cover)"
+        alt=""
+      />
     </div>
     <div class="px-3 py-4">
       <div class="flex items-center">
         <div
           class="w-10 h-10 flex-shrink-0 border border-white shadow-md rounded-full overflow-hidden"
         >
-          <img alt="" :src="project.owner.avatar" class="w-full h-full" />
+          <img alt="" :src="$cdn(owner.avatar)" class="w-full h-full" />
         </div>
         <h4 class="mx-3 font-semibold w-full mb-0 text-[14px]">
           {{ project.name }}
         </h4>
       </div>
 
-      <div v-if="project.roles.length" class="flex flex-wrap mt-4 -mx-1.5 -mb-1.5">
+      <div
+        v-if="project.roles.length"
+        class="flex flex-wrap mt-4 -mx-1.5 -mb-1.5"
+      >
         <button
           v-for="(role, index2) in project.roles.slice(0, 5)"
           :key="index2"
@@ -79,15 +80,16 @@
         </button>
 
         <button
-          v-if="project.roles.length > 6"
+          v-if="roles.length > 6"
           class="w-2/12 px-1.5 pb-1.5 text-center transition hover:scale-105"
         >
           <div
             class="w-full aspect-1 rounded-full border border-dashed flex items-center justify-center text-white bg-primary-600"
           >
-            <span
-              >+<span class="text-[12px]">{{ project.roles.length - 5 }}</span></span
-            >
+            <span>
+              <span>+</span>
+              <span class="text-[12px]">{{ roles.length - 5 }}</span>
+            </span>
           </div>
           <h4 class="text-[10px] mt-0.5 opacity-0">x</h4>
         </button>
@@ -98,11 +100,29 @@
       </div>
 
       <div class="mt-1.5 flex items-center justify-between">
-        <button class="text-white bg-green-500 text-xs px-2 py-0.5 rounded-lg">
-          {{ project.roles.length ? '6/12 Members' : 'Waiting...' }}
+        <button
+          v-if="!roles.length"
+          class="text-white bg-green-500 text-xs px-2 py-0.5 rounded-lg shadow-md shadow-green-300"
+        >
+          <span>Waiting...</span>
         </button>
+
+        <button
+          v-else-if="roles.length === filledRoles.length"
+          class="text-white bg-indigo-500 text-xs px-2 py-0.5 rounded-lg shadow-md shadow-indio-300"
+        >
+          <span> Full </span>
+        </button>
+
+        <button
+          v-else
+          class="text-white bg-primary-500 text-xs px-2 py-0.5 rounded-lg shadow-md shadow-primary-300"
+        >
+          <span>{{ filledRoles.length }} / {{ roles.length }}</span>
+        </button>
+
         <span class="text-xs text-gray-500">
-          {{ project.category.name }}
+          {{ category.name }}
         </span>
       </div>
     </div>
@@ -110,11 +130,18 @@
 </template>
 
 <script lang="ts" setup>
-import { GetHomeOnBoard_projects } from '~/apollo/shinzo/queries/__generated__/GetHomeOnBoard'
+import { computed } from '#imports'
+import { ProjectItemDoc } from '~/apollo/shinzo/queries/__generated__/ProjectItemDoc'
 
-defineProps<{
-  project: GetHomeOnBoard_projects
+const props = defineProps<{
+  project: ProjectItemDoc
 }>()
+
+const roles = computed(() => props.project.roles)
+const filledRoles = computed(() => roles.value.filter((role) => role.user))
+
+const owner = computed(() => props.project.owner)
+const category = computed(() => props.project.category)
 </script>
 
 <style scoped lang="scss">

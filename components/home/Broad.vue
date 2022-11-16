@@ -17,18 +17,17 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, reactive, useAsyncQuery } from "#imports";
-import { GET_HOME_BOARD } from "~/apollo/shinzo/queries/coupon.query";
+import { computed, reactive, useAsyncQuery } from "#imports"
+import { GET_HOME_BOARD } from "~/apollo/shinzo/queries/coupon.query"
 import { GetHomeOnBoard, GetHomeOnBoardVariables } from "~/apollo/shinzo/queries/__generated__/GetHomeOnBoard"
-import { ProjectStatus } from "~/__generated__/shinzoTypes";
-
+import { ProjectStatus } from "~/__generated__/shinzoTypes"
 
 const variables = reactive<GetHomeOnBoardVariables>({
   filter: {
     limit: 8,
     offset: 0,
     sort: 'updatedAt',
-    status:ProjectStatus.PREPARE
+    status: ProjectStatus.PREPARE
   }
 })
 const { data } = await useAsyncQuery<GetHomeOnBoard>(GET_HOME_BOARD, variables)
