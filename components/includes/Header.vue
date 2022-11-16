@@ -70,9 +70,9 @@
 </template>
 
 <script lang="ts" setup>
-import { nextTick, onMounted, useKoki } from "#imports"
+import { nextTick, onMounted, useApp } from "#imports"
 
-const kokiApp = useKoki()
+const kokiApp = useApp()
 
 onMounted(() => nextTick(() => {
   window.copyJWT = () => kokiApp.token

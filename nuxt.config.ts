@@ -110,7 +110,7 @@ export default defineNuxtConfig({
     }
   },
   hooks: {
-    'pages:extend' (routes) {
+    'pages:extend'(routes) {
       routes.forEach((route) => {
         if (route.path === '/projects') {
           route.path = '/projects/:id'
@@ -141,7 +141,7 @@ export default defineNuxtConfig({
             } else if (componentName.toLowerCase() === 'swiperslide') {
               return { name: 'SwiperSlide', from: 'swiper/vue' }
             }
-          },
+          }
         ],
         dts: path.resolve(__dirname, 'types/components.d.ts')
       }),

@@ -24,6 +24,12 @@ export enum UserRole {
   USER = "USER",
 }
 
+export interface CreateProposalInput {
+  letter?: string | null;
+  resume?: string | null;
+  role: string;
+}
+
 export interface ExampleProjectsFilter {
   category?: string | null;
   exclude?: string[] | null;

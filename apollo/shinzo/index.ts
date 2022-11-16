@@ -19,8 +19,7 @@ export default defineApolloClient({
     connectToDevTools: false,
     defaultOptions: {},
     inMemoryCacheOptions: {},
-    tokenName: 'apollo:koki.token',
+    tokenName: 'apollo:app.token',
     tokenStorage: 'cookie',
-    authType: 'Bearer',
     authHeader: 'Authorization'
 })

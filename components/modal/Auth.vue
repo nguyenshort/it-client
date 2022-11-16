@@ -1,13 +1,12 @@
 <template>
   <lazy-modal-base event="auth" title="Đăng Nhập" :max-width="450">
-
     <template #default>
       <div style="width: 250px; height: 200px" class="mx-auto">
         <vue-lottie-player
-            width="250px"
-            height="200px"
-            loop
-            path="https://assets8.lottiefiles.com/packages/lf20_7jnffdxl.json"
+          width="250px"
+          height="200px"
+          loop
+          path="https://assets8.lottiefiles.com/packages/lf20_7jnffdxl.json"
         />
       </div>
 
@@ -18,16 +17,16 @@
       </div>
 
       <form
-          id="authForm"
-          v-auto-animate
-          class="mx-auto mt-4 max-w-xs"
-          @submit.prevent="authAction"
+        id="authForm"
+        v-auto-animate
+        class="mx-auto mt-4 max-w-xs"
+        @submit.prevent="authAction"
       >
         <form-text
-            v-if="mode === 'register'"
-            v-model:value="name"
-            placeholder="Tên"
-            class="mb-3"
+          v-if="mode === 'register'"
+          v-model:value="name"
+          placeholder="Tên"
+          class="mb-3"
         >
           <template #prefix>
             <i-ri-user-4-fill class="text-gray-400" />
@@ -41,10 +40,10 @@
         </form-text>
 
         <form-text
-            v-model:value="password"
-            placeholder="Password"
-            type="password"
-            class="mt-3"
+          v-model:value="password"
+          placeholder="Password"
+          type="password"
+          class="mt-3"
         >
           <template #prefix>
             <i-ic-round-vpn-key class="text-gray-400" />
@@ -52,7 +51,7 @@
 
           <template v-if="mode === 'login'" #suffix>
             <a
-                class="ml-3 block flex-shrink-0 cursor-pointer text-xs text-primary-500"
+              class="ml-3 block flex-shrink-0 cursor-pointer text-xs text-primary-500"
             >
               Quên Mật Khẩu?
             </a>
@@ -63,8 +62,8 @@
           <p class="text-gray-400">
             {{ mode === 'login' ? 'Chưa có tài khoản?' : 'Đã có tài khoản?' }}
             <a
-                class="ml-1 cursor-pointer text-primary-500"
-                @click="
+              class="ml-1 cursor-pointer text-primary-500"
+              @click="
                 mode === 'register' ? (mode = 'login') : (mode = 'register')
               "
             >
@@ -82,42 +81,58 @@
           </span>
         </form-button>
 
-        <div>
+        <div class="mb-1">
           <div class="mt-5 flex items-center">
             <span class="h-px w-full bg-gray-200" />
-            <span class="mx-3 flex-shrink-0 text-xs font-medium text-gray-400">HOẶC TIẾP TỤC VỚI</span>
+            <span class="mx-3 flex-shrink-0 text-xs font-medium text-gray-400"
+              >HOẶC TIẾP TỤC VỚI</span
+            >
             <span class="h-px w-full bg-gray-200" />
           </div>
           <div class="mt-5 flex items-center justify-center">
-            <button
-                class="mx-3 scale-95 transform"
-                @click="googleSignIn"
-            >
-              <img width="25" height="25" src="/images/logo/gg.png" alt="" />
+            <button class="mx-3" @click="googleSignIn">
+              <img width="28" height="28" src="/images/logo/gg.png" alt="" />
             </button>
             <button class="mx-3 -translate-y-0.5 transform">
               <img
-                  src="/images/logo/apple.png"
-                  alt=""
-                  class="h-[25px] w-auto object-cover"
+                src="/images/logo/apple.png"
+                alt=""
+                class="object-cover"
+                width="26"
+                height="26"
               />
             </button>
           </div>
         </div>
       </form>
     </template>
-
   </lazy-modal-base>
 </template>
 
 <script lang="ts" setup>
 import {
   signInWithEmailAndPassword,
-  createUserWithEmailAndPassword, getAuth
+  createUserWithEmailAndPassword,
+  getAuth
 } from 'firebase/auth'
 import type { FirebaseError } from 'firebase/app'
-import { AuthErrorCodes, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
-import {ref, getDatabase, computed, useRouter} from "#imports";
+import {
+  AuthErrorCodes,
+  signInWithPopup,
+  GoogleAuthProvider
+} from 'firebase/auth'
+import {
+  ref,
+  getDatabase,
+  computed,
+  useRouter,
+  dbSet,
+  dbRef,
+  watch,
+  useApp
+} from '#imports'
+
+const app = useApp()
 
 const mode = ref<'login' | 'register'>('login')
 
@@ -137,7 +152,7 @@ const router = useRouter()
 // Thông báo
 
 const authAction = async () => {
-  if(mode.value === 'login') {
+  if (mode.value === 'login') {
     await login()
   } else {
     await register()
@@ -149,13 +164,8 @@ const authAction = async () => {
  * Gi token vào store vad redirect đến trang chủ
  */
 const login = async () => {
-  console.log('login')
   try {
-    await signInWithEmailAndPassword(
-        getAuth(),
-        email.value,
-        password.value
-    )
+    await signInWithEmailAndPassword(getAuth(), email.value, password.value)
     message.value = 'Đăng nhập thành công'
   } catch (e) {
     const _e = e as FirebaseError
@@ -177,19 +187,18 @@ const login = async () => {
 const register = async () => {
   try {
     const data = await createUserWithEmailAndPassword(
-        getAuth(),
-        email.value,
-        password.value
+      getAuth(),
+      email.value,
+      password.value
     )
 
-    const db = getDatabase();
+    const db = getDatabase()
     await dbSet(dbRef(db, 'users/' + data.user.uid), {
       name: name,
       email: email
     })
     message.value = 'Đăng ký thành công'
   } catch (e) {
-    console.log(e)
     const _e = e as FirebaseError
     if (_e.code === AuthErrorCodes.USER_DELETED) {
       message.value = 'Tài khoản không tồn tại'
@@ -209,11 +218,14 @@ const register = async () => {
 const googleSignIn = () => signInWithPopup(getAuth(), new GoogleAuthProvider())
 
 const modal = ref()
-// watch(isAuthenticated, (val) => {
-//   if (val) {
-//     modal.value?.dispose()
-//   }
-// })
+watch(
+  () => useApp.auth,
+  (val) => {
+    if (val) {
+      modal.value?.dispose()
+    }
+  }
+)
 </script>
 
 <style scoped></style>

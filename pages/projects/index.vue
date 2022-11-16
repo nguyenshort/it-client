@@ -19,7 +19,7 @@
         <lazy-project-progress class="mt-10" :project="project" />
         <lazy-project-comments class="mt-10" />
       </div>
-      <div class="w-1/3 min-h-screen px-4">
+      <div class="w-1/3 min-h-screen pr-4 pl-6">
         <lazy-project-members :project="project" />
         <lazy-project-others class="mt-12" :exclude="[project?.id]" />
         <!--        <project-members />-->

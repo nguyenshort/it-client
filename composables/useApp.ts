@@ -8,7 +8,7 @@ interface AppInstance {
   user?: GetMe_me
 }
 
-export const useKoki = defineStore('koki', {
+export const useApp = defineStore('app', {
   state: () => ({
     token: '',
     user: undefined
@@ -29,6 +29,7 @@ export const useKoki = defineStore('koki', {
           this.user = data.me
         }
       } catch (e) {
+        console.log(e)
         //
       }
     },

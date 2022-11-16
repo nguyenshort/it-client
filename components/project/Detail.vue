@@ -1,8 +1,16 @@
 <template>
   <div>
-    <h4 class="text-[26px] font-semibold capitalize mt-3 mb-4 text-gray-800">
-      {{ project.name }}
-    </h4>
+
+    <div class="flex justify-between items-start">
+      <h4 class="text-[28px] font-semibold capitalize mt-3 mb-4 text-gray-800">
+        {{ project.name }}
+      </h4>
+
+      <div class="w-10 h-10 bg-rose-500 rounded-lg shadow-md shadow-rose-200 text-white flex items-center justify-center text-[18px] cursor-pointer transition transform hover:scale-105 hover:shadow-none">
+        <i-material-symbols-bookmark-add />
+      </div>
+
+    </div>
 
     <div class="mt-3">
 

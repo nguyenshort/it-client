@@ -65,11 +65,7 @@
 
             <template v-else>
               <div>
-                <div
-                  class="w-12 h-12 rounded-full overflow-hidden cutsom-shadow border border-dashed flex items-center justify-center text-gray-400"
-                >
-                  <i-material-symbols-add />
-                </div>
+                <lazy-template-proposal-button class="w-12 h-12" :current="member" :roles="emptyRoles" />
               </div>
 
               <div class="ml-3">
@@ -117,43 +113,32 @@
           <h4 class="text-[10px] mt-0.5">{{ role.name }}</h4>
         </button>
 
-        <button
-          v-if="project.roles.length > 10"
-          class="w-12"
-        >
+        <button v-if="project.roles.length > 10" class="w-12">
           <div
             class="w-12 h-12 rounded-full overflow-hidden cutsom-shadow border border-dashed flex items-center justify-center text-white bg-primary-600"
           >
-            <span>+<span class="text-[12px]">{{ project.roles.length - 10 }}</span></span>
+            <span
+              >+<span class="text-[12px]">{{
+                project.roles.length - 10
+              }}</span></span
+            >
           </div>
           <h4 class="text-[10px] mt-0.5 opacity-0">x</h4>
         </button>
       </div>
-
-      <!--      <li>-->
-      <!--        <div class="flex items-center">-->
-      <!--          <span class="text-primary-500 text-[14px] font-semibold mr-4">Còn trống 2 vị trí.</span>-->
-
-      <!--          <button-->
-      <!--              class="flex items-center mr-6 bg-gradient-to-r from-primary-500 to-primary-700 text-white px-3 py-2 rounded-full shadow-lg shadow-primary-200"-->
-      <!--              @click="$emitter.emit('requiredGrantModal')"-->
-      <!--          >-->
-      <!--            <span class="text-xs font-semibold mr-1">Tham Gia</span>-->
-      <!--            <i-material-symbols-add-circle-rounded/>-->
-      <!--          </button>-->
-
-      <!--        </div>-->
-      <!--      </li>-->
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { GetProject_project } from '~/apollo/shinzo/queries/__generated__/GetProject'
+import {computed} from "#imports";
 
-defineProps<{
+const props = defineProps<{
   project: GetProject_project
 }>()
+
+const emptyRoles = computed(() => props.project.roles.filter((role) => !role.user))
 </script>
 
 <style scoped>
