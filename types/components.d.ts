@@ -7,8 +7,6 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    GridItem: typeof import('vue3-grid-layout')['GridItem']
-    GridLayout: typeof import('vue3-grid-layout')['GridLayout']
     IAntDesignFlagOutlined: typeof import('~icons/ant-design/flag-outlined')['default']
     IAntDesignLikeFilled: typeof import('~icons/ant-design/like-filled')['default']
     IBiStarFill: typeof import('~icons/bi/star-fill')['default']
@@ -21,12 +19,9 @@ declare module '@vue/runtime-core' {
     IIcBaselineTiktok: typeof import('~icons/ic/baseline-tiktok')['default']
     IIconoirChatBubble: typeof import('~icons/iconoir/chat-bubble')['default']
     IIcOutlineAlternateEmail: typeof import('~icons/ic/outline-alternate-email')['default']
-    IIcOutlineCheck: typeof import('~icons/ic/outline-check')['default']
     IIcRoundVpnKey: typeof import('~icons/ic/round-vpn-key')['default']
     IIcSharpSettings: typeof import('~icons/ic/sharp-settings')['default']
-    IIcTwotoneFiberSmartRecord: typeof import('~icons/ic/twotone-fiber-smart-record')['default']
     IIonChatbubbleEllipses: typeof import('~icons/ion/chatbubble-ellipses')['default']
-    IIonHeart: typeof import('~icons/ion/heart')['default']
     IIonMdCheckmarkCircleOutline: typeof import('~icons/ion/md-checkmark-circle-outline')['default']
     IIonMdHome: typeof import('~icons/ion/md-home')['default']
     IJamTriangleDangerF: typeof import('~icons/jam/triangle-danger-f')['default']
@@ -40,7 +35,6 @@ declare module '@vue/runtime-core' {
     IMaterialSymbolsCheckCircle: typeof import('~icons/material-symbols/check-circle')['default']
     IMaterialSymbolsClose: typeof import('~icons/material-symbols/close')['default']
     IMaterialSymbolsShare: typeof import('~icons/material-symbols/share')['default']
-    IMaterialSymbolsVerified: typeof import('~icons/material-symbols/verified')['default']
     IMdiClockOutline: typeof import('~icons/mdi/clock-outline')['default']
     IMdiClockTimeEightOutline: typeof import('~icons/mdi/clock-time-eight-outline')['default']
     IMdiDocument: typeof import('~icons/mdi/document')['default']
@@ -48,18 +42,13 @@ declare module '@vue/runtime-core' {
     IMdiPencilCircle: typeof import('~icons/mdi/pencil-circle')['default']
     IMdiTwitter: typeof import('~icons/mdi/twitter')['default']
     IOcticonIssueDraft16: typeof import('~icons/octicon/issue-draft16')['default']
-    IPhFireSimpleDuotone: typeof import('~icons/ph/fire-simple-duotone')['default']
     IPhLinkSimpleFill: typeof import('~icons/ph/link-simple-fill')['default']
     IPhPersonSimpleRunBold: typeof import('~icons/ph/person-simple-run-bold')['default']
-    IPhPushPinFill: typeof import('~icons/ph/push-pin-fill')['default']
-    IRadixIconsDotFilled: typeof import('~icons/radix-icons/dot-filled')['default']
     IRiCompass3Fill: typeof import('~icons/ri/compass3-fill')['default']
     IRiInstagramFill: typeof import('~icons/ri/instagram-fill')['default']
     IRiUser4Fill: typeof import('~icons/ri/user4-fill')['default']
     ISimpleIconsZalo: typeof import('~icons/simple-icons/zalo')['default']
     ITablerSearch: typeof import('~icons/tabler/search')['default']
     IUilFacebookF: typeof import('~icons/uil/facebook-f')['default']
-    Swiper: typeof import('swiper/vue')['Swiper']
-    SwiperSlide: typeof import('swiper/vue')['SwiperSlide']
   }
 }

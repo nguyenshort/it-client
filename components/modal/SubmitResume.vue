@@ -62,7 +62,9 @@
 
         <h4 class="font-semibold mt-4 mb-1">Thư Xin Viện</h4>
 
-        <textarea class="w-full bg-gray-100 h-[120px] rounded-md focus:outline-0 p-4" />
+        <textarea
+          class="w-full bg-gray-100 h-[120px] rounded-md focus:outline-0 p-4"
+        />
 
         <div class="flex justify-between mt-4">
           <a class="text-[13px] text-green-500 underline">Mẹo xin việc</a>
@@ -77,7 +79,7 @@
         </div>
       </div>
       <div
-        v-if="currentStep === 'success'"
+        v-else-if="currentStep === 'success'"
         class="flex flex-col items-center justify-center"
       >
         <div
@@ -99,10 +101,13 @@
 </template>
 
 <script lang="ts" setup>
-import {reactive, ref, useMutation, useNuxtApp} from '#imports'
+import { reactive, ref, useMutation, useNuxtApp } from '#imports'
 import { RoleDoc } from '~/apollo/shinzo/queries/__generated__/RoleDoc'
-import {CreateProposal, CreateProposalVariables} from '~/apollo/shinzo/mutates/__generated__/CreateProposal'
-import {SUBMIT_PROPOSAL} from "~/apollo/shinzo/mutates/proposal.mutate";
+import {
+  CreateProposal,
+  CreateProposalVariables
+} from '~/apollo/shinzo/mutates/__generated__/CreateProposal'
+import { SUBMIT_PROPOSAL } from '~/apollo/shinzo/mutates/proposal.mutate'
 
 const currentStep = ref('input')
 
@@ -121,8 +126,10 @@ const openModal = (data: any) => {
   form.input.role = data.current.id
 }
 
-
 const { $modal } = useNuxtApp()
-const { loading, mutate, onDone } = useMutation<CreateProposal, CreateProposalVariables>(SUBMIT_PROPOSAL)
+const { loading, mutate, onDone } = useMutation<
+  CreateProposal,
+  CreateProposalVariables
+>(SUBMIT_PROPOSAL)
 onDone(() => $modal().off('proposal'))
 </script>
