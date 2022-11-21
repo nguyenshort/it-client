@@ -3,7 +3,7 @@
     class="rounded-full overflow-hidden border border-dashed flex items-center justify-center text-gray-400"
     @click="$modal().open('proposal', { current, roles })"
   >
-    <i-material-symbols-add />
+    <Icon name="material-symbols:add" />
   </div>
 </template>
 

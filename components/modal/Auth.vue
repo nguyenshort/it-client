@@ -29,13 +29,13 @@
           class="mb-3"
         >
           <template #prefix>
-            <i-ri-user-4-fill class="text-gray-400" />
+            <Icon name="ri:user-4-fill" class="text-gray-400" />
           </template>
         </form-text>
 
         <form-text v-model:value="email" placeholder="Email ID">
           <template #prefix>
-            <i-ic-outline-alternate-email class="text-gray-400" />
+            <Icon name="material-symbols:alternate-email" class="text-gray-400" />
           </template>
         </form-text>
 
@@ -46,7 +46,7 @@
           class="mt-3"
         >
           <template #prefix>
-            <i-ic-round-vpn-key class="text-gray-400" />
+            <Icon name="material-symbols:vpn-key" class="text-gray-400" />
           </template>
 
           <template v-if="mode === 'login'" #suffix>
@@ -74,7 +74,7 @@
 
         <form-button type="primary" block class="mt-4">
           <template #icon>
-            <i-material-symbols-arrow-circle-right />
+            <Icon name="material-symbols:arrow-circle-right" />
           </template>
           <span class="ml-1 text-xs font-semibold">
             {{ mode === 'login' ? 'Đăng Nhập' : 'Đăng Ký' }}
@@ -129,10 +129,10 @@ import {
   dbSet,
   dbRef,
   watch,
-  useApp
+  useAppStore
 } from '#imports'
 
-const app = useApp()
+const app = useAppStore()
 
 const mode = ref<'login' | 'register'>('login')
 
@@ -219,7 +219,7 @@ const googleSignIn = () => signInWithPopup(getAuth(), new GoogleAuthProvider())
 
 const modal = ref()
 watch(
-  () => useApp.auth,
+  () => useAppStore.auth,
   (val) => {
     if (val) {
       modal.value?.dispose()

@@ -1,82 +1,57 @@
 <template>
-  <div id="site-header" class="border-b">
-    <div class="mx-auto flex h-full max-w-bootstrap items-center px-4">
+  <div>
+    <div id="site-header" class="border-b">
+      <div class="mx-auto flex h-full max-w-bootstrap items-center px-4">
 
-      <div class="header-logo mr-3 flex-shrink-0">
-        <nuxt-link to="/" title="" class="logo">
-          <img
-              class="mr-4 h-full w-full object-cover"
-              src="/images/logo.png"
-              alt=""
-          />
-        </nuxt-link>
-      </div>
-
-      <div class="menu-list mr-auto flex h-full flex-shrink-0 items-center text-gray-500">
-        <lazy-menu-tech/>
-        <lazy-menu-categories/>
-        <div class="menu-item">
-          <router-link
-              to="/studio"
-              class="flex items-center text-gray-500 hover:text-gray-500"
-          >
-            <i-mdi-pencil-circle class="text-[23px]"/>
-            <h5 class="mb-0 ml-2 text-[15px] font-semibold text-current">
-              Studio
-            </h5>
-          </router-link>
+        <div class="header-logo mr-3 flex-shrink-0">
+          <nuxt-link to="/" title="" class="logo">
+            <img
+                class="mr-4 h-full w-full object-cover"
+                src="/images/logo.png"
+                alt=""
+            />
+          </nuxt-link>
         </div>
-      </div>
 
-      <div class="flex h-full w-full justify-end py-3.5 pr-3">
-        <form
-            class="h-full w-[280px]"
-            action="/search"
-            @click="$modal().open('spotlight')"
+        <div
+            class="menu-list mr-auto flex h-full flex-shrink-0 items-center text-gray-500"
         >
-          <div
-              class="flex h-full w-full cursor-pointer items-center rounded-full border pl-4 transition hover:border-primary-500 hover:bg-primary-50 hover:text-primary-500 focus:outline-0"
-          >
-            <i-tabler-search class="flex-shrink-0 text-current"/>
-            <span class="ml-2 text-current">Tìm kiếm...</span>
-          </div>
-        </form>
+          <lazy-menu-tech />
+          <lazy-menu-categories />
+          <lazy-menu-studio />
+        </div>
+
+        <lazy-menu-search class="pr-3" />
+
+        <div class="mx-6 flex flex-shrink-0 items-center text-gray-500">
+          <div class="text-[15px] font-semibold">Find Job</div>
+
+          <div class="ml-6 text-[15px] font-semibold">Blog</div>
+
+          <button class="ml-6" @click="$modal().open('setting')">
+            <Icon name="material-symbols:settings" class="text-[20px]" />
+          </button>
+        </div>
+
+        <lazy-menu-user />
+
       </div>
-
-      <div class="mx-6 flex flex-shrink-0 items-center text-gray-500">
-        <div class="text-[15px] font-semibold">Find Job</div>
-
-        <div class="ml-6 text-[15px] font-semibold">Blog</div>
-
-        <button class="ml-6" @click="$modal().open('setting')">
-          <i-ic-sharp-settings class="text-[20px]"/>
-        </button>
-      </div>
-
-      <form-button v-if="!kokiApp.auth" class="flex-shrink-0" @click="$modal().open('auth')">
-        <span class="text-sm font-bold">
-            Đăng Nhập
-        </span>
-      </form-button>
-
-      <div v-else class="flex-shrink-0 w-[40px] h-[40px] rounded-full overflow-hidden custom-shadow">
-        <img :src="kokiApp.user?.avatar"  alt="" class="w-full h-full object-cover" />
-      </div>
-
     </div>
-  </div>
 
-  <div class="h-[70px]"></div>
+    <div class="h-[70px]"></div>
+  </div>
 </template>
 
 <script lang="ts" setup>
-import { nextTick, onMounted, useApp } from "#imports"
+import { nextTick, onMounted, useAppStore } from '#imports'
 
-const kokiApp = useApp()
+const kokiApp = useAppStore()
 
-onMounted(() => nextTick(() => {
-  window.copyJWT = () => kokiApp.token
-}))
+onMounted(() =>
+  nextTick(() => {
+    ;(window as any).copyJWT = () => kokiApp.token
+  })
+)
 </script>
 
 <style lang="scss">

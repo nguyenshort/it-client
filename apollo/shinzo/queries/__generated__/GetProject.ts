@@ -28,6 +28,8 @@ export interface GetProject_project_roles_user {
   __typename: "User";
   id: string;
   name: string;
+  avatar: string | null;
+  slug: string;
 }
 
 export interface GetProject_project_roles {

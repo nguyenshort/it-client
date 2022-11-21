@@ -1,12 +1,3 @@
-import Components from 'unplugin-vue-components/vite'
-import Icons from 'unplugin-icons/vite'
-import IconsResolver from 'unplugin-icons/resolver'
-import path from 'path'
-
-import EnvGenerator from './utils/vite/env'
-import GraphqlGenerator from './utils/vite/graphql'
-
-// https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   app: {
     head: {
@@ -43,6 +34,7 @@ export default defineNuxtConfig({
     '@nuxtjs/apollo',
     '@vueuse/nuxt',
     '@intlify/nuxt3',
+    'nuxt-icon',
     [
       '@pinia/nuxt',
       {
@@ -60,7 +52,8 @@ export default defineNuxtConfig({
       { name: 'getDatabase', from: 'firebase/database' },
       { name: 'ref', from: 'firebase/database', as: 'dbRef' },
       { name: 'set', from: 'firebase/database', as: 'dbSet' },
-      { name: 'onValue', from: 'firebase/database', as: 'dbOnValue' }
+      { name: 'onValue', from: 'firebase/database', as: 'dbOnValue' },
+      { name: 'useAxios', from: '@vueuse/integrations/useAxios' }
     ]
   },
   apollo: {
@@ -105,8 +98,9 @@ export default defineNuxtConfig({
     // Config within public will be also exposed to the client
     public: {
       apiBase: '/api',
-      apiGraphQL: 'http://localhost:5001/graphql',
-      cdnEndpoint: 'http://localhost:5001/'
+      apiGraphQL: process.env.NUXT_PUBLIC_API_GRAPHQL_ENDPOINT,
+      cdnEndpoint: process.env.NUXT_PUBLIC_API_CDN_ENDPOINT,
+      apiBackend: process.env.NUXT_PUBLIC_API_BACKEND_ENDPOINT,
     }
   },
   hooks: {
@@ -117,39 +111,5 @@ export default defineNuxtConfig({
         }
       })
     }
-  },
-  vite: {
-    plugins: [
-      Components({
-        types: [],
-        resolvers: [
-          IconsResolver({
-            prefix: 'i'
-          }),
-          (componentName) => {
-            // where `componentName` is always CapitalCase
-            if (componentName.toLowerCase() === 'gridlayout') {
-              return { name: 'GridLayout', from: 'vue3-grid-layout' }
-            } else if (componentName.toLowerCase() === 'griditem') {
-              return { name: 'GridItem', from: 'vue3-grid-layout' }
-            }
-          },
-          (componentName) => {
-            // where `componentName` is always CapitalCase
-            if (componentName.toLowerCase() === 'swiper') {
-              return { name: 'Swiper', from: 'swiper/vue' }
-            } else if (componentName.toLowerCase() === 'swiperslide') {
-              return { name: 'SwiperSlide', from: 'swiper/vue' }
-            }
-          }
-        ],
-        dts: path.resolve(__dirname, 'types/components.d.ts')
-      }),
-      Icons({
-        autoInstall: true
-      }),
-      EnvGenerator(),
-      GraphqlGenerator()
-    ]
   }
 })

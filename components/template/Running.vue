@@ -60,22 +60,23 @@
           :avatars="filledRoles.map((role) => role.user.avatar)"
         />
 
-        <button
+        <theme-button
           v-else-if="project.roles.length"
-          class="flex items-center bg-gradient-to-r from-primary-500 to-primary-600 text-white px-3 py-1.5 rounded-full shadow-lg shadow-primary-200"
+          size="small"
+          type="indigo"
+          icon="material-symbols:add-circle"
         >
-          <span class="text-xs font-semibold mr-1">Tham Gia</span>
-          <i-material-symbols-add-circle-rounded />
-        </button>
+          Tham Gia
+        </theme-button>
 
-        <button
-          v-else
-          class="flex items-center bg-gradient-to-r from-indigo-500 to-indigo-600 text-white px-3 py-1.5 rounded-full shadow-lg shadow-primary-200"
+        <theme-button
+            v-else
+            icon="material-symbols:timelapse-outline"
+            size="small"
+            type="indigo"
         >
-          <span class="text-xs font-semibold mr-1">Xin Chờ</span>
-          <i-mdi-clock-time-eight-outline />
-        </button>
-
+          Xin Chờ
+        </theme-button>
       </div>
     </div>
   </div>

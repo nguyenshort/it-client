@@ -14,12 +14,19 @@ export enum ProjectStatus {
   STUCK = "STUCK",
 }
 
+export enum ProposalStatus {
+  APPROVED = "APPROVED",
+  REJECTED = "REJECTED",
+  WAITING = "WAITING",
+}
+
 export enum StepStatus {
   DONE = "DONE",
   WAITING = "WAITING",
 }
 
 export enum UserRole {
+  ADMIN = "ADMIN",
   SP_ADMIN = "SP_ADMIN",
   USER = "USER",
 }
@@ -47,6 +54,21 @@ export interface GetProjectsFilter {
   sort: string;
   status?: ProjectStatus | null;
   technologies?: string[] | null;
+}
+
+export interface GetProposalFilter {
+  project: string;
+}
+
+export interface GetRolesInput {
+  project: string;
+}
+
+export interface UpdateProposalInput {
+  id: string;
+  letter?: string | null;
+  resume?: string | null;
+  role?: string | null;
 }
 
 //==============================================================

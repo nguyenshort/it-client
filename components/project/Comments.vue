@@ -22,8 +22,8 @@
                   :key="index"
                   class="text-[13px] ml-2 first:ml-0"
                 >
-                  <i-bi-star-fill v-if="index <= comment.score" class="text-orange-500" />
-                  <i-bi-star-fill v-else class="text-gray-300" />
+                  <Icon name="ph:star-fill" v-if="index <= comment.score" class="text-orange-500" />
+                  <Icon name="ph:star-fill" v-else class="text-gray-300" />
                 </li>
               </ul>
 
@@ -37,7 +37,7 @@
             class="flex items-center mr-6 bg-gradient-to-r from-primary-500 to-primary-700 text-white px-4 py-2 rounded-full shadow-lg shadow-primary-200"
           >
             <span class="text-[14px] font-semibold mr-2">Đánh Giá</span>
-            <i-bx-bxs-message-square-edit />
+            <Icon name="bx:bxs-message-square-edit" />
           </button>
         </div>
       </div>

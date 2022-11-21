@@ -8,7 +8,7 @@ interface AppInstance {
   user?: GetMe_me
 }
 
-export const useApp = defineStore('app', {
+export const useAppStore = defineStore('app', {
   state: () => ({
     token: '',
     user: undefined

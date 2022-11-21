@@ -14,7 +14,7 @@
     >
       <form>
         <div class="flex items-center px-4 pb-3.5 pt-4 bg-gray-100">
-          <i-lucide-search class="text-[19px] flex-shrink-0" />
+          <Icon name="lucide:search" class="text-[19px] flex-shrink-0" />
           <input
               ref="inputRef"
               v-model="keyword"
@@ -52,7 +52,7 @@
 
               <div class="flex items-center text-xs text-gray-500">
                 <span>
-                  <i-iconoir-chat-bubble/>
+                  <Icon name="ion:chatbubble-ellipses" />
                 </span>
                 <span class="ml-1 relative mt-0.5">
                   {{ project.comment }} bình luận
@@ -63,7 +63,7 @@
 
               <div class="flex items-center text-xs text-gray-500">
                 <span>
-                  <i-octicon-issue-draft-16/>
+                  <Icon name="octicon:issue-draft-16" />
                 </span>
                 <span class="ml-1 relative mt-0.5">
                   {{ project.issues }} issues

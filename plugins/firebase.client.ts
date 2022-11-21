@@ -1,4 +1,4 @@
-import {defineNuxtPlugin, useApp} from "#imports"
+import {defineNuxtPlugin, useAppStore} from "#imports"
 import {initializeApp} from "@firebase/app";
 import {getAnalytics} from "@firebase/analytics";
 import {getAuth} from "firebase/auth";
@@ -19,7 +19,7 @@ export default defineNuxtPlugin(nuxtApp => {
     const app = initializeApp(firebaseConfig)
     const analytics = getAnalytics(app)
     const auth = getAuth(app)
-    const kokiApp = useApp()
+    const kokiApp = useAppStore()
 
     nuxtApp.hooks.hook('app:mounted', () => {
         // Listen to Supabase auth changes

@@ -1,7 +1,7 @@
 <template>
   <div class="menu-item _has_sub">
     <button class="flex items-center">
-      <i-ri-compass-3-fill class="text-[23px]" />
+      <Icon name="ri:compass-3-fill" class="text-[23px]" />
       <h5 class="mb-0 text-current font-semibold ml-2 text-[15px]">
         Technology
       </h5>

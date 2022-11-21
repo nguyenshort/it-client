@@ -30,6 +30,8 @@ export const GET_PROJECT = gql`
         user {
           id
           name
+          avatar
+          slug
         }
       }
       slug

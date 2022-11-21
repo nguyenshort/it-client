@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-shadow rounded-lg flex overflow-hidden items-center">
+  <div class="shadow-default rounded-lg flex overflow-hidden items-center">
     <div class="pl-6 py-5">
       <nuxt-link
         :to="$link().product(project)"
@@ -28,7 +28,7 @@
           class="flex items-center text-sm"
         >
           <span>
-            <i-ph-link-simple-fill />
+            <Icon name="ph:link-simple" />
           </span>
           <span class="ml-1">{{ project.link }}</span>
         </a>
@@ -40,7 +40,7 @@
 
         <div class="flex items-center text-xs text-gray-500">
           <span>
-            <i-iconoir-chat-bubble />
+            <Icon name="ion:chatbubble-ellipses-outline" />
           </span>
           <span class="ml-1 relative mt-0.5">
             {{ project.comments }} bình luận
@@ -51,7 +51,7 @@
 
         <div class="flex items-center text-xs text-gray-500">
           <span>
-            <i-octicon-issue-draft-16 />
+            <Icon name="octicon:issue-draft-16" />
           </span>
           <span class="ml-1 relative mt-0.5">
             {{ project.bookmarks }} issues
@@ -66,7 +66,7 @@
       <div class="mt-1 flex items-center text-gray-500 text-xs">
         <div class="flex items-center">
           <span>
-            <i-mdi-clock-outline />
+            <Icon name="mdi:clock-time-two-outline" />
           </span>
           <span class="ml-1">
             {{ $dayjs(project.estimate[0]).format('DD/MM/YYYY') }}
@@ -81,7 +81,7 @@
       <div class="mt-1 flex items-center text-gray-500 text-xs">
         <div class="flex items-center">
           <span>
-            <i-ant-design-flag-outlined />
+            <Icon name="mingcute:flag-1-fill" />
           </span>
           <span class="ml-1">
             {{ $dayjs(project.estimate[1]).format('DD/MM/YYYY') }}
@@ -92,12 +92,14 @@
 
     <lazy-includes-group-avatar v-if="filledRoles.length" :avatars="filledRoles.map((e) => e.user.avatar)" />
 
-    <button
-      class="flex items-center mr-6 bg-gradient-to-r from-primary-500 to-primary-700 text-white px-3 py-2 rounded-full shadow-lg shadow-primary-200"
+    <theme-button
+        type="primary"
+        size="small"
+        icon="material-symbols:arrow-circle-right"
+        class="mr-6"
     >
-      <span class="text-xs font-semibold mr-1">Đánh Giá</span>
-      <i-material-symbols-arrow-circle-right />
-    </button>
+      Đánh Giá
+    </theme-button>
   </div>
 </template>
 

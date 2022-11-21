@@ -7,3 +7,20 @@ export const SUBMIT_PROPOSAL = gql`
     }
   }
 `
+
+export const UPDATE_PROPOSAL = gql`
+  mutation UpdateProposal($input: UpdateProposalInput!) {
+    updateProposal(input: $input) {
+      id
+      letter
+      resume
+      createdAt
+      note
+      role {
+        id
+        name
+      }
+      status
+    }
+  }
+`

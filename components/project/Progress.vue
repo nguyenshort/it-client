@@ -2,54 +2,64 @@
   <div>
     <h3 class="text-[20px] font-semibold text-gray-700">Tiến Độ</h3>
 
-    <div v-auto-animate class="mt-5">
+    <div class="mt-5">
       <div v-if="steps.length">
         <div class="text-gray-500">
           <div class="flex items-center justify-between">
             <button class="flex items-center">
-              <i-ep-flag class="text-[13px]" />
-              <span class="ml-2 text-[14px]">
+              <Icon name="ph:person-simple-run-bold" class="text-[13px]" />
+              <span class="ml-2 text-[12px]">
                 {{ $dayjs(project.estimate[0]).format('DD/MM/YYYY') }}
               </span>
             </button>
 
             <button class="flex items-center">
-              <i-material-symbols-check-circle class="text-[13px]" />
-              <span class="ml-2 text-[14px]">
+              <Icon name="mingcute:flag-1-fill" class="text-[13px]" />
+              <span class="ml-2 text-[12px]">
                 {{ $dayjs(project.estimate[1]).format('DD/MM/YYYY') }}
               </span>
             </button>
           </div>
 
-          <div class="flex items-center justify-between mt-4 relative">
+          <div class="mt-4 flex relative justify-between">
             <div
               v-for="(step, index) in steps"
               :key="index"
               class="relative z-10"
             >
-              <div
-                class="w-16 h-16 rounded-full object-cover border-[3px] cutsom-shadow bg-white flex items-center justify-center"
-                :class="{
-                  'border-primary-500': index <= currentActive,
-                  'border-gray-300': index > currentActive
-                }"
-              >
-                <i-ic-baseline-check
-                  v-if="currentActive > index"
-                  class="text-[22px] text-primary-500"
-                />
-                <i-eos-icons-loading
-                  v-if="currentActive === index"
-                  class="text-[22px] text-primary-500"
-                />
-                <i-mdi-clock-time-eight-outline
-                  v-if="currentActive < index"
-                  class="text-[22px] text-gray-300"
-                />
+              <div class="text-center">
+                <div
+                  class="w-16 h-16 rounded-full border-[3px] flex items-center justify-center bg-white"
+                  :class="{
+                    'border-primary-500': getStatus(index) === 'done',
+                  }"
+                >
+                  <Icon
+                    v-if="getStatus(index) === 'doing'"
+                    name="eos-icons:loading"
+                    class="text-[22px] text-primary-500"
+                  />
+                  <Icon
+                    v-else-if="getStatus(index) === 'done'"
+                    name="ic:outline-check"
+                    class="text-[22px] text-primary-500"
+                  />
+                  <Icon
+                    v-else
+                    name="mdi:clock-time-five-outline"
+                    class="text-[22px] text-gray-300"
+                  />
+                </div>
+
+                <div class="text-[14px] mt-2 font-semibold text-gray-500">
+                  {{ step.name }}
+                </div>
               </div>
             </div>
 
-            <div class="absolute h-[4px] top-1/2 left-3 right-3 transform z-0">
+            <div
+              class="absolute h-[4px] top-8 left-3 right-3 transform z-0 -translate-y-1/2"
+            >
               <div class="w-full h-full bg-gray-100 relative">
                 <div
                   class="bg-primary-500 h-full _progress"
@@ -58,18 +68,6 @@
                   }"
                 ></div>
               </div>
-            </div>
-          </div>
-
-          <div class="flex items-center justify-between mt-2.5 relative">
-            <div
-              v-for="(step, index) in steps"
-              :key="index"
-              class="w-16 text-center"
-            >
-              <span class="mt-3 font-semibold text-gray-500">{{
-                step.name
-              }}</span>
             </div>
           </div>
         </div>
@@ -123,6 +121,16 @@ const getWidth = computed(() => {
 const isHiring = computed(() => {
   return props.project.roles.filter((role) => !role.user).length > 0
 })
+
+const getStatus = (index: number) => {
+  if (index <= currentActive.value) {
+    return 'done'
+  } else if (index === currentActive.value + 1) {
+    return 'doing'
+  } else {
+    return 'todo'
+  }
+}
 </script>
 
 <style lang="css" scoped>

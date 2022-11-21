@@ -9,19 +9,16 @@
 
           <div class="logo-icon mt-auto">
             <button>
-              <i-ri-instagram-fill />
+              <Icon name="mdi:instagram" />
             </button>
             <button>
-              <i-ic-baseline-tiktok />
+              <Icon name="ic:baseline-tiktok" />
             </button>
             <button>
-              <i-mdi-twitter />
+              <Icon name="ion:logo-twitter" />
             </button>
             <button>
-              <i-uil-facebook-f />
-            </button>
-            <button class="transform scale-150 ml-1">
-              <i-simple-icons-zalo />
+              <Icon name="ion:social-facebook" />
             </button>
           </div>
 

@@ -28,7 +28,7 @@
             @click="dispose()"
         >
           <span ref="closeButton" class="opacity-0">
-            <i-material-symbols-close class="fill-current text-[20px]" />
+            <Icon name="material-symbols:close" class="fill-current text-[20px]" />
           </span>
         </a>
 

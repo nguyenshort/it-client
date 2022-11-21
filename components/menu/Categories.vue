@@ -1,103 +1,80 @@
 <template>
-  <div
-      class='menu-item _has_sub categories'
-      @mouseenter="showCategories"
-      @mouseleave="hideCategories"
+  <lazy-menu-wrapper
+    icon="bx:bxs-category"
+    title="Category"
+    @mouseenter="showCategories"
+    @mouseleave="hideCategories"
   >
-    <button class='flex items-center'>
-      <i-bx-bxs-category-alt class='text-[23px]' />
-      <h5 class='mb-0 text-current font-semibold ml-2 text-[15px]'>Category</h5>
-    </button>
-
-    <div class='absolute sub-menu w-[150px] h-[312px] top-full z-20'>
-      <div
-          class='sub-menu-content'
-      >
-        <ul ref="categoriesRef">
-          <li
-              v-for="category in categories"
-              :key="category.id"
-          >
-            <router-link to="/">
-              <component :is="category.icon" />
-              <span>{{ category.name }}</span>
-            </router-link>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-  </div>
+    <template #submenu>
+      <ul ref="categoriesRef">
+        <li v-for="category in categories" :key="category.id">
+          <router-link to="/">
+            <Icon :name="category.icon" />
+            <span>{{ category.name }}</span>
+          </router-link>
+        </li>
+      </ul>
+    </template>
+  </lazy-menu-wrapper>
 </template>
 
 <script lang="ts" setup>
-
-import MdiWeb from '~icons/mdi/web'
-import UilMobileVibrate from '~icons/uil/mobile-vibrate'
-import PhFigmaLogo from '~icons/ph/figma-logo'
-import NimbusMarketing from '~icons/nimbus/marketing'
-import ClarityBlocksGroupSolid from '~icons/clarity/blocks-group-solid'
-import ClarityInternetOfThingsSolid from '~icons/clarity/internet-of-things-solid'
-import MdiAppleIcloud from '~icons/mdi/apple-icloud'
-import UilServers from '~icons/uil/servers'
-import PhDatabaseFill from '~icons/ph/database-fill'
-import {nextTick, shallowRef, useNuxtApp} from "#imports";
-
+import { nextTick, ref, shallowRef, useNuxtApp } from '#imports'
 
 const categories = shallowRef<any[]>([
   {
     id: '1',
     name: 'Mobile',
     slug: 'mobile',
-    icon: UilMobileVibrate
+    icon: 'ph:device-mobile-speaker-bold'
   },
   {
     id: '2',
     name: 'Web',
     slug: 'web',
-    icon: MdiWeb
+    icon: 'mdi:web'
   },
   {
     id: '3',
     name: 'Design',
     slug: 'design',
-    icon: PhFigmaLogo
+    icon: 'ph:figma-logo'
   },
   {
     id: '4',
     name: 'Marketing',
     slug: 'marketing',
-    icon: NimbusMarketing
+    icon: 'nimbus:marketing'
   },
   {
     id: '5',
     name: 'Blockchain',
     slug: 'marketing',
-    icon: ClarityBlocksGroupSolid
+    icon: 'clarity:block-solid'
   },
   {
     id: '6',
     name: 'IoT',
     slug: 'iot',
-    icon: ClarityInternetOfThingsSolid
+    icon: 'pepicons:internet'
   },
   {
     id: '7',
     name: 'Cloud',
     slug: 'cloud',
-    icon: MdiAppleIcloud
+    icon: 'material-symbols:cloud'
   },
   {
     id: '8',
     name: 'DevOps',
     slug: 'devops',
-    icon: UilServers
+    icon: 'mdi:microsoft-azure-devops'
   },
   {
     id: '10',
     name: 'Data Science',
     slug: 'data-science',
-    icon: PhDatabaseFill
+    icon: 'ph:database-bold'
   }
 ])
 
@@ -105,14 +82,16 @@ const categoriesRef = ref<HTMLUListElement>()
 const { $anime } = useNuxtApp()
 
 const showCategories = () => {
-  nextTick(() => $anime({
-    targets: categoriesRef.value?.querySelectorAll('li'),
-    translateY: [-30, 0],
-    opacity: [0, 1],
-    //duration: 300,
-    // easing: 'easeOutQuad',
-    delay: (el, i) => 100 + 30 * i
-  }))
+  nextTick(() =>
+    $anime({
+      targets: categoriesRef.value?.querySelectorAll('li'),
+      translateY: [-30, 0],
+      opacity: [0, 1],
+      //duration: 300,
+      // easing: 'easeOutQuad',
+      delay: (el: any, i: number) => 100 + 30 * i
+    })
+  )
 }
 
 const hideCategories = () => {
@@ -121,20 +100,17 @@ const hideCategories = () => {
     li.style.transform = 'translateY(-30px)'
   })
 }
-
 </script>
 
 <style scoped lang="scss">
-.menu-item.categories {
-  ul {
-    background: #18181b;
-    @apply mb-0 rounded-lg py-2 overflow-hidden;
-    li {
-      a {
-        @apply flex items-center py-2 px-3 text-white transition hover:bg-primary-500;
-        span {
-          @apply ml-2;
-        }
+ul {
+  background: #18181b;
+  @apply rounded-lg py-2 overflow-hidden;
+  li {
+    a {
+      @apply flex items-center py-2 px-4 text-white transition hover:bg-primary-500 w-[150px];
+      span {
+        @apply ml-2;
       }
     }
   }

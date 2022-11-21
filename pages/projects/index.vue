@@ -4,7 +4,7 @@
       <ul class="text-gray-500 opacity-90">
         <li class="flex items-center">
           <span class="flex items-center">
-            <i-ion-md-home />
+            <Icon name="bx:bxs-home-circle" />
           </span>
           <span class="mx-1.5">/</span>
           <span>{{ project?.name }}</span>

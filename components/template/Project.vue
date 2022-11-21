@@ -14,33 +14,33 @@
             class="flex justify-around text-white absolute bottom-3 left-0 right-0"
           >
             <button v-if="project.bookmarks" class="flex items-center">
-              <i-ant-design-like-filled />
+              <Icon name="bx:bxs-like" />
               <span class="mb-0 text-xs relative top-0.5 ml-1">
                 {{ project.bookmarks }}
               </span>
             </button>
 
             <button v-if="project.comments" class="flex items-center">
-              <i-ion-chatbubble-ellipses />
+              <Icon name="ion:chatbubble-ellipses" />
               <span class="mb-0 text-xs relative top-0.5 ml-1">
                 {{ project.comments }}
               </span>
             </button>
 
             <button v-if="false" class="flex items-center">
-              <i-material-symbols-share />
+              <Icon name="ion:share-social-sharp" />
             </button>
           </div>
           <button
             class="absolute top-3 right-2 text-white opacity-0 transition more-button"
           >
-            <i-mdi-dots-vertical />
+            <Icon name="mdi:dots-vertical" />
           </button>
 
           <button
             class="absolute top-3 left-2 text-white opacity-0 transition scale-0 like-button text-xl"
           >
-            <i-material-symbols-bookmark-add-rounded />
+            <Icon name="material-symbols:bookmark-add-rounded" />
           </button>
         </div>
       </div>
@@ -62,38 +62,12 @@
         </h4>
       </div>
 
-      <div
+      <lazy-roles-hiring-grid
         v-if="project.roles.length"
-        class="flex flex-wrap mt-4 -mx-1.5 -mb-1.5"
-      >
-        <button
-          v-for="(role, index2) in project.roles.slice(0, 5)"
-          :key="index2"
-          class="w-2/12 px-1.5 pb-1.5 text-center transition hover:scale-105"
-        >
-          <div
-            class="w-full aspect-1 rounded-full border border-dashed flex items-center justify-center text-gray-400"
-          >
-            <i-material-symbols-add />
-          </div>
-          <h4 class="text-[10px] mt-0.5">{{ role.name }}</h4>
-        </button>
-
-        <button
-          v-if="roles.length > 6"
-          class="w-2/12 px-1.5 pb-1.5 text-center transition hover:scale-105"
-        >
-          <div
-            class="w-full aspect-1 rounded-full border border-dashed flex items-center justify-center text-white bg-primary-600"
-          >
-            <span>
-              <span>+</span>
-              <span class="text-[12px]">{{ roles.length - 5 }}</span>
-            </span>
-          </div>
-          <h4 class="text-[10px] mt-0.5 opacity-0">x</h4>
-        </button>
-      </div>
+        :roles="project.roles"
+        :project="project.id"
+        class="mt-4"
+      />
 
       <div v-else class="text-sm text-gray-500 mt-3 mb-2 line-clamp-3">
         {{ project.content }}

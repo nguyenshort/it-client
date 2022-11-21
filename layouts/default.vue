@@ -10,10 +10,14 @@
       <nuxt-page />
     </div>
     <lazy-includes-footer />
-    <lazy-includes-spotlight />
-    <lazy-modal-auth />
-    <lazy-modal-setting />
-    <lazy-modal-submit-resume />
+
+    <client-only>
+      <lazy-includes-spotlight />
+      <lazy-modal-auth />
+      <lazy-modal-setting />
+      <lazy-modal-submit-resume />
+    </client-only>
+
   </div>
 </template>
 
