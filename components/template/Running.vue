@@ -65,6 +65,7 @@
           size="small"
           type="indigo"
           icon="material-symbols:add-circle"
+          @click="$modal().open('proposal', { project: project.id })"
         >
           Tham Gia
         </theme-button>

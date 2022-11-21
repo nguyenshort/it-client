@@ -1,5 +1,5 @@
 <template>
-  <lazy-modal-base event="proposal" title="Yêu Cầu Tham Gia" @init="openModal">
+  <lazy-modal-base event="proposal" title="Yêu Cầu Tham Gia" @init="openModal" @dispose="currentStep = STATUS.LOADING">
     <div v-auto-animate>
       <div v-if="currentStep === STATUS.INPUT">
         <div class="mb-3 text-gray-500">
@@ -294,7 +294,7 @@ const openModal = async ({ role, project }: OpenModalProp) => {
       form.role = proposal.role.id
       form.status = proposal.status
     } else {
-      form.role = ''
+      form.role = role?.id || ''
       form.letter = ''
       form.resume = ''
     }

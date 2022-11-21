@@ -20,6 +20,7 @@
     <lazy-roles-hiring-grid
         v-if="project.roles.length > 5"
         :roles="emptyRoles"
+        :project="project.id"
         class="mt-3"
     />
   </div>
