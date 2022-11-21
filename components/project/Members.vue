@@ -14,6 +14,7 @@
         v-for="(role, index) in filledRoles.slice(0, 5)"
         :key="index"
         :role="role"
+        class="mt-3"
       />
     </div>
 

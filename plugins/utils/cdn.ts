@@ -20,7 +20,7 @@ export const $cdn = (path: string, location = CDNLocation.LOCAL) => {
 
   switch (location) {
     case CDNLocation.LOCAL:
-      _path = runtime.cdnEndpoint + path
+      _path = runtime.public.cdnEndpoint + path
       break
   }
 
