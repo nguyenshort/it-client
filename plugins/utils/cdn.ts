@@ -16,7 +16,7 @@ export const $cdn = (path: string, location = CDNLocation.LOCAL) => {
     return path
   }
 
-  let _path = path.replace(/^\//, '')
+  let _path = path.replace(/^\//, '/')
 
   switch (location) {
     case CDNLocation.LOCAL:
