@@ -1,5 +1,5 @@
 <template>
-  <lazy-modal-base event="auth" title="Đăng Nhập" :max-width="450">
+  <lazy-modal-base event="auth" title="Đăng Nhập" :max-width="450" ref="modal">
     <template #default>
       <div style="width: 250px; height: 200px" class="mx-auto">
         <vue-lottie-player
@@ -35,7 +35,10 @@
 
         <form-text v-model:value="email" placeholder="Email ID">
           <template #prefix>
-            <Icon name="material-symbols:alternate-email" class="text-gray-400" />
+            <Icon
+              name="material-symbols:alternate-email"
+              class="text-gray-400"
+            />
           </template>
         </form-text>
 
@@ -219,12 +222,8 @@ const googleSignIn = () => signInWithPopup(getAuth(), new GoogleAuthProvider())
 
 const modal = ref()
 watch(
-  () => useAppStore.auth,
-  (val) => {
-    if (val) {
-      modal.value?.dispose()
-    }
-  }
+  () => app.auth,
+  (val) => val && modal.value?.dispose()
 )
 </script>
 

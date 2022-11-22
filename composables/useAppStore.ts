@@ -35,8 +35,13 @@ export const useAppStore = defineStore('app', {
     },
 
     async logOut() {
-      this.token = ''
-      this.user = undefined
+      try {
+        this.token = ''
+        this.user = undefined
+        await $fetch('/api/logout', { method: 'POST' })
+      } catch (e) {
+        //
+      }
     }
   }
 })

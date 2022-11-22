@@ -36,8 +36,7 @@ export default defineNuxtPlugin(nuxtApp => {
                         })
                         await kokiApp.getUser()
                     } catch (e) {
-                        //
-                        kokiApp.token = ''
+                        await kokiApp.logOut()
                     }
                 }
             } else {
