@@ -27,7 +27,7 @@ export default defineNuxtPlugin(nuxtApp => {
         auth.onIdTokenChanged(async (user) => {
             if (user) {
                 const firebaseToken = await user.getIdToken()
-                if(kokiApp.token) {
+                if(firebaseToken) {
                     try {
                         await $fetch('/api/auth', {
                             method: 'POST',

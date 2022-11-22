@@ -90,13 +90,17 @@
       </div>
     </div>
 
-    <lazy-includes-group-avatar v-if="filledRoles.length" :avatars="filledRoles.map((e) => e.user.avatar)" />
+    <lazy-includes-group-avatar
+      v-if="filledRoles.length"
+      :avatars="filledRoles.map((e) => e.user.avatar)"
+    />
 
     <theme-button
-        type="primary"
-        size="small"
-        icon="material-symbols:arrow-circle-right"
-        class="mr-6"
+      type="primary"
+      size="small"
+      icon="material-symbols:arrow-circle-right"
+      class="mr-6"
+      @click="$authFunc(() => {})"
     >
       Đánh Giá
     </theme-button>
@@ -105,7 +109,7 @@
 
 <script lang="ts" setup>
 import { ProjectDoneDoc } from '~/apollo/shinzo/queries/__generated__/ProjectDoneDoc'
-import {computed} from "#imports";
+import { computed } from '#imports'
 
 const props = defineProps<{
   project: ProjectDoneDoc

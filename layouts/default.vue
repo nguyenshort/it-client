@@ -16,11 +16,16 @@
       <lazy-modal-auth />
       <lazy-modal-setting />
       <lazy-modal-submit-resume />
+      <lazy-includes-notify-wrapper v-if="appStore.auth" />
     </client-only>
 
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import {useAppStore} from "#imports";
+
+const appStore = useAppStore()
+</script>
 
 <style scoped></style>

@@ -12,7 +12,7 @@ declare module '#app' {
 export default defineApolloClient({
     httpEndpoint: process.env.NUXT_PUBLIC_API_GRAPHQL_ENDPOINT as string,
     browserHttpEndpoint: '',
-    wsEndpoint: '',
+    wsEndpoint: process.env.NUXT_PUBLIC_API_GRAPHQL_SUBSCRIPTION_ENDPOINT as string,
     httpLinkOptions: {},
     wsLinkOptions: {},
     websocketsOnly: false,

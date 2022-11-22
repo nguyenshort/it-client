@@ -7,7 +7,9 @@
     >
       <button
         class="w-full"
-        @click.prevent.stop="$modal().open('proposal', { role: role, project })"
+        @click.prevent.stop="
+          $authFunc(() => $modal().open('proposal', { role, project }))
+        "
       >
         <div
           class="w-full aspect-1 rounded-full border border-dashed flex items-center justify-center text-gray-400"
@@ -37,7 +39,6 @@
 
 <script lang="ts" setup>
 import { ProjectItemDoc_roles } from '~/apollo/shinzo/queries/__generated__/ProjectItemDoc'
-import { computed } from '#imports'
 
 const props = withDefaults(
   defineProps<{
