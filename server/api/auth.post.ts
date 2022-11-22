@@ -38,6 +38,7 @@ export default defineEventHandler(async (event) => {
         }
       }
     } catch (e) {
+      console.log(e)
       return {
         status: 401,
         body: {
