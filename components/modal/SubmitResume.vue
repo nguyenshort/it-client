@@ -1,5 +1,10 @@
 <template>
-  <lazy-modal-base event="proposal" title="Yêu Cầu Tham Gia" @init="openModal" @dispose="currentStep = STATUS.LOADING">
+  <lazy-modal-base
+    event="proposal"
+    title="Yêu Cầu Tham Gia"
+    @init="openModal"
+    @dispose="currentStep = STATUS.LOADING"
+  >
     <div v-auto-animate>
       <div v-if="currentStep === STATUS.INPUT">
         <div class="mb-3 text-gray-500">
@@ -24,11 +29,10 @@
         <h4 class="font-semibold">Chọn Ví Trí</h4>
 
         <ul
-            class="flex flex-wrap justify-between -mx-1 mt-2"
-            :class="{
-              'pointer-events-none': form.status === ProposalStatus.APPROVED
-            }"
-
+          class="flex flex-wrap justify-between -mx-1 mt-2"
+          :class="{
+            'pointer-events-none': form.status === ProposalStatus.APPROVED
+          }"
         >
           <li
             v-for="item in jobPositions"
@@ -154,11 +158,18 @@
         v-else-if="currentStep === STATUS.SUCCESS"
         class="flex flex-col items-center justify-center"
       >
-        <div
-          class="flex h-16 w-16 items-center justify-center rounded-full bg-green-100"
-        >
-          <Icon name="ion:checkmark-circled" class="text-3xl text-green-500" />
-        </div>
+        <!--        <div-->
+        <!--          class="flex h-16 w-16 items-center justify-center rounded-full bg-green-100"-->
+        <!--        >-->
+        <!--          <Icon name="ion:checkmark-circled" class="text-3xl text-green-500" />-->
+        <!--        </div>-->
+
+        <vue-lottie-player
+          width="250px"
+          height="200px"
+          loop
+          path="https://assets10.lottiefiles.com/packages/lf20_muvibu0i.json"
+        />
         <div class="mt-4 text-center">
           <h3 class="text-lg font-semibold text-gray-700">
             Yêu cầu tham gia thành công
@@ -167,6 +178,45 @@
             Chúng tôi sẽ thông báo cho bạn khi có phản hồi
           </p>
         </div>
+      </div>
+
+      <div
+        v-else-if="currentStep === STATUS.OWNER"
+        class="flex flex-col items-center justify-center"
+      >
+        <!--        <div-->
+        <!--          class="flex h-16 w-16 items-center justify-center rounded-full bg-green-100"-->
+        <!--        >-->
+        <!--          <Icon name="ion:checkmark-circled" class="text-3xl text-green-500" />-->
+        <!--        </div>-->
+
+        <vue-lottie-player
+          width="250px"
+          height="200px"
+          loop
+          path="https://assets8.lottiefiles.com/packages/lf20_ymyikn6l.json"
+        />
+        <div class="mt-4 text-center">
+          <h3 class="text-lg font-semibold text-gray-700">
+            Bạn hiện là chủ sở hữu của dự án này
+          </h3>
+          <p class="mt-2 text-sm text-gray-500">
+            Bạn có thể quản lý dự án tại trang quản lý dự án
+          </p>
+        </div>
+
+        <div class="flex mt-8 w-full">
+          <lazy-theme-button
+              icon="ph:person-simple-run-bold"
+              type="primary"
+              size="tini"
+              @click="$modal().off('proposal')"
+              class="ml-auto"
+          >
+            Đồng Ý
+          </lazy-theme-button>
+        </div>
+
       </div>
 
       <div
@@ -197,7 +247,8 @@ import {
   useMutation,
   useNuxtApp,
   watch,
-  useUpload
+  useUpload,
+  useAppStore
 } from '#imports'
 import { RoleDoc } from '~/apollo/shinzo/queries/__generated__/RoleDoc'
 import {
@@ -225,8 +276,11 @@ import { GetProposal_proposal } from '~/apollo/shinzo/queries/__generated__/GetP
 enum STATUS {
   INPUT,
   SUCCESS,
-  LOADING
+  LOADING,
+  OWNER
 }
+
+const appStore = useAppStore()
 
 const currentStep = ref<STATUS>(STATUS.LOADING)
 const filter = reactive<GetRolesVariables>({
@@ -253,6 +307,9 @@ interface OpenModalProp {
 }
 
 const { $apollo } = useNuxtApp()
+
+// Todo: Merge to single query
+
 const getRoles = async (project: string) => {
   const { data } = await $apollo.defaultClient.query({
     query: GET_ROLES,
@@ -280,12 +337,23 @@ const getProposal = async (
   return data?.proposal
 }
 
+// const getProject = async (project: string) => {
+//   const { data } = await $apollo.defaultClient.query({
+//     query: GET_OWNER_PROJECT,
+//     variables: {
+//       project
+//     }
+//   })
+//   return data?.project
+// }
+
 const openModal = async ({ role, project }: OpenModalProp) => {
   try {
     const [roles, proposal] = await Promise.all([
       getRoles(project),
       getProposal(project)
     ])
+
     jobPositions.value = roles
     if (proposal) {
       form.id = proposal.id
@@ -298,24 +366,38 @@ const openModal = async ({ role, project }: OpenModalProp) => {
       form.letter = ''
       form.resume = ''
     }
-    currentStep.value = STATUS.INPUT
+    currentStep.value =
+      proposal?.project.owner.id === appStore.user?.id
+        ? STATUS.OWNER
+        : STATUS.INPUT
   } catch (e) {
     //
   }
 }
 
 const { $modal } = useNuxtApp()
+
+const afterSubmit = () => {
+  console.log('afterSubmit')
+  currentStep.value = STATUS.SUCCESS
+  setTimeout(() => {
+    $modal().off('proposal')
+  }, 5000)
+}
+
 const {
   loading,
   mutate: createProposal,
-  onDone
+  onDone: afterCreated
 } = useMutation<CreateProposal, CreateProposalVariables>(SUBMIT_PROPOSAL)
-onDone(() => $modal().off('proposal'))
+afterCreated(() => afterSubmit())
 
-const { loading: updating, mutate: updateProposal } = useMutation<
-  UpdateProposal,
-  UpdateProposalVariables
->(UPDATE_PROPOSAL)
+const {
+  loading: updating,
+  mutate: updateProposal,
+  onDone: afterUpdated
+} = useMutation<UpdateProposal, UpdateProposalVariables>(UPDATE_PROPOSAL)
+afterUpdated(() => afterSubmit())
 
 const submitProposal = () => {
   if (form?.id) {
@@ -343,11 +425,7 @@ const submitProposal = () => {
 // Upload file
 const upload = useUpload()
 
-const {
-  files,
-  open: openUploadFile,
-  reset
-} = useFileDialog({
+const { files, open: openUploadFile } = useFileDialog({
   accept: 'application/pdf',
   multiple: false
 })

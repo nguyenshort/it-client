@@ -44,6 +44,12 @@ export const GET_PROPOSAL = gql`
       role {
         id
       }
+      project {
+        id
+        owner {
+          id
+        }
+      }
     }
   }
 `

@@ -49,3 +49,15 @@ export const GET_PROJECT = gql`
     }
   }
 `
+
+
+export const GET_OWNER_PROJECT = gql`
+  query GetOwnerProject($project: String!) {
+    project(project: $project) {
+      id
+      owner {
+        id
+      }
+    }
+  }
+`

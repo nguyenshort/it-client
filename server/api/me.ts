@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
         }
       }
     }
-    const data = await $fetch(config.public.apiBackend + 'users/me', {
+    const data = await $fetch(config.public.apiBackend + '/users/me', {
       headers: {
         Authorization: auth
       }

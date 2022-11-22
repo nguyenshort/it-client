@@ -29,7 +29,7 @@ export const useAppStore = defineStore('app', {
           this.user = data.me
         }
       } catch (e) {
-        console.log(e)
+        console.log('get User', e)
         //
       }
     },

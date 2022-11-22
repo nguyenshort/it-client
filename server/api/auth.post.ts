@@ -15,12 +15,13 @@ export default defineEventHandler(async (event) => {
     }
   } else {
     try {
-      const data: any = await $fetch(config.public.apiBackend + 'users/auth', {
+      const data: any = await $fetch(config.public.apiBackend + '/users/auth', {
         method: 'POST',
         headers: {
           Authorization: 'Bearer ' + body.token
         }
       })
+
       if (!data.token) {
         return {
           status: 401,
