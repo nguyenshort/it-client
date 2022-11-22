@@ -2,6 +2,7 @@ import {defineNuxtPlugin, useAppStore} from "#imports"
 import {initializeApp} from "@firebase/app";
 import {getAnalytics} from "@firebase/analytics";
 import {getAuth} from "firebase/auth";
+import {useCookie} from "#app";
 
 export default defineNuxtPlugin(nuxtApp => {
 
@@ -25,15 +26,16 @@ export default defineNuxtPlugin(nuxtApp => {
         // Listen to Supabase auth changes
         auth.onIdTokenChanged(async (user) => {
             if (user) {
-                kokiApp.token = await user.getIdToken()
+                const firebaseToken = await user.getIdToken()
                 if(kokiApp.token) {
                     try {
                         await $fetch('/api/auth', {
                             method: 'POST',
                             body: {
-                                token: kokiApp.token
+                                token:firebaseToken
                             }
                         })
+                        kokiApp.token = useCookie('apollo:app.token').value || ''
                         await kokiApp.getUser()
                     } catch (e) {
                         await kokiApp.logOut()
