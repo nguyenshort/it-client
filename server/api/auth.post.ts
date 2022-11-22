@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
     return {
       status: 401,
       body: {
-        message: 'Unauthorized'
+        message: 'Unauthorized - no token'
       }
     }
   } else {
@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
         return {
           status: 401,
           body: {
-            message: 'Unauthorized'
+            message: 'Unauthorized - invalid token'
           }
         }
       }
@@ -41,7 +41,7 @@ export default defineEventHandler(async (event) => {
       return {
         status: 401,
         body: {
-          message: 'Unauthorized'
+          message: 'Unauthorized - error'
         }
       }
     }
