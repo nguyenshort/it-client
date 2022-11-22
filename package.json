@@ -7,6 +7,7 @@
     "preview": "PORT=5003 nuxt preview",
     "postinstall": "nuxt prepare",
     "build:env": "sed 's/=.*/=/' .env > .env.example",
+    "stop": "pm2 stop it-client",
     "apollo:codegen:shinzo": "npx apollo codegen:generate --localSchemaFile=shinzo@current.graphql --target=typescript --tagName=gql --includes=./apollo/shinzo/**/*.ts --globalTypesFile=__generated__/shinzoTypes.ts",
     "apollo:download": "npx apollo client:download-schema --endpoint=http://localhost:5001/graphql shinzo@current.graphql"
   },
