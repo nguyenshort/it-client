@@ -4,7 +4,7 @@
     class="flex-shrink-0"
     @click="$modal().open('auth')"
   >
-    Đăng Nhập
+    {{ $t('auth.login') }}
   </theme-button>
 
   <menu-wrapper v-else class="user-menu">

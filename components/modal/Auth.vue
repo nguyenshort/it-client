@@ -1,5 +1,5 @@
 <template>
-  <lazy-modal-base event="auth" title="Đăng Nhập" :max-width="450" ref="modal">
+  <lazy-modal-base event="auth" :title="$t('auth.login')" :max-width="450" ref="modal">
     <template #default>
       <div style="width: 250px; height: 200px" class="mx-auto">
         <vue-lottie-player
@@ -12,7 +12,7 @@
 
       <div class="text-center">
         <small class="text-xs italic text-gray-400 opacity-90">
-          Đăng Nhập
+          {{ $t('auth.login') }}
         </small>
       </div>
 
@@ -25,7 +25,7 @@
         <form-text
           v-if="mode === 'register'"
           v-model:value="name"
-          placeholder="Tên"
+          :placeholder="$t('auth.name')"
           class="mb-3"
         >
           <template #prefix>
@@ -33,7 +33,7 @@
           </template>
         </form-text>
 
-        <form-text v-model:value="email" placeholder="Email ID">
+        <form-text v-model:value="email" :placeholder="$t('auth.email')">
           <template #prefix>
             <Icon
               name="material-symbols:alternate-email"
@@ -44,7 +44,7 @@
 
         <form-text
           v-model:value="password"
-          placeholder="Password"
+          :placeholder="$t('auth.password')"
           type="password"
           class="mt-3"
         >
@@ -56,21 +56,21 @@
             <a
               class="ml-3 block flex-shrink-0 cursor-pointer text-xs text-primary-500"
             >
-              Quên Mật Khẩu?
+              {{ $t('auth.forgot') }}
             </a>
           </template>
         </form-text>
 
         <div class="my-1 mt-3 text-center text-xs">
           <p class="text-gray-400">
-            {{ mode === 'login' ? 'Chưa có tài khoản?' : 'Đã có tài khoản?' }}
+            {{ mode === 'login' ? $t('auth.signUpNew') : $t('auth.haveAccount') }}
             <a
-              class="ml-1 cursor-pointer text-primary-500"
+              class="ml-1 cursor-pointer text-primary-500 capitalize"
               @click="
                 mode === 'register' ? (mode = 'login') : (mode = 'register')
               "
             >
-              {{ mode === 'login' ? 'Đăng Ký' : 'Đăng Nhập' }}
+              {{ mode === 'login' ? $t('auth.signup') : $t('auth.login') }}
             </a>
           </p>
         </div>
@@ -80,16 +80,16 @@
             <Icon name="material-symbols:arrow-circle-right" />
           </template>
           <span class="ml-1 text-xs font-semibold">
-            {{ mode === 'login' ? 'Đăng Nhập' : 'Đăng Ký' }}
+            {{ mode === 'login' ? $t('auth.login') : $t('auth.signup') }}
           </span>
         </form-button>
 
         <div class="mb-1">
           <div class="mt-5 flex items-center">
             <span class="h-px w-full bg-gray-200" />
-            <span class="mx-3 flex-shrink-0 text-xs font-medium text-gray-400"
-              >HOẶC TIẾP TỤC VỚI</span
-            >
+            <span class="mx-3 flex-shrink-0 text-xs font-medium text-gray-400 uppercase">
+              {{ $t('auth.with') }}
+            </span>
             <span class="h-px w-full bg-gray-200" />
           </div>
           <div class="mt-5 flex items-center justify-center">

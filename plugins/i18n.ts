@@ -14,7 +14,7 @@ export default defineNuxtPlugin((nuxtApp) => {
           search: 'Search...',
           job: 'Find Job',
           blog: 'Blog',
-          logout: 'LogOut'
+          logout: 'Log Out'
         },
         home: {
           onBroad: 'On Broad',
@@ -51,6 +51,17 @@ export default defineNuxtPlugin((nuxtApp) => {
           document: 'Manual document',
           vision: 'Project Vision',
           welcome: "Let's leave a review for us"
+        },
+        auth: {
+          login: 'Login',
+          signup: 'Signup',
+          name: 'Name',
+          email: 'Email ID',
+          pass: 'Password',
+          forgot: 'Forgot password?',
+          haveAccount: 'Have a account?',
+          signUpNew: 'Create a new account?',
+          with: 'Login With'
         }
       }
     }
