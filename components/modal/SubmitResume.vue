@@ -1,7 +1,7 @@
 <template>
   <lazy-modal-base
     event="proposal"
-    title="Yêu Cầu Tham Gia"
+    :title="$t('resume.request')"
     @init="openModal"
     @dispose="currentStep = STATUS.LOADING"
   >
@@ -11,22 +11,23 @@
           <Icon name="jam:alert" class="relative !inline text-orange-500" />
           <span class="text-[12px] ml-0.5">
             <template v-if="!form.id">
-              Chúng tôi sẽ sử dụng thông tin của bạn trên hệ thống để gửi cho
-              nhà tuyển dụng
+              {{ $t('resume.warning') }}
             </template>
             <template v-else-if="form.status === ProposalStatus.APPROVED">
-              You are already approved by the employer
+              {{ $t('resume.already') }}
             </template>
             <template v-else-if="form.note">
               {{ form.note }}
             </template>
             <template v-else>
-              You have already sent a proposal to this job. You can edit your
+              {{ $t('resume.edit') }}
             </template>
           </span>
         </div>
 
-        <h4 class="font-semibold">Chọn Ví Trí</h4>
+        <h4 class="font-semibold">
+          {{ $t('resume.selectPosition') }}
+        </h4>
 
         <ul
           class="flex flex-wrap justify-between -mx-1 mt-2"
@@ -82,14 +83,18 @@
           </li>
         </ul>
 
-        <h4 class="font-semibold mt-4 mb-1">Thư Xin Viện</h4>
+        <h4 class="font-semibold mt-4 mb-1">
+          {{ $t('resume.coverLetter') }}
+        </h4>
 
         <textarea
           class="w-full bg-gray-100 h-[120px] rounded-md focus:outline-0 p-4"
           v-model="form.letter"
         />
 
-        <h4 class="font-semibold mt-4 mb-1">Sơ Yếu Lý Lịch</h4>
+        <h4 class="font-semibold mt-4 mb-1">
+          {{ $t('resume.resume') }}
+        </h4>
 
         <div class="mt-3" v-auto-animate>
           <div v-if="!form.resume" class="flex items-center">
@@ -99,10 +104,10 @@
               class="!py-0.5"
               @click="openUploadFile"
             >
-              Tải Lên
+              {{ $t('general.upload') }}
             </lazy-theme-button>
             <span class="ml-2 text-[12px] text-gray-500">
-              Gửi lên hồ sơ của bạn.
+              {{ $t('resume.uploadYour') }}
             </span>
           </div>
           <div v-else class="py-1 px-3 bg-gray-100 rounded-lg">
@@ -117,28 +122,28 @@
 
         <div class="flex mt-4">
           <a v-if="!form.id" class="text-[13px] text-green-500 underline">
-            Mẹo xin việc
+            {{ $t('resume.tip') }}
           </a>
 
           <a
             v-if="form.status === ProposalStatus.WAITING"
             class="text-[12px] text-purple-600 underline uppercase font-semibold"
           >
-            Đang Chờ Phê Duyệt
+            {{ $t('resume.waiting') }}
           </a>
 
           <a
             v-if="form.status === ProposalStatus.APPROVED"
             class="text-[12px] text-primary-600 underline uppercase font-semibold"
           >
-            Đã Được Phê Duyệt
+            {{ $t('resume.approved') }}
           </a>
 
           <a
             v-if="form.status === ProposalStatus.REJECTED"
             class="text-[12px] text-rose-600 underline uppercase font-semibold"
           >
-            Đã Bị Từ Chối
+            {{ $t('resume.rejected') }}
           </a>
 
           <lazy-theme-button
@@ -149,7 +154,7 @@
             @click="submitProposal"
             class="ml-auto"
           >
-            {{ form.id ? 'Gửi Lại' : 'Ứng Tuyển' }}
+            {{ form.id ? $t('resume.resend') : $t('resume.send') }}
           </lazy-theme-button>
         </div>
       </div>
@@ -158,12 +163,6 @@
         v-else-if="currentStep === STATUS.SUCCESS"
         class="flex flex-col items-center justify-center"
       >
-        <!--        <div-->
-        <!--          class="flex h-16 w-16 items-center justify-center rounded-full bg-green-100"-->
-        <!--        >-->
-        <!--          <Icon name="ion:checkmark-circled" class="text-3xl text-green-500" />-->
-        <!--        </div>-->
-
         <vue-lottie-player
           width="250px"
           height="200px"
@@ -172,10 +171,10 @@
         />
         <div class="mt-4 text-center">
           <h3 class="text-lg font-semibold text-gray-700">
-            Yêu cầu tham gia thành công
+            {{ $t('resume.success') }}
           </h3>
           <p class="mt-2 text-sm text-gray-500">
-            Chúng tôi sẽ thông báo cho bạn khi có phản hồi
+            {{ $t('resume.promise') }}
           </p>
         </div>
       </div>
@@ -184,12 +183,6 @@
         v-else-if="currentStep === STATUS.OWNER"
         class="flex flex-col items-center justify-center"
       >
-        <!--        <div-->
-        <!--          class="flex h-16 w-16 items-center justify-center rounded-full bg-green-100"-->
-        <!--        >-->
-        <!--          <Icon name="ion:checkmark-circled" class="text-3xl text-green-500" />-->
-        <!--        </div>-->
-
         <vue-lottie-player
           width="250px"
           height="200px"
@@ -198,25 +191,24 @@
         />
         <div class="mt-4 text-center">
           <h3 class="text-lg font-semibold text-gray-700">
-            Bạn hiện là chủ sở hữu của dự án này
+            {{ $t('resume.owner') }}
           </h3>
           <p class="mt-2 text-sm text-gray-500">
-            Bạn có thể quản lý dự án tại trang quản lý dự án
+            {{ $t('resume.controller') }}
           </p>
         </div>
 
         <div class="flex mt-8 w-full">
           <lazy-theme-button
-              icon="ph:person-simple-run-bold"
-              type="primary"
-              size="tini"
-              @click="$modal().off('proposal')"
-              class="ml-auto"
+            icon="ph:person-simple-run-bold"
+            type="primary"
+            size="tini"
+            @click="$modal().off('proposal')"
+            class="ml-auto"
           >
-            Đồng Ý
+            {{ $t('resume.ok') }}
           </lazy-theme-button>
         </div>
-
       </div>
 
       <div
@@ -231,7 +223,7 @@
           path="https://assets10.lottiefiles.com/packages/lf20_muvibu0i.json"
         />
         <p class="text-[11px] text-gray-500">
-          Đang thu thập thông tin về dự án
+          {{ $t('resume.collect') }}
         </p>
       </div>
     </div>
