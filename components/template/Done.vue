@@ -42,8 +42,8 @@
           <span>
             <Icon name="ion:chatbubble-ellipses-outline" />
           </span>
-          <span class="ml-1 relative mt-0.5">
-            {{ project.comments }} bình luận
+          <span class="ml-1 relative mt-0.5 lowercase">
+            {{ project.comments }} {{ $t('general.comment') }}
           </span>
         </div>
 
@@ -54,14 +54,16 @@
             <Icon name="octicon:issue-draft-16" />
           </span>
           <span class="ml-1 relative mt-0.5">
-            {{ project.bookmarks }} issues
+            {{ project.bookmarks }} {{ $t('general.issues') }}
           </span>
         </div>
       </div>
     </div>
 
     <div class="ml-2 px-6 py-5 flex flex-col">
-      <h2 class="text-[13px] font-semibold text-gray-700 mb-0">Bắt Đầu</h2>
+      <h2 class="text-[13px] font-semibold text-gray-700 mb-0">
+        {{ $t('general.start') }}
+      </h2>
 
       <div class="mt-1 flex items-center text-gray-500 text-xs">
         <div class="flex items-center">
@@ -76,7 +78,9 @@
     </div>
 
     <div class="ml-2 px-6 py-5 flex flex-col mr-auto">
-      <h2 class="text-[13px] font-semibold text-gray-700 mb-0">Kết Thúc</h2>
+      <h2 class="text-[13px] font-semibold text-gray-700 mb-0">
+        {{ $t('general.end') }}
+      </h2>
 
       <div class="mt-1 flex items-center text-gray-500 text-xs">
         <div class="flex items-center">
@@ -102,7 +106,7 @@
       class="mr-6"
       @click="$authFunc(() => {})"
     >
-      Đánh Giá
+      {{ $t('general.review') }}
     </theme-button>
   </div>
 </template>

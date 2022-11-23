@@ -1,5 +1,5 @@
 <template>
-  <lazy-template-session title="Running Project">
+  <lazy-template-session :title="$t('home.running')">
     <div class="flex flex-wrap -mx-3 -mb-7">
       <div
         v-for="(project, index) in projects"

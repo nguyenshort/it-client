@@ -7,7 +7,9 @@
       </div>
 
       <button class='flex items-center transition text-gray-500 hover:text-primary-600'>
-        <span class='text-[13px] transition mr-1'>Xem Thêm</span>
+        <span class='text-[13px] transition mr-1'>
+          {{ $t('general.seeMore') }}
+        </span>
         <Icon name="material-symbols:arrow-forward" class='transition' />
       </button>
 

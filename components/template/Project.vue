@@ -45,7 +45,7 @@
         </div>
       </div>
       <img
-        class="transition hover:scale-105 absolute w-full h-full z-10 top-0 left-0 object-cover"
+        class="transition transform absolute w-full h-full z-10 top-0 left-0 object-cover cover"
         :src="$cdn(project.cover)"
         alt=""
       />
@@ -78,14 +78,16 @@
           v-if="!roles.length"
           class="text-white bg-green-500 text-xs px-2 py-0.5 rounded-lg shadow-md shadow-green-300"
         >
-          <span>Waiting...</span>
+          <span>{{ $t('general.waiting') }}...</span>
         </button>
 
         <button
           v-else-if="roles.length === filledRoles.length"
           class="text-white bg-indigo-500 text-xs px-2 py-0.5 rounded-lg shadow-md shadow-indio-300"
         >
-          <span> Full </span>
+          <span>
+            {{ $('general.full') }}
+          </span>
         </button>
 
         <button
@@ -127,6 +129,12 @@ const category = computed(() => props.project.category)
     .like-button {
       @apply scale-100 opacity-100;
     }
+  }
+}
+
+.project-avatar:hover {
+  .cover {
+    @apply scale-110;
   }
 }
 </style>

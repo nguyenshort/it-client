@@ -24,9 +24,13 @@
         <lazy-menu-search class="pr-3" />
 
         <div class="mx-6 flex flex-shrink-0 items-center text-gray-500">
-          <div class="text-[15px] font-semibold">Find Job</div>
+          <div class="text-[15px] font-semibold">
+            {{ $t('menu.job') }}
+          </div>
 
-          <div class="ml-6 text-[15px] font-semibold">Blog</div>
+          <div class="ml-6 text-[15px] font-semibold">
+            {{ $t('menu.blog') }}
+          </div>
 
           <button class="ml-6" @click="$modal().open('setting')">
             <Icon name="material-symbols:settings" class="text-[20px]" />

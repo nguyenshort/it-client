@@ -1,5 +1,5 @@
 <template>
-  <lazy-template-session title="On Broad" description="Projects that allow registration to participate.">
+  <lazy-template-session :title="$t('home.onBroad')" :description="$t('home.onBroadSub')">
     <div
         class='flex flex-wrap -mx-3 -mb-7'
     >

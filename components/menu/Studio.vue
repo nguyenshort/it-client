@@ -1,5 +1,5 @@
 <template>
-  <menu-wrapper title="Studio" icon="uil:visual-studio"></menu-wrapper>
+  <menu-wrapper :title="$t('menu.studio')" icon="uil:visual-studio"></menu-wrapper>
 </template>
 
 <script lang="ts" setup>

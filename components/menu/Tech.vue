@@ -3,7 +3,7 @@
     <button class="flex items-center">
       <Icon name="ri:compass-3-fill" class="text-[23px]" />
       <h5 class="mb-0 text-current font-semibold ml-2 text-[15px]">
-        Technology
+        {{ $t('menu.technology') }}
       </h5>
     </button>
 

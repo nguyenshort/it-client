@@ -1,5 +1,5 @@
 <template>
-  <lazy-template-session title="Show Case"></lazy-template-session>
+  <lazy-template-session :title="$t('home.showCase')"></lazy-template-session>
 </template>
 
 <script lang="ts" setup></script>

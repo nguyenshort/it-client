@@ -1,5 +1,5 @@
 <template>
-  <lazy-template-session title="Done Project">
+  <lazy-template-session :title="$t('home.done')">
     <ul>
       <li
         v-for="(project, index) in projects"

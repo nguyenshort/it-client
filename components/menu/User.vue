@@ -42,7 +42,7 @@
           class="px-4 py-3 transition hover:bg-primary-500 font-semibold text-gray-200 cursor-pointer"
           @click="logOut"
         >
-          Đăng Xuất
+          {{ $t('menu.logout') }}
         </div>
       </div>
     </template>

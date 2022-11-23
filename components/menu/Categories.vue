@@ -1,7 +1,7 @@
 <template>
   <lazy-menu-wrapper
     icon="bx:bxs-category"
-    title="Category"
+    :title="$t('menu.category')"
     @mouseenter="showCategories"
     @mouseleave="hideCategories"
   >

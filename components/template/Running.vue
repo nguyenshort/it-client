@@ -40,13 +40,13 @@
       ></div>
     </div>
 
-    <div class="text-[14px] font-semibold">Description:</div>
-    <p class="mt-1.5 text-[12px] line-clamp-2">
-      {{ project.content }}
-    </p>
+    <div class="text-[14px] font-semibold">{{ $t('general.des') }}:</div>
+    <p class="mt-1.5 text-[12px] line-clamp-2" v-html="project.content" />
 
     <div class="pt-3">
-      <div class="text-[13px] font-semibold">Teams</div>
+      <div class="text-[13px] font-semibold">
+        {{ $t('general.teams') }}
+      </div>
 
       <div class="flex items-center justify-between">
         <div
@@ -67,7 +67,7 @@
           icon="material-symbols:add-circle"
           @click="$modal().open('proposal', { project: project.id })"
         >
-          Tham Gia
+          {{ $t('general.join') }}
         </theme-button>
 
         <theme-button
@@ -76,7 +76,7 @@
             size="small"
             type="indigo"
         >
-          Xin Chờ
+          {{ $t('general.wait') }}
         </theme-button>
       </div>
     </div>
