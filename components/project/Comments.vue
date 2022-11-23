@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3 class="text-[20px] font-semibold text-gray-700 mb-0">
-      Đánh Giá
+      {{ $t('general.review') }}
       <span class="text-[14px] text-gray-500">(250)</span>
     </h3>
 
@@ -14,7 +14,7 @@
             class="mb-4 last:mb-0"
           >
             <div class="flex justify-between items-center">
-              <h5 class="mb-0 font-semibold text-gray-600">{{ comment.name }}</h5>
+              <h5 class="mb-0 font-semibold text-gray-600">{{ $t('review.' + comment.key) }}</h5>
 
               <ul class="flex">
                 <li
@@ -36,7 +36,9 @@
           <button
             class="flex items-center mr-6 bg-gradient-to-r from-primary-500 to-primary-700 text-white px-4 py-2 rounded-full shadow-lg shadow-primary-200"
           >
-            <span class="text-[14px] font-semibold mr-2">Đánh Giá</span>
+            <span class="text-[14px] font-semibold mr-2">
+              {{ $t('general.review') }}
+            </span>
             <Icon name="bx:bxs-message-square-edit" />
           </button>
         </div>
@@ -52,7 +54,7 @@
           path="https://assets6.lottiefiles.com/packages/lf20_akvycwlq.json"
         />
         <div class="text-sm text-gray-400">
-          Hãy đánh giá dự án của chúng tôi.
+          {{ $t('review.welcome') }}
         </div>
       </div>
     </div>
@@ -62,6 +64,7 @@
 
 <script lang="ts" setup>
 import { ref } from "#imports";
+import {useI18n} from "vue-i18n";
 
 interface SratingScore {
   score: number
@@ -76,17 +79,17 @@ const poits = ref<SratingScore[]>([
     key: 'design',
   },
   {
-    score: 4,
+    score: 5,
     name: 'Tốc Độ Phát Triển',
-    key: 'good',
+    key: 'speed',
   },
   {
-    score: 4,
+    score: 5,
     name: 'Tài Liệu Hướng Dẫn',
     key: 'document',
   },
   {
-    score: 2,
+    score: 5,
     name: 'Tầm Nhìn Dự Án',
     key: 'vision',
   }

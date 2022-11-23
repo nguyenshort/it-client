@@ -35,7 +35,22 @@ export default defineNuxtPlugin((nuxtApp) => {
           issues: 'Issues',
           start: 'Start',
           end: 'End',
-          review: 'Review'
+          review: 'Review',
+          views: 'Views',
+          enclose: 'Enclose',
+          progress: 'Progress',
+          weAreHiring: 'Welcome to join us',
+          discovering: 'We are discovering this project',
+          joinNow: 'Join Now',
+          members: 'Members',
+          otherProjects: 'Other Projects',
+        },
+        review: {
+          design: 'Good looking design',
+          speed: 'Growth Speed',
+          document: 'Manual document',
+          vision: 'Project Vision',
+          welcome: "Let's leave a review for us"
         }
       }
     }

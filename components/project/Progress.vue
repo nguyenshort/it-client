@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h3 class="text-[20px] font-semibold text-gray-700">Tiến Độ</h3>
+    <h3 class="text-[20px] font-semibold text-gray-700">
+      {{ $t('general.progress') }}
+    </h3>
 
     <div class="mt-5">
       <div v-if="steps.length">
@@ -73,12 +75,13 @@
         </div>
 
         <div v-if="isHiring" class="mt-4">
-          Dự án hiện vẫn đang welcome thành viên mới.
+          {{ $t('general.weAreHiring') }}
           <a
             class="underline text-primary-600 font-semibold"
             href="javascript:void(0)"
-            >Đăng ký ngay</a
           >
+            {{ $t('general.joinNow') }}
+          </a>
         </div>
       </div>
 
@@ -91,7 +94,7 @@
             path="https://assets5.lottiefiles.com/packages/lf20_dsxct2el.json"
           />
           <div class="text-sm text-gray-500">
-            Dự án vẫn đang trong quá trình tìm hiểu
+            {{ $t('general.discovering') }}
           </div>
         </div>
       </div>

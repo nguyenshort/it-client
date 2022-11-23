@@ -38,12 +38,12 @@
       <div class="text-gray-500 bg-gray-100 rounded-lg flex items-center">
         <button v-if="project.files.length" class="flex items-center px-3 py-1.5">
           <Icon name="ion:document-text" class="text-[16px]" />
-          <span class="text-[12px] ml-1">{{ project.files.length }} Tệp Đính Kèm</span>
+          <span class="text-[12px] ml-1">{{ project.files.length }} {{ $t('general.enclose') }}</span>
         </button>
         <span v-if="project.files.length" class="h-full w-px bg-gray-200 mx-1"></span>
         <button class="flex items-center px-3 py-1.5">
           <Icon name="ic:baseline-remove-red-eye" class="text-[16px]" />
-          <span class="text-[12px] ml-1">34350 Lượt Xem</span>
+          <span class="text-[12px] ml-1">34350 {{ $t('general.views') }}</span>
         </button>
       </div>
     </div>

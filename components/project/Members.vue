@@ -1,10 +1,10 @@
 <template>
   <div>
     <h3 class="text-[20px] font-semibold text-gray-700 mb-0">
-      Thành Viên
-      <span class="text-[14px] text-gray-500"
-        >({{ project.roles.length + 1 }})</span
-      >
+      {{ $t('general.members') }}
+      <span class="text-[14px] text-gray-500">
+        ({{ project.roles.length + 1 }})
+      </span>
     </h3>
 
     <div class="mt-3">

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h3 class="text-[20px] font-semibold text-gray-700 mb-0">Dự Án Khác</h3>
+    <h3 class="text-[20px] font-semibold text-gray-700 mb-0">
+      {{ $t('general.otherProjects') }}
+    </h3>
 
     <div class="mt-5">
       <lazy-template-project
