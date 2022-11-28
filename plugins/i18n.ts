@@ -85,6 +85,11 @@ export default defineNuxtPlugin((nuxtApp) => {
           collect: 'We are collecting the data from the database',
           resend: 'Re Send',
           send: 'Send'
+        },
+        setting: {
+          language: 'Language',
+          tab: 'Tab to change the language',
+          current: 'Current Language'
         }
       }
     }

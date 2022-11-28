@@ -2,7 +2,7 @@
   <div class="menu-item">
     <slot name="title"></slot>
 
-    <button v-if="!$slots['title']" class="flex items-center">
+    <button v-if="!$slots['title']" class="flex items-center" @click="emit('click')">
       <Icon :name="icon" class="text-[23px]" />
       <h5 class="mb-0 text-current font-semibold ml-2 text-[15px]">
         {{ title }}
@@ -24,6 +24,10 @@
 const props = defineProps<{
   icon?: string
   title?: string
+}>()
+
+const emit = defineEmits<{
+  (e: 'click'): void
 }>()
 </script>
 

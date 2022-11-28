@@ -8,7 +8,7 @@
     "postinstall": "nuxt prepare",
     "build:env": "sed 's/=.*/=/' .env > .env.example",
     "stop": "pm2 stop it-client",
-    "apollo:codegen:shinzo": "npx apollo codegen:generate --localSchemaFile=shinzo@current.graphql --target=typescript --tagName=gql --includes=./apollo/shinzo/**/*.ts --globalTypesFile=__generated__/shinzoTypes.ts",
+    "apollo:codegen:shinzo": "npx apollo codegen:generate --localSchemaFile=shinzo@current.graphql --target=typescript --tagName=gql --includes=./apollo/shinzo/**/*.ts --globalTypesFile=./apollo/__generated__/serverTypes.ts",
     "apollo:download": "npx apollo client:download-schema --endpoint=http://localhost:5001/graphql shinzo@current.graphql"
   },
   "devDependencies": {
