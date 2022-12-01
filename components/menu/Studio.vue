@@ -4,7 +4,7 @@
 
 <script lang="ts" setup>
 const openStudio = () => {
-  window.open('https://studio.fanboylove.com/', '_blank')
+  window.open('https://studio.enlightenyourcapital.com/', '_blank')
 }
 </script>
 
