@@ -28,9 +28,9 @@
             {{ $t('menu.job') }}
           </div>
 
-          <div class="ml-6 text-[15px] font-semibold">
+          <button class="ml-6 text-[15px] font-semibold" @click="$router.push('/blog')">
             {{ $t('menu.blog') }}
-          </div>
+          </button>
 
           <button class="ml-6" @click="$modal().open('setting')">
             <Icon name="material-symbols:settings" class="text-[20px]" />
