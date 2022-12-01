@@ -42,7 +42,9 @@ export default defineEventHandler(async (event) => {
       return {
         status: 401,
         body: {
-          message: 'Unauthorized - error'
+          message: 'Unauthorized - error',
+          url: config.public.apiBackend + '/users/auth',
+          token: body.token
         }
       }
     }

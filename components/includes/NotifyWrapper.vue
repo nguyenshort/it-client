@@ -19,7 +19,7 @@ import {
   SubNotify_subNotify
 } from '~/apollo/shinzo/subscriptions/__generated__/SubNotify'
 type Notify = {
-  id: Number
+  id: number
   notify: SubNotify_subNotify
 }
 
@@ -35,7 +35,7 @@ onResult((val) => {
   }
 })
 
-const removeByID = (id: Number) => {
+const removeByID = (id: number) => {
   notifies.value = notifies.value.filter((n) => n.id !== id)
 }
 </script>
