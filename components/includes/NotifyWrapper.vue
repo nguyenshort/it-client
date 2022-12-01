@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, useSubscription } from '#imports'
+import { ref, useEventBus, useSubscription } from '#imports'
 import { SUB_NOTIFY } from '~/apollo/shinzo/subscriptions/notify.subscription'
 import {
   SubNotify,
@@ -38,6 +38,8 @@ onResult((val) => {
 const removeByID = (id: number) => {
   notifies.value = notifies.value.filter((n) => n.id !== id)
 }
+
+const mitter = useEventBus<SubNotify_subNotify>('notify')
 </script>
 
 <style scoped>

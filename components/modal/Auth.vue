@@ -1,5 +1,10 @@
 <template>
-  <lazy-modal-base event="auth" :title="$t('auth.login')" :max-width="450" ref="modal">
+  <lazy-modal-base
+    ref="modal"
+    event="auth"
+    :title="$t('auth.login')"
+    :max-width="450"
+  >
     <template #default>
       <div style="width: 250px; height: 200px" class="mx-auto">
         <vue-lottie-player
@@ -19,7 +24,7 @@
       <form
         id="authForm"
         v-auto-animate
-        class="mx-auto mt-4 max-w-xs"
+        class="mx-auto mt-4 max-w-xs relative"
         @submit.prevent="authAction"
       >
         <form-text
@@ -63,7 +68,9 @@
 
         <div class="my-1 mt-3 text-center text-xs">
           <p class="text-gray-400">
-            {{ mode === 'login' ? $t('auth.signUpNew') : $t('auth.haveAccount') }}
+            {{
+              mode === 'login' ? $t('auth.signUpNew') : $t('auth.haveAccount')
+            }}
             <a
               class="ml-1 cursor-pointer text-primary-500 capitalize"
               @click="
@@ -87,7 +94,9 @@
         <div class="mb-1">
           <div class="mt-5 flex items-center">
             <span class="h-px w-full bg-gray-200" />
-            <span class="mx-3 flex-shrink-0 text-xs font-medium text-gray-400 uppercase">
+            <span
+              class="mx-3 flex-shrink-0 text-xs font-medium text-gray-400 uppercase"
+            >
               {{ $t('auth.with') }}
             </span>
             <span class="h-px w-full bg-gray-200" />
@@ -108,6 +117,13 @@
           </div>
         </div>
       </form>
+
+      <div
+        ref="errorRef"
+        class="absolute bottom-0 left-0 right-0 bg-rose-500 text-white px-5 py-3 font-semibold opacity-0"
+      >
+        {{ message }}
+      </div>
     </template>
   </lazy-modal-base>
 </template>
@@ -128,11 +144,12 @@ import {
   ref,
   getDatabase,
   computed,
-  useRouter,
   dbSet,
   dbRef,
   watch,
-  useAppStore
+  useAppStore,
+  useNuxtApp,
+  nextTick
 } from '#imports'
 
 const app = useAppStore()
@@ -141,16 +158,13 @@ const mode = ref<'login' | 'register'>('login')
 
 // Form data
 const name = ref('Nguyên')
-const email = ref<string>('dnstylish@gmail.com')
-const password = ref<string>('Khoi@025')
+const email = ref<string>('')
+const password = ref<string>('')
 
 const message = ref<string>('')
 
 // active button
 const isReady = computed(() => email.value && password.value)
-
-// Support login action
-const router = useRouter()
 
 // Thông báo
 
@@ -225,6 +239,30 @@ watch(
   () => app.auth,
   (val) => val && modal.value?.dispose()
 )
+
+const { $anime } = useNuxtApp()
+const errorRef = ref()
+watch(message, (val) => {
+  if (val) {
+    nextTick(() => {
+      $anime({
+        targets: errorRef.value,
+        opacity: [0, 1],
+        translateY: [30, 0]
+      })
+      setTimeout(() => {
+        $anime({
+          targets: errorRef.value,
+          opacity: [1, 0],
+          translateY: [0, 30],
+          complete: () => {
+            message.value = ''
+          }
+        })
+      }, 4000)
+    })
+  }
+})
 </script>
 
 <style scoped></style>
