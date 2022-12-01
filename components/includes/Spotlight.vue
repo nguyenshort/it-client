@@ -12,7 +12,7 @@
         'invisible scale-95 opacity-0': !isOpen
       }"
     >
-      <form>
+      <form @submit.prevent="openAdvanchedSeach">
         <div class="flex items-center px-4 pb-3.5 pt-4 bg-gray-100">
           <Icon name="lucide:search" class="text-[19px] flex-shrink-0" />
           <input
@@ -120,7 +120,8 @@ import {
   watch,
   useQuery,
   reactive,
-  computed
+  computed,
+  useRouter
 } from '#imports'
 import { QUICK_SEARCH } from '~/apollo/shinzo/queries/projects.query'
 import {
@@ -197,6 +198,19 @@ const { result } = useQuery<QuickSearch, QuickSearchVariables>(
   { debounce: 500 }
 )
 const projects = computed(() => result.value?.projects || [])
+
+const router = useRouter()
+const openAdvanchedSeach = () => {
+  if(filter.filter.name) {
+    isOpen.value = false
+    router.push({
+      name: 'search',
+      query: {
+        keyword: filter.filter.name
+      }
+    })
+  }
+}
 </script>
 
 <style lang="scss">
