@@ -42,7 +42,8 @@ export default defineEventHandler(async (event) => {
       return {
         status: 401,
         body: {
-          message: 'Unauthorized - error',
+          // @ts-ignore
+          message: 'Unauthorized - error - ' + e.message,
           url: config.public.apiBackend + '/users/auth',
           token: body.token
         }
