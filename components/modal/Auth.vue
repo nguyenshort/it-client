@@ -176,6 +176,20 @@ const authAction = async () => {
   }
 }
 
+function Errorextracted(_e: FirebaseError) {
+  if (_e.code === AuthErrorCodes.USER_DELETED) {
+    message.value = 'Tài khoản không tồn tại'
+  } else if (_e.code === AuthErrorCodes.USER_DISABLED) {
+    message.value = 'Tài khoản đã bị khóa'
+  } else if (_e.code === AuthErrorCodes.INVALID_PASSWORD) {
+    message.value = 'Mật khẩu không đúng'
+  } else if (_e.code === AuthErrorCodes.INVALID_EMAIL) {
+    message.value = 'Email không hợp lệ'
+  } else {
+    message.value = 'Đăng nhập thất bại'
+  }
+}
+
 /**
  * Lưu token vào cookie
  * Gi token vào store vad redirect đến trang chủ
@@ -185,18 +199,7 @@ const login = async () => {
     await signInWithEmailAndPassword(getAuth(), email.value, password.value)
     message.value = 'Đăng nhập thành công'
   } catch (e) {
-    const _e = e as FirebaseError
-    if (_e.code === AuthErrorCodes.USER_DELETED) {
-      message.value = 'Tài khoản không tồn tại'
-    } else if (_e.code === AuthErrorCodes.USER_DISABLED) {
-      message.value = 'Tài khoản đã bị khóa'
-    } else if (_e.code === AuthErrorCodes.INVALID_PASSWORD) {
-      message.value = 'Mật khẩu không đúng'
-    } else if (_e.code === AuthErrorCodes.INVALID_EMAIL) {
-      message.value = 'Email không hợp lệ'
-    } else {
-      message.value = 'Đăng nhập thất bại'
-    }
+    Errorextracted(e as FirebaseError)
     //
   }
 }
@@ -216,18 +219,7 @@ const register = async () => {
     })
     message.value = 'Đăng ký thành công'
   } catch (e) {
-    const _e = e as FirebaseError
-    if (_e.code === AuthErrorCodes.USER_DELETED) {
-      message.value = 'Tài khoản không tồn tại'
-    } else if (_e.code === AuthErrorCodes.USER_DISABLED) {
-      message.value = 'Tài khoản đã bị khóa'
-    } else if (_e.code === AuthErrorCodes.INVALID_PASSWORD) {
-      message.value = 'Mật khẩu không đúng'
-    } else if (_e.code === AuthErrorCodes.INVALID_EMAIL) {
-      message.value = 'Email không hợp lệ'
-    } else {
-      message.value = 'Đăng nhập thất bại'
-    }
+    Errorextracted(e as FirebaseError)
     //
   }
 }
