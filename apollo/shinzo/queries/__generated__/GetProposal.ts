@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { GetProposalFilter, ProposalStatus } from "./../../../../__generated__/shinzoTypes";
+import { GetProposalFilter, ProposalStatus } from "./../../../__generated__/serverTypes";
 
 // ====================================================
 // GraphQL query operation: GetProposal
@@ -37,7 +37,7 @@ export interface GetProposal_proposal {
 }
 
 export interface GetProposal {
-  proposal: GetProposal_proposal;
+  proposal: GetProposal_proposal | null;
 }
 
 export interface GetProposalVariables {

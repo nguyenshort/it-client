@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { StepStatus, ProjectStatus } from "./../../../../__generated__/shinzoTypes";
+import { StepStatus, ProjectStatus } from "./../../../__generated__/serverTypes";
 
 // ====================================================
 // GraphQL query operation: GetProject

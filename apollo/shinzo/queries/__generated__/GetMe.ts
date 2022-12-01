@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { UserRole } from "./../../../../__generated__/shinzoTypes";
+import { UserRole } from "./../../../__generated__/serverTypes";
 
 // ====================================================
 // GraphQL query operation: GetMe

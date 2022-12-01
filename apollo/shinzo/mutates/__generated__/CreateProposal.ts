@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { CreateProposalInput } from "./../../../../__generated__/shinzoTypes";
+import { CreateProposalInput } from "./../../../__generated__/serverTypes";
 
 // ====================================================
 // GraphQL mutation operation: CreateProposal
