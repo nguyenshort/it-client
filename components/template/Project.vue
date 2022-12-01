@@ -69,9 +69,7 @@
         class="mt-4"
       />
 
-      <div v-else class="text-sm text-gray-500 mt-3 mb-2 line-clamp-3">
-        {{ project.content }}
-      </div>
+      <div v-else class="text-sm text-gray-500 mt-3 mb-2 line-clamp-3" v-html="project.content"></div>
 
       <div class="mt-1.5 flex items-center justify-between">
         <button
