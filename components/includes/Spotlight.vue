@@ -36,7 +36,7 @@
             <h4 class="text-[16px] capitalize text-gray-700 font-semibold mb-0">
               Dự án nổi bật
             </h4>
-            <ul class="mt-3 mb-0">
+            <ul v-auto-animate class="mt-3 mb-0">
               <li
                 v-for="(project, index) in projects"
                 :key="index"
@@ -61,32 +61,29 @@
                   <span class="h-[15px] w-px bg-gray-200 block mx-3"></span>
 
                   <div class="flex items-center text-xs text-gray-500">
-                <span>
-                  <Icon name="ion:chatbubble-ellipses" />
-                </span>
+                    <span>
+                      <Icon name="ion:chatbubble-ellipses" />
+                    </span>
                     <span class="ml-1 relative mt-0.5">
-                  {{ project.comment }} bình luận
-                </span>
+                      {{ project.comment }} bình luận
+                    </span>
                   </div>
 
                   <span class="h-[15px] w-px bg-gray-200 block mx-3"></span>
 
                   <div class="flex items-center text-xs text-gray-500">
-                <span>
-                  <Icon name="octicon:issue-draft-16" />
-                </span>
+                    <span>
+                      <Icon name="octicon:issue-draft-16" />
+                    </span>
                     <span class="ml-1 relative mt-0.5">
-                  {{ project.issues }} issues
-                </span>
+                      {{ project.issues }} issues
+                    </span>
                   </div>
                 </div>
               </li>
             </ul>
           </div>
-          <div
-            v-else
-            class="flex flex-col items-center justify-center"
-          >
+          <div v-else class="flex flex-col items-center justify-center">
             <vue-lottie-player
               width="250px"
               height="200px"
@@ -94,9 +91,7 @@
               path="https://assets4.lottiefiles.com/datafiles/vhvOcuUkH41HdrL/data.json"
             />
             <div class="mt-4 text-center">
-              <p class="mt-2 text-sm text-gray-500">
-                Chẳng có gì ở đây cả
-              </p>
+              <p class="mt-2 text-sm text-gray-500">Chẳng có gì ở đây cả</p>
             </div>
           </div>
         </div>
@@ -201,7 +196,7 @@ const projects = computed(() => result.value?.projects || [])
 
 const router = useRouter()
 const openAdvanchedSeach = () => {
-  if(filter.filter.name) {
+  if (filter.filter.name) {
     isOpen.value = false
     router.push({
       name: 'search',

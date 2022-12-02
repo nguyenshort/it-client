@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="site-header" class="border-b">
+    <div id="site-header" class="border-b border-gray-100">
       <div class="mx-auto flex h-full max-w-bootstrap items-center px-4">
 
         <div class="header-logo mr-3 flex-shrink-0">

@@ -35,6 +35,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     // '@intlify/nuxt3',
     'nuxt-icon',
+    '@nuxt/image-edge',
     [
       '@pinia/nuxt',
       {
@@ -60,6 +61,9 @@ export default defineNuxtConfig({
     clients: {
       default: './apollo/shinzo/index.ts'
     }
+  },
+  image: {
+
   },
   runtimeConfig: {
     // Private config that is only available on the server
