@@ -31,6 +31,13 @@ export enum UserRole {
   USER = "USER",
 }
 
+export interface CountProjectsFilter {
+  category?: string | null;
+  name?: string | null;
+  status?: ProjectStatus | null;
+  technologies?: string[] | null;
+}
+
 export interface CreateBookmarkInput {
   project: string;
 }

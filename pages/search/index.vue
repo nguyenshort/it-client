@@ -21,7 +21,9 @@
         <div class="w-full">
           <h4 class="font-semibold text-[18px] mb-5">
             Kết Quả
-            <span class="opacity-50 text-[16px] ml-2">30</span>
+            <client-only>
+              <search-count />
+            </client-only>
           </h4>
 
           <search-results />

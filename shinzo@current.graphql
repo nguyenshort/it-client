@@ -80,6 +80,13 @@ type CommentLike {
   user: User!
 }
 
+input CountProjectsFilter {
+  category: ID
+  name: String
+  status: ProjectStatus
+  technologies: [ID!]
+}
+
 input CreateBookmarkInput {
   project: ID!
 }
@@ -389,6 +396,7 @@ type Query {
   posts(filter: GetPostsFilter!): [Post!]!
   project(project: String!): Project!
   projects(filter: GetProjectsFilter!): [Project!]!
+  projectsCount(filter: CountProjectsFilter!): Int!
   proposal(filter: GetProposalFilter!): Proposal
   proposals(filter: GetProposalsFilter!): [Proposal!]!
   roles(filter: GetRolesInput!): [Role!]!

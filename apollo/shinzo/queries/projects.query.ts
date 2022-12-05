@@ -36,3 +36,9 @@ export const ADVANCED_SEARCH = gql`
       }
   }
 `
+
+export const COUNT_SEARCH = gql`
+  query CountSearch($filter: CountProjectsFilter!) {
+      projectsCount(filter: $filter)
+  }
+`

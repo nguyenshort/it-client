@@ -8,14 +8,17 @@
         <img src="/images/logo.png" alt="" class="w-full h-full" />
       </div>
 
-      <div v-if="qrcode" class="w-12 w-12 transition transform hover:scale-110">
-        <img :src="qrcode" alt="" class="w-full h-full" />
+      <div ref="codeRef" class="w-12 w-12 opacity-0">
+        <img
+          v-if="qrcode"
+          :src="qrcode"
+          alt=""
+          class="w-full h-full transition transform hover:scale-110"
+        />
       </div>
     </div>
 
-    <h4 class="mt-2 text-[18px] font-bold line-clamp-2">
-      {{ project.name }}
-    </h4>
+    <h4 class="mt-2 text-[18px] font-bold line-clamp-2" v-html="highligh" />
 
     <div class="flex flex-wrap -mb-2 mt-3">
       <div
@@ -48,9 +51,19 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, useRouter } from '#imports'
+import {
+  computed,
+  inject,
+  useRouter,
+  ref,
+  useNuxtApp,
+  watch,
+  nextTick
+} from '#imports'
 import { useQRCode } from '@vueuse/integrations/useQRCode'
 import { AdvancedSearch_projects } from '~/apollo/shinzo/queries/__generated__/AdvancedSearch'
+import { UnwrapNestedRefs } from '@vue/reactivity'
+import { GetProjectsFilter } from '~/apollo/__generated__/serverTypes'
 
 const props = defineProps<{
   project: AdvancedSearch_projects
@@ -60,9 +73,34 @@ const router = useRouter()
 const link = computed(
   () =>
     props.project.link ||
-    router.resolve({ name: 'projects', params: { id: props.project.slug } }).href
+    router.resolve({ name: 'projects', params: { id: props.project.slug } })
+      .href
 )
+const filter: UnwrapNestedRefs<GetProjectsFilter> = inject('searchFilter')!
+
+const highligh = computed(() => {
+  const { name } = filter
+  if (!name) return props.project.name
+  const regex = new RegExp(name, 'gi')
+  return props.project.name.replace(
+    regex,
+    (match) => `<span class="text-primary-600">${match}</span>`
+  )
+})
+
 const qrcode = useQRCode(link)
+const { $anime } = useNuxtApp()
+const codeRef = ref<HTMLElement>()
+watch(qrcode, (el) => {
+  if (!el) return
+  nextTick(() => {
+    $anime({
+      targets: codeRef.value,
+      opacity: [0, 1],
+      scale: [0.7, 1]
+    })
+  })
+})
 </script>
 
 <style scoped></style>
