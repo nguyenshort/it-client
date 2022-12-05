@@ -37,14 +37,17 @@
 import { reactive, provide } from '#imports'
 import { GetProjectsFilter } from '~/apollo/__generated__/serverTypes'
 
-provide('searchFilter', reactive<GetProjectsFilter>({
-  offset: 0,
-  limit: 10,
-  sort: 'name',
-  category: '',
-  name: '',
-  status: null
-}))
+provide(
+  'searchFilter',
+  reactive<GetProjectsFilter>({
+    offset: 0,
+    limit: 6,
+    sort: 'name',
+    category: '',
+    name: '',
+    status: null
+  })
+)
 </script>
 
 <style scoped></style>
