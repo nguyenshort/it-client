@@ -6,7 +6,7 @@
       }"
   >
     <lazy-includes-header />
-    <div class='w-full mx-auto min-h-[56vh] max-w-bootstrap px-4'>
+    <div class='w-full mx-auto min-h-screen max-w-bootstrap px-4'>
       <nuxt-page />
     </div>
     <lazy-includes-footer />

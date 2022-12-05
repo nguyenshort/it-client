@@ -13,7 +13,7 @@
       </div>
     </div>
 
-    <h4 class="mt-2 text-[18px] font-bold">
+    <h4 class="mt-2 text-[18px] font-bold line-clamp-2">
       {{ project.name }}
     </h4>
 

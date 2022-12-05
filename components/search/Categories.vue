@@ -5,7 +5,7 @@
       :class="{
         'text-primary-600': filter.category === category.id
       }"
-      @click="filter.category = category.id"
+      @click="filter.category === category.id ? filter.category = null : filter.category = category.id"
     >
       <div
         class="w-6 h-6 border-2 border-primary-500 rounded-lg flex items-center justify-center"

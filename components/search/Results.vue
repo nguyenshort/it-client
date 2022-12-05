@@ -1,17 +1,12 @@
 <template>
-  <dev-only>{{ filter }}</dev-only>
-
   <div v-auto-animate>
-    <div class="-m-4 flex flex-wrap w-full">
+    <div class="-m-4 flex flex-wrap w-full" v-auto-animate>
       <div v-for="(project, index) in projects" :key="index" class="w-1/3 p-4">
         <search-item :project="project" />
       </div>
     </div>
     <div v-if="scrollStatus === InfiniteStatus.READY" ref="el"></div>
-    <div
-      v-else-if="loading"
-      class="flex flex-col items-center justify-center"
-    >
+    <div v-else-if="loading" class="flex flex-col items-center justify-center">
       <vue-lottie-player
         width="250px"
         height="200px"
@@ -45,13 +40,21 @@
 <script lang="ts" setup>
 import { UnwrapNestedRefs } from '@vue/reactivity'
 import { GetProjectsFilter } from '~/apollo/__generated__/serverTypes'
-import { inject, computed, useQuery, ref, useElementVisibility, watch } from '#imports'
 import {
-  AdvancedSearch, AdvancedSearch_projects,
+  inject,
+  computed,
+  useQuery,
+  ref,
+  useElementVisibility,
+  watch
+} from '#imports'
+import {
+  AdvancedSearch,
+  AdvancedSearch_projects,
   AdvancedSearchVariables
-} from "~/apollo/shinzo/queries/__generated__/AdvancedSearch";
+} from '~/apollo/shinzo/queries/__generated__/AdvancedSearch'
 import { ADVANCED_SEARCH } from '~/apollo/shinzo/queries/projects.query'
-import { InfiniteStatus } from "~/utils/infinite";
+import { InfiniteStatus } from '~/utils/infinite'
 
 const filter: UnwrapNestedRefs<GetProjectsFilter> = inject('searchFilter')!
 const vars = computed<AdvancedSearchVariables>(() => ({
@@ -69,12 +72,21 @@ const { loading, onResult } = useQuery<AdvancedSearch, AdvancedSearchVariables>(
 )
 const projects = ref<AdvancedSearch_projects[]>([])
 onResult((data) => {
-  if(data.data?.projects.length) {
-    projects.value.push(...data?.data.projects || [])
+  if (data.data?.projects.length) {
+    projects.value.push(...(data?.data.projects || []))
   } else {
     scrollStatus.value = InfiniteStatus.DONE
   }
 })
+
+watch(
+  () => [filter.name, filter.status, filter.category],
+  () => {
+    filter.offset = 0
+    projects.value = []
+    scrollStatus.value = InfiniteStatus.READY
+  }
+)
 
 const el = ref<HTMLElement>()
 const bttom = useElementVisibility(el)
@@ -83,7 +95,6 @@ watch(bttom, (val) => {
     filter.offset = projects.value.length
   }
 })
-
 </script>
 
 <style scoped></style>
