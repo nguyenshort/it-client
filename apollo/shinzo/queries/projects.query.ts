@@ -11,3 +11,26 @@ export const QUICK_SEARCH = gql`
       }
   }
 `
+
+export const ADVANCED_SEARCH = gql`
+  query AdvancedSearch($filter: GetProjectsFilter!) {
+      projects(filter: $filter) {
+          id
+          name
+          content
+          link
+          technologies {
+              id
+              name
+              slug
+          }
+          roles {
+              id
+              name
+              user {
+                  id
+              }
+          }
+      }
+  }
+`
