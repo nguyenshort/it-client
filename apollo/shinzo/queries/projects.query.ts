@@ -16,9 +16,11 @@ export const ADVANCED_SEARCH = gql`
   query AdvancedSearch($filter: GetProjectsFilter!) {
       projects(filter: $filter) {
           id
+          slug
           name
           content
           link
+          status
           technologies {
               id
               name

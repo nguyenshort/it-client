@@ -41,7 +41,7 @@ provide(
   'searchFilter',
   reactive<GetProjectsFilter>({
     offset: 0,
-    limit: 6,
+    limit: 9,
     sort: 'name',
     category: '',
     name: '',

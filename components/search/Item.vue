@@ -1,6 +1,7 @@
 <template>
-  <div
-    class="shadow-default p-4 bg-white rounded-lg cursor-pointer transform transition-all hover:shadow-primary-100"
+  <nuxt-link
+    :to="`/projects/${project.slug}`"
+    class="shadow-default p-4 bg-white rounded-lg cursor-pointer transform transition-all hover:shadow-primary-100 block"
   >
     <div class="flex items-center justify-between">
       <div class="w-12 w-12 transition transform hover:scale-110">
@@ -12,23 +13,21 @@
       </div>
     </div>
 
-    <h4 class="mt-2 text-[18px] font-bold">Memrise</h4>
+    <h4 class="mt-2 text-[18px] font-bold">
+      {{ project.name }}
+    </h4>
 
     <div class="flex flex-wrap -mb-2 mt-3">
       <div
-        v-for="(tag, index) in tags"
+        v-for="(tag, index) in project.technologies"
         :key="index"
         class="mr-3 mb-2 text-primary-500 font-semibold border border-primary-500 rounded-full px-2 text-[11px] transition transform hover:text-white hover:bg-primary-500 hover:shadow-lg shadow-primary-200"
       >
-        {{ tag }}
+        {{ tag.name }}
       </div>
     </div>
 
-    <div class="text-[13px] line-clamp-3 mt-2">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquid
-      amet assumenda at cum dolorem eaque iste itaque, magnam minus, mollitia
-      nam necessitatibus perspiciatis quas quibusdam sed tempore tenetur totam?
-    </div>
+    <div class="text-[13px] line-clamp-3 mt-2" v-html="project.content"></div>
 
     <div class="mt-4 flex">
       <button
@@ -45,77 +44,25 @@
         <span class="font-semibold text-[14px]"> Detail </span>
       </button>
     </div>
-  </div>
+  </nuxt-link>
 </template>
 
 <script lang="ts" setup>
+import { computed, useRouter } from '#imports'
 import { useQRCode } from '@vueuse/integrations/useQRCode'
+import { AdvancedSearch_projects } from '~/apollo/shinzo/queries/__generated__/AdvancedSearch'
 
-const categories = shallowRef<any[]>([
-  {
-    id: '1',
-    name: 'Mobile',
-    slug: 'mobile',
-    icon: 'ph:device-mobile-speaker-bold'
-  },
-  {
-    id: '2',
-    name: 'Web',
-    slug: 'web',
-    icon: 'mdi:web'
-  },
-  {
-    id: '3',
-    name: 'Design',
-    slug: 'design',
-    icon: 'ph:figma-logo'
-  },
-  {
-    id: '4',
-    name: 'Marketing',
-    slug: 'marketing',
-    icon: 'nimbus:marketing'
-  },
-  {
-    id: '5',
-    name: 'Blockchain',
-    slug: 'marketing',
-    icon: 'clarity:block-solid'
-  },
-  {
-    id: '6',
-    name: 'IoT',
-    slug: 'iot',
-    icon: 'pepicons:internet'
-  },
-  {
-    id: '7',
-    name: 'Cloud',
-    slug: 'cloud',
-    icon: 'material-symbols:cloud'
-  },
-  {
-    id: '8',
-    name: 'DevOps',
-    slug: 'devops',
-    icon: 'mdi:microsoft-azure-devops'
-  },
-  {
-    id: '10',
-    name: 'Data Science',
-    slug: 'data-science',
-    icon: 'ph:database-bold'
-  }
-])
+const props = defineProps<{
+  project: AdvancedSearch_projects
+}>()
 
-const form = reactive({
-  keyword: '',
-  category: ''
-})
-
-const tags = ref(['Web', 'Mobile', 'Design', 'Marketing'])
-
-const qrcode = useQRCode('https://www.facebook.com/kouki.matsuno.1')
+const router = useRouter()
+const link = computed(
+  () =>
+    props.project.link ||
+    router.resolve({ name: 'projects', params: { id: props.project.slug } }).href
+)
+const qrcode = useQRCode(link)
 </script>
 
 <style scoped></style>
