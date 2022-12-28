@@ -116,6 +116,7 @@ input CreateProjectInput {
   category: ID!
   content: String = ""
   cover: String!
+  enterprise: Boolean = false
   estimate: [Float!]!
   files: [ID!] = []
   link: String = ""
@@ -132,12 +133,13 @@ input CreateProposalInput {
 }
 
 input CreateRoleInput {
+  content: String = ""
+  count: Int = 1
   name: String!
 
   """Mảng các quyền...mảng giao động từ 1"""
   permissions: [PermissionEnum!]!
   project: ID!
-  user: ID
 }
 
 input CreateStepInput {
@@ -259,6 +261,7 @@ input GetTechnologiesFilter {
 }
 
 input GetUsersFilter {
+  email: String
   exclude: [ID!] = []
   limit: Int!
   name: String
@@ -275,7 +278,7 @@ type Mutation {
   createPost(input: CreatePostInput!): Post!
   createProject(input: CreateProjectInput!): Project!
   createProposal(input: CreateProposalInput!): Proposal!
-  createRole(input: CreateRoleInput!): Role!
+  createRole(input: CreateRoleInput!): [Role!]!
   createStep(input: CreateStepInput!): Step!
   createTechnology(input: CreateTechnologyInput!): Technology!
   removeCategory(input: DeleteCategoryInput!): Category!
@@ -335,6 +338,7 @@ type Project {
   content: String
   cover: String!
   createdAt: Float!
+  enterprise: Boolean
   estimate: [Float!]!
   files: [String!]!
   id: ID!
@@ -434,7 +438,9 @@ input RemoveTechnologyInput {
 }
 
 type Role {
+  content: String
   createdAt: Float!
+  group: Float
   id: ID!
   name: String!
   order: Float!
@@ -504,6 +510,7 @@ input UpdateProjectInput {
   category: ID
   content: String = ""
   cover: String
+  enterprise: Boolean = false
   estimate: [Float!]
   files: [ID!] = []
   id: ID!
@@ -522,6 +529,7 @@ input UpdateProposalInput {
 }
 
 input UpdateRoleInput {
+  content: String = ""
   id: ID!
   name: String
 
@@ -546,6 +554,7 @@ input UpdateTechnologyInput {
 type User {
   avatar: String
   createdAt: Float!
+  email: String
   id: ID!
   name: String!
   role: UserRole!

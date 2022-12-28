@@ -58,7 +58,7 @@ export default defineNuxtPlugin((nuxtApp) => {
           signup: 'Signup',
           name: 'Name',
           email: 'Email ID',
-          pass: 'Password',
+          password: 'Password',
           forgot: 'Forgot password?',
           haveAccount: 'Have a account?',
           signUpNew: 'Create a new account?',

@@ -35,6 +35,7 @@ export interface AdvancedSearch_projects {
   name: string;
   content: string | null;
   link: string | null;
+  logo: string | null;
   status: ProjectStatus;
   technologies: AdvancedSearch_projects_technologies[];
   roles: AdvancedSearch_projects_roles[];

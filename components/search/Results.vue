@@ -1,9 +1,18 @@
 <template>
   <div v-auto-animate>
-    <div class="-m-4 flex flex-wrap w-full" v-auto-animate>
+    <div class="-m-4 flex flex-wrap w-full">
       <div v-for="(project, index) in projects" :key="index" class="w-1/3 p-4">
         <search-item :project="project" />
       </div>
+    </div>
+
+    <div v-if="false" class="flex flex-col items-center justify-center">
+      <vue-lottie-player
+        width="250px"
+        height="200px"
+        loop
+        path="/json/loading.json"
+      />
     </div>
     <div v-if="scrollStatus === InfiniteStatus.READY" ref="el"></div>
     <div v-else-if="loading" class="flex flex-col items-center justify-center">

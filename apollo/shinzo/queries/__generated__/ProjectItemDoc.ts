@@ -43,6 +43,7 @@ export interface ProjectItemDoc {
   name: string;
   cover: string;
   owner: ProjectItemDoc_owner;
+  enterprise: boolean | null;
   category: ProjectItemDoc_category;
   bookmarks: number;
   comments: number;

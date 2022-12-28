@@ -36,17 +36,18 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, provide } from '#imports'
+import { reactive, provide, useRoute } from '#imports'
 import { GetProjectsFilter } from '~/apollo/__generated__/serverTypes'
 
+const route = useRoute()
 provide(
   'searchFilter',
   reactive<GetProjectsFilter>({
     offset: 0,
     limit: 9,
     sort: 'name',
-    category: '',
-    name: '',
+    category: null,
+    name: (route.query.keyword || '') as string,
     status: null
   })
 )

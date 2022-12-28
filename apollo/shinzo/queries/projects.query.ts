@@ -20,6 +20,7 @@ export const ADVANCED_SEARCH = gql`
           name
           content
           link
+          logo
           status
           technologies {
               id

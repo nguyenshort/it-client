@@ -31,14 +31,16 @@
               <Icon name="ion:share-social-sharp" />
             </button>
           </div>
+
           <button
-            class="absolute top-3 right-2 text-white opacity-0 transition more-button"
+            v-if="project.enterprise"
+            class="absolute top-3 left-0 text-white transition bg-gradient-to-r from-primary-500 to-primary-600 more-button px-3 py-0.5 rounded-r-lg shadow-md shadow-primary-300 font-semibold text-[13px]"
           >
-            <Icon name="mdi:dots-vertical" />
+            Enterprise
           </button>
 
           <button
-            class="absolute top-3 left-2 text-white opacity-0 transition scale-0 like-button text-xl"
+            class="absolute top-3 right-2 text-white opacity-0 transition more-button"
           >
             <Icon name="material-symbols:bookmark-add-rounded" />
           </button>
@@ -106,6 +108,7 @@
 <script lang="ts" setup>
 import { computed } from '#imports'
 import { ProjectItemDoc } from '~/apollo/shinzo/queries/__generated__/ProjectItemDoc'
+import Button from "~/components/theme/Button.vue";
 
 const props = defineProps<{
   project: ProjectItemDoc

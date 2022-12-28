@@ -1,11 +1,15 @@
 <template>
   <nuxt-link
     :to="`/projects/${project.slug}`"
-    class="shadow-default p-4 bg-white rounded-lg cursor-pointer transform transition-all hover:shadow-primary-100 block"
+    class="shadow-default p-4 bg-white rounded-lg cursor-pointer transform transition-all hover:shadow-primary-100 transform hover:scale-105 block"
   >
     <div class="flex items-center justify-between">
       <div class="w-12 w-12 transition transform hover:scale-110">
-        <img src="/images/logo.png" alt="" class="w-full h-full" />
+        <img
+          :src="project.logo ? $cdn(project.logo) : '/images/logo.png'"
+          alt=""
+          class="w-full h-full"
+        />
       </div>
 
       <div ref="codeRef" class="w-12 w-12 opacity-0">
@@ -34,7 +38,18 @@
 
     <div class="mt-4 flex">
       <button
+        v-if="!roles.length"
+        class="w-full bg-second text-primary rounded-full py-1"
+      >
+        <span class="font-semibold text-[14px]">Preparing</span>
+      </button>
+
+      <button
+        v-else
         class="w-full bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-full shadow-lg shadow-primary-200 py-1"
+        @click.prevent="
+          $authFunc(() => $modal().open('proposal', { project: project.id }))
+        "
       >
         <span class="font-semibold text-[14px]">Apply</span>
       </button>
@@ -101,6 +116,9 @@ watch(qrcode, (el) => {
     })
   })
 })
+
+const roles = computed(() => props.project.roles)
+const filledRoles = computed(() => roles.value.filter((role) => role.user))
 </script>
 
 <style scoped></style>

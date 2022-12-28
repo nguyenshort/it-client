@@ -23,6 +23,7 @@ module.exports = {
       },
       colors: {
         primary: {
+          DEFAULT: '#3b66f5',
           50: '#f5f7ff',
           100: '#ebf0fe',
           200: '#ced9fd',
@@ -33,6 +34,19 @@ module.exports = {
           700: '#2c4db8',
           800: '#233d93',
           900: '#1d3278'
+        },
+        second: {
+          DEFAULT: '#D0DEFF',
+          50: '#FFFFFF',
+          100: '#FFFFFF',
+          200: '#FFFFFF',
+          300: '#FFFFFF',
+          400: '#F9FBFF',
+          500: '#D0DEFF',
+          600: '#98B7FF',
+          700: '#608FFF',
+          800: '#2868FF',
+          900: '#0047EF'
         }
       }
     }

@@ -45,6 +45,7 @@ export interface GetHomeOnBoard_projects {
   name: string;
   cover: string;
   owner: GetHomeOnBoard_projects_owner;
+  enterprise: boolean | null;
   category: GetHomeOnBoard_projects_category;
   bookmarks: number;
   comments: number;

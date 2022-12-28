@@ -81,7 +81,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineAsyncComponent, ref, inject } from '#imports'
+import { defineAsyncComponent, ref, inject, useRouter, watch, InfiniteStatus } from "#imports";
 import { UnwrapNestedRefs } from '@vue/reactivity'
 import {
   GetProjectsFilter,
@@ -92,6 +92,19 @@ const VueSlider = defineAsyncComponent(() => import('vue3-slider'))
 const openRange = ref(false)
 
 const filter: UnwrapNestedRefs<GetProjectsFilter> = inject('searchFilter')!
+
+const router = useRouter()
+watch(
+  () => [filter.name],
+  ([val]) => {
+    router.replace({
+      query: {
+        ...router.currentRoute.value.query,
+        keyword: val
+      }
+    })
+  }
+)
 </script>
 
 <style scoped></style>

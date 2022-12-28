@@ -2,7 +2,7 @@
   <lazy-modal-base
     ref="modal"
     event="auth"
-    :title="$t('auth.login')"
+    :title="mode === 'login' ? $t('auth.login') : $t('auth.signup')"
     :max-width="450"
   >
     <template #default>

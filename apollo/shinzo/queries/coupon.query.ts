@@ -11,6 +11,7 @@ export const GET_HOME_BOARD = gql`
       avatar
       slug
     }
+    enterprise
     category {
       id
       name
