@@ -49,34 +49,34 @@
       </div>
 
       <div class="flex items-center justify-between">
-        <div
-          class="w-9 h-9 flex-shrink-0 border border-white shadow-md rounded-full overflow-hidden mt-1.5"
-        >
-          <img alt="" :src="$cdn(owner.avatar)" class="w-full h-full" />
+
+        <div class="relative h-9">
+          <div
+            class="w-9 h-9 flex-shrink-0 border border-white shadow-md rounded-full overflow-hidden mt-1.5"
+          >
+            <img alt="" :src="$cdn(owner.avatar)" class="w-full h-full" />
+          </div>
+
+          <button
+            v-for="(avatar, index) in filledRoles.splice(0, 3)"
+            :key="index"
+            :style="{
+              transform: `translateX(${index * 15}px)`,
+              zIndex: index
+            }"
+          >
+            <img :src="avatar" alt="" />
+          </button>
+
         </div>
 
-        <lazy-includes-group-avatar
-          v-if="filledRoles.length"
-          :avatars="filledRoles.map((role) => role.user.avatar)"
-        />
-
         <theme-button
-          v-else-if="project.roles.length"
           size="small"
-          type="indigo"
+          type="primary"
           icon="material-symbols:add-circle"
           @click="$modal().open('proposal', { project: project.id })"
         >
           {{ $t('general.join') }}
-        </theme-button>
-
-        <theme-button
-            v-else
-            icon="material-symbols:timelapse-outline"
-            size="small"
-            type="indigo"
-        >
-          {{ $t('general.wait') }}
         </theme-button>
       </div>
     </div>
