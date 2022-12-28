@@ -1,7 +1,7 @@
 <template>
   <div
     ref="target"
-    class="w-full h-full bg-white overflow-hidden rounded-lg bg-white p-5"
+    class="w-full h-full bg-white overflow-hidden rounded-lg bg-white p-5 shadow-default"
   >
     <div class="flex justify-between">
       <div>
@@ -84,22 +84,18 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  computed,
-  nextTick,
-  ref,
-  useElementVisibility,
-  useNuxtApp,
-  watch
-} from '#imports'
-import { ProjectRunningDoc } from '~/apollo/shinzo/queries/__generated__/ProjectRunningDoc'
+import { computed, nextTick, ref, useElementVisibility, useNuxtApp, watch } from "#imports";
+import { GetHomeRunning_projects } from "~/apollo/shinzo/queries/__generated__/GetHomeRunning";
+import { StepStatus } from "~/apollo/__generated__/serverTypes";
 
 const props = defineProps<{
-  project: ProjectRunningDoc
+  project: GetHomeRunning_projects
 }>()
 const roles = computed(() => props.project.roles)
 const filledRoles = computed(() => roles.value.filter((role) => role.user))
 const owner = computed(() => props.project.owner)
+
+const steps = computed(() => props.project.steps)
 
 const { $dayjs, $anime } = useNuxtApp()
 
@@ -110,6 +106,11 @@ const line1 = ref<HTMLDivElement>()
 const line2 = ref<HTMLDivElement>()
 watch(targetIsVisible, (isVisible) => {
   if (isVisible) {
+
+    const done = steps.value.filter((step) => step.status === StepStatus.DONE).length
+    const total = steps.value.length
+    const percent = done / total * 100
+
     nextTick(() => {
       setTimeout(() => {
         $anime({
@@ -120,7 +121,7 @@ watch(targetIsVisible, (isVisible) => {
 
         $anime({
           targets: line1.value,
-          width: '60%',
+          width: percent + '%',
           duration: 1500
         })
       }, 500)

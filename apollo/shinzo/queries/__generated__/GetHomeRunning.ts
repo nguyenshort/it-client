@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { GetProjectsFilter } from "./../../../__generated__/serverTypes";
+import { GetProjectsFilter, StepStatus } from "./../../../__generated__/serverTypes";
 
 // ====================================================
 // GraphQL query operation: GetHomeRunning
@@ -15,6 +15,12 @@ export interface GetHomeRunning_projects_owner {
   name: string;
   slug: string;
   avatar: string | null;
+}
+
+export interface GetHomeRunning_projects_steps {
+  __typename: "Step";
+  id: string;
+  status: StepStatus;
 }
 
 export interface GetHomeRunning_projects_roles_user {
@@ -40,6 +46,7 @@ export interface GetHomeRunning_projects {
   logo: string | null;
   content: string | null;
   owner: GetHomeRunning_projects_owner;
+  steps: GetHomeRunning_projects_steps[];
   roles: GetHomeRunning_projects_roles[];
   createdAt: number;
 }

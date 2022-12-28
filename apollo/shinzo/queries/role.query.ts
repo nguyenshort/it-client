@@ -4,6 +4,7 @@ export const ROLE_DOCUMENT = gql`
   fragment RoleDoc on Role {
     id
     name
+      group
     user {
       id
       name
@@ -17,6 +18,7 @@ export const GET_ROLES = gql`
   fragment RoleDoc on Role {
     id
     name
+      group
     user {
       id
       name

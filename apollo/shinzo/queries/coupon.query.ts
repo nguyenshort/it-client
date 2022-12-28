@@ -24,6 +24,7 @@ export const GET_HOME_BOARD = gql`
       id
       name
       updatedAt
+      group
       user {
         id
         name
@@ -54,6 +55,10 @@ export const GET_HOME_RUNNING = gql`
       slug
       avatar
     }
+      steps {
+          id
+          status
+      }
     roles {
       id
       name

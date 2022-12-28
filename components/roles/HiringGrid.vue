@@ -38,11 +38,10 @@
 </template>
 
 <script lang="ts" setup>
-import { ProjectItemDoc_roles } from '~/apollo/shinzo/queries/__generated__/ProjectItemDoc'
+import { computed } from '#imports'
 
 const props = withDefaults(
   defineProps<{
-    roles: ProjectItemDoc_roles[]
     maxRoles?: number
     project?: string
   }>(),
@@ -50,6 +49,8 @@ const props = withDefaults(
     maxRoles: 6
   }
 )
+
+const roles = computed(() => [])
 </script>
 
 <style scoped></style>

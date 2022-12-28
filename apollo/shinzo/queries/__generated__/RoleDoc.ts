@@ -19,5 +19,6 @@ export interface RoleDoc {
   __typename: "Role";
   id: string;
   name: string;
+  group: number | null;
   user: RoleDoc_user | null;
 }

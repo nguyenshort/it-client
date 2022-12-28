@@ -36,6 +36,7 @@ export interface GetHomeOnBoard_projects_roles {
   id: string;
   name: string;
   updatedAt: number;
+  group: number | null;
   user: GetHomeOnBoard_projects_roles_user | null;
 }
 

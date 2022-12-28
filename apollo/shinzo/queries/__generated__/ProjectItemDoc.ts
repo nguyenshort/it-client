@@ -34,6 +34,7 @@ export interface ProjectItemDoc_roles {
   id: string;
   name: string;
   updatedAt: number;
+  group: number | null;
   user: ProjectItemDoc_roles_user | null;
 }
 

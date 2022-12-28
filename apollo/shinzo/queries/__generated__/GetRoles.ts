@@ -21,6 +21,7 @@ export interface GetRoles_roles {
   __typename: "Role";
   id: string;
   name: string;
+  group: number | null;
   user: GetRoles_roles_user | null;
 }
 

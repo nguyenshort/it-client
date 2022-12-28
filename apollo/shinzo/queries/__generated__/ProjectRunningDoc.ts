@@ -3,6 +3,8 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
+import { StepStatus } from "./../../../__generated__/serverTypes";
+
 // ====================================================
 // GraphQL fragment: ProjectRunningDoc
 // ====================================================
@@ -13,6 +15,12 @@ export interface ProjectRunningDoc_owner {
   name: string;
   slug: string;
   avatar: string | null;
+}
+
+export interface ProjectRunningDoc_steps {
+  __typename: "Step";
+  id: string;
+  status: StepStatus;
 }
 
 export interface ProjectRunningDoc_roles_user {
@@ -38,6 +46,7 @@ export interface ProjectRunningDoc {
   logo: string | null;
   content: string | null;
   owner: ProjectRunningDoc_owner;
+  steps: ProjectRunningDoc_steps[];
   roles: ProjectRunningDoc_roles[];
   createdAt: number;
 }
