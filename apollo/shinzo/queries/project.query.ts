@@ -27,6 +27,7 @@ export const GET_PROJECT = gql`
       roles {
         id
         name
+          group
         user {
           id
           name
@@ -50,6 +51,15 @@ export const GET_PROJECT = gql`
   }
 `
 
+
+export const GET_PROJECT_FILES = gql`
+    query GetProjectFiles($project: String!) {
+        project(project: $project) {
+            id
+            files
+        }
+    }
+`
 
 export const GET_OWNER_PROJECT = gql`
   query GetOwnerProject($project: String!) {

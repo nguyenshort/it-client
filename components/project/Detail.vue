@@ -6,7 +6,7 @@
       </h4>
 
       <button
-        class="w-10 h-10 bg-rose-500 rounded-lg shadow-md shadow-rose-200 text-white flex items-center justify-center text-[18px] cursor-pointer transition transform hover:scale-105 hover:shadow-none"
+        class="w-10 h-10 bg-rose-500 rounded-lg shadow-md shadow-rose-200 text-white flex items-center justify-center text-[20px] cursor-pointer transition transform hover:scale-105 hover:shadow-none"
         :disabled="loading"
         @click="$authFunc(() => mutate({ input: { project: project.id } }))"
       >
@@ -37,26 +37,25 @@
       v-html="project.content"
     />
     <div class="flex mt-4">
-      <div class="text-gray-500 bg-gray-100 rounded-lg flex items-center">
+      <div class="flex items-center">
         <button
           v-if="project.files.length"
-          class="flex items-center px-3 py-1.5"
+          class="text-gray-500 bg-gray-100 flex items-center px-3 py-1.5 transition hover:bg-primary hover:text-white hover:shadow hover:shadow-primary-300 rounded-l-lg"
+          @click="$modal().open('enclose', { id: project.id, slug: project.slug })"
         >
           <Icon name="ion:document-text" class="text-[16px]" />
           <span class="text-[12px] ml-1"
             >{{ project.files.length }} {{ $t('general.enclose') }}</span
           >
         </button>
-        <span
-          v-if="project.files.length"
-          class="h-full w-px bg-gray-200 mx-1"
-        ></span>
-        <button class="flex items-center px-3 py-1.5">
+        <span v-if="project.files.length" class="h-full w-px bg-gray-200"></span>
+        <button class="text-gray-500 bg-gray-100 flex items-center px-3 py-1.5 transition hover:bg-primary hover:text-white hover:shadow hover:shadow-primary-300 rounded-r-lg">
           <Icon name="ic:baseline-remove-red-eye" class="text-[16px]" />
           <span class="text-[12px] ml-1">34350 {{ $t('general.views') }}</span>
         </button>
       </div>
     </div>
+
   </div>
 </template>
 

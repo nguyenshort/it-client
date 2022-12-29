@@ -26,6 +26,12 @@
         <!--        <project-other class="mt-6" />-->
       </div>
     </div>
+
+
+    <client-only>
+      <lazy-modal-en-close />
+    </client-only>
+
   </div>
 </template>
 

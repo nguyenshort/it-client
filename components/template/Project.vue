@@ -95,14 +95,14 @@
       <div class="mt-1.5 flex items-center justify-between">
         <button
           v-if="!roles.length"
-          class="text-white bg-green-500 text-xs px-2 py-0.5 rounded-lg shadow-md shadow-green-300"
+          class="text-white bg-green-500 text-xs px-2 py-0.5 rounded-lg shadow-md shadow-green-300 transition hover:scale-105"
         >
           <span>{{ $t("general.waiting") }}...</span>
         </button>
 
         <button
           v-else-if="roles.length === filledRoles.length"
-          class="text-white bg-indigo-500 text-xs px-2 py-0.5 rounded-lg shadow-md shadow-indio-300"
+          class="text-white bg-indigo-500 text-xs px-2 py-0.5 rounded-lg shadow-md shadow-indio-300 transition hover:scale-105"
         >
           <span>
             {{ $("general.full") }}
@@ -111,7 +111,7 @@
 
         <button
           v-else
-          class="text-white bg-primary-500 text-xs px-2 py-0.5 rounded-lg shadow-md shadow-primary-300"
+          class="text-white bg-primary-500 text-xs px-2 py-0.5 rounded-lg shadow-md shadow-primary-300 transition hover:scale-105"
         >
           <span>{{ filledRoles.length }} / {{ roles.length }}</span>
         </button>

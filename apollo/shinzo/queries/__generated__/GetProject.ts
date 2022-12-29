@@ -36,6 +36,7 @@ export interface GetProject_project_roles {
   __typename: "Role";
   id: string;
   name: string;
+  group: number | null;
   user: GetProject_project_roles_user | null;
 }
 
