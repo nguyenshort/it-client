@@ -5,10 +5,10 @@
       <div
         v-for="(file, index) in files"
         :key="index"
-        class="py-3.5 cursor-pointer hover:text-primary hover:font-semibold"
+        class="py-3.5 cursor-pointer hover:text-primary hover:font-semibold transition"
         @click="downloadFile(file.name)"
       >
-        <div class="flex items-center">
+        <div class="flex items-center _item_file opacity-0">
           <img :src='file.icon' :alt="file.shortName" width="22" />
 
           <div class="line-clamp-1 text-[14px] ml-1">
@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useQuery, reactive, computed, useNuxtApp } from '#imports'
+import { useQuery, reactive, computed, useNuxtApp, watch, nextTick } from '#imports'
 import { GET_PROJECT_FILES } from "~/apollo/shinzo/queries/project.query";
 import { GetProjectFiles, GetProjectFilesVariables } from "~/apollo/shinzo/queries/__generated__/GetProjectFiles"
 
@@ -63,7 +63,20 @@ const open = async (payload: { id: string, slug: string }) => {
   vars.project = payload.slug
 }
 
-const { $cdn } = useNuxtApp()
+const { $cdn, $anime } = useNuxtApp()
+
+watch(files, (val, oldValue) => {
+  if (val !== oldValue && val.length) {
+    nextTick(() => setTimeout(() => {
+      $anime({
+        targets: '._item_file',
+        opacity: 1,
+        translateY: [-20, 0],
+        delay: $anime.stagger(100)
+      })
+    }, 500))
+  }
+})
 
 const downloadFile = (file: string) => {
   window.open($cdn(file), '_blank')
