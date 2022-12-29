@@ -22,8 +22,6 @@
       <div class="w-1/3 min-h-screen pr-4 pl-6">
         <lazy-project-members :project="project" />
         <lazy-project-others class="mt-12" :exclude="[project?.id]" />
-        <!--        <project-members />-->
-        <!--        <project-other class="mt-6" />-->
       </div>
     </div>
 

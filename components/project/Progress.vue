@@ -4,140 +4,154 @@
       {{ $t('general.progress') }}
     </h3>
 
-    <div class="mt-5">
-      <div v-if="steps.length">
-        <div class="text-gray-500">
-          <div class="flex items-center justify-between">
-            <button class="flex items-center">
-              <Icon name="ph:person-simple-run-bold" class="text-[13px]" />
-              <span class="ml-2 text-[12px]">
-                {{ $dayjs(project.estimate[0]).format('DD/MM/YYYY') }}
-              </span>
-            </button>
+    <div v-auto-animate>
+      <div class="mt-5">
 
-            <button class="flex items-center">
-              <Icon name="mingcute:flag-1-fill" class="text-[13px]" />
-              <span class="ml-2 text-[12px]">
-                {{ $dayjs(project.estimate[1]).format('DD/MM/YYYY') }}
-              </span>
-            </button>
-          </div>
-
-          <div class="mt-4 flex relative justify-between">
-            <div
-              v-for="(step, index) in steps"
-              :key="index"
-              class="relative z-10"
-            >
-              <div class="text-center">
-                <div
-                  class="w-16 h-16 rounded-full border-[3px] flex items-center justify-center bg-white"
-                  :class="{
-                    'border-primary-500': getStatus(index) === 'done',
+        <div v-if="steps.length">
+          <div class="text-gray-500">
+            <div ref="containerRef" class="mt-4 flex relative justify-between">
+              <div
+                v-for="(step, index) in steps"
+                :key="index"
+                class="relative z-10"
+              >
+                <button class="text-center" @click="toggleActiveStep(index)">
+                  <div
+                    class="w-16 h-16 rounded-full border-[3px] flex items-center justify-center bg-white"
+                    :class="{
+                    'border-primary-500': index <= process,
                   }"
-                >
-                  <Icon
-                    v-if="getStatus(index) === 'doing'"
-                    name="eos-icons:loading"
-                    class="text-[22px] text-primary-500"
-                  />
-                  <Icon
-                    v-else-if="getStatus(index) === 'done'"
-                    name="ic:outline-check"
-                    class="text-[22px] text-primary-500"
-                  />
-                  <Icon
-                    v-else
-                    name="mdi:clock-time-five-outline"
-                    class="text-[22px] text-gray-300"
-                  />
-                </div>
+                  >
+                    <Icon
+                      v-if="index === process + 1"
+                      name="eos-icons:loading"
+                      class="text-[22px] text-primary-500"
+                    />
+                    <Icon
+                      v-else-if="index <= process"
+                      name="ic:outline-check"
+                      class="text-[22px] text-primary-500"
+                    />
+                    <Icon
+                      v-else
+                      name="mdi:clock-time-five-outline"
+                      class="text-[22px] text-gray-300"
+                    />
+                  </div>
 
-                <div class="text-[14px] mt-2 font-semibold text-gray-500">
-                  {{ step.name }}
-                </div>
+                  <div class="text-[14px] mt-2 font-semibold text-gray-500">
+                    {{ step.name }}
+                  </div>
+                </button>
               </div>
-            </div>
 
-            <div
-              class="absolute h-[4px] top-8 left-3 right-3 transform z-0 -translate-y-1/2"
-            >
-              <div class="w-full h-full bg-gray-100 relative">
-                <div
-                  class="bg-primary-500 h-full _progress"
-                  :style="{
-                    width: `${(currentActive / (steps.length - 1)) * 100}%`
+              <div
+                class="absolute h-[4px] top-8 left-3 right-3 transform z-0 -translate-y-1/2"
+              >
+                <div class="w-full h-full bg-gray-100 relative">
+                  <div
+                    class="bg-primary-500 h-full _progress"
+                    :style="{
+                    width: `${(process / (steps.length - 1)) * 100}%`
                   }"
-                ></div>
+                  ></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div v-if="isHiring" class="mt-4">
-          {{ $t('general.weAreHiring') }}
-          <a
-            class="underline text-primary-600 font-semibold"
-            href="javascript:void(0)"
-          >
-            {{ $t('general.joinNow') }}
-          </a>
+        <div v-else class="text-center">
+          <div style="width: 300px; height: 250px" class="mx-auto">
+            <vue-lottie-player
+              width="300px"
+              height="250px"
+              loop
+              path="https://assets5.lottiefiles.com/packages/lf20_dsxct2el.json"
+            />
+            <div class="text-sm text-gray-500">
+              {{ $t('general.discovering') }}
+            </div>
+          </div>
         </div>
+
       </div>
 
-      <div v-else class="text-center">
-        <div style="width: 300px; height: 250px" class="mx-auto">
-          <vue-lottie-player
-            width="300px"
-            height="250px"
-            loop
-            path="https://assets5.lottiefiles.com/packages/lf20_dsxct2el.json"
-          />
-          <div class="text-sm text-gray-500">
-            {{ $t('general.discovering') }}
-          </div>
+      <div
+        v-if="activeStep !== undefined"
+        class="bg-primary-100 text-primary-600 p-4 rounded-lg mt-6 relative step-content"
+      >
+        <div>
+          {{ steps[activeStep].content || '---' }}
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
 <script lang="ts" setup>
 import { GetProject_project } from '~/apollo/shinzo/queries/__generated__/GetProject'
-import { computed } from '#imports'
+import { computed, useQuery, ref, watch, useElementSize } from '#imports'
 import { StepStatus } from '~/__generated__/shinzoTypes'
+import { GET_PROJECT_STEPS } from "~/apollo/shinzo/queries/project.query";
+import { GetProjectSteps } from "~/apollo/shinzo/queries/__generated__/GetProjectSteps";
+import { GetProjectFilesVariables } from "~/apollo/shinzo/queries/__generated__/GetProjectFiles";
+import { VueLottiePlayer } from "@nguyenshort/vue-lottie";
 
 const props = defineProps<{
-  project: GetProject_project
+  project: Pick<GetProject_project, "id" | "slug">
 }>()
 
-const steps = computed(() => props.project.steps)
-
-const currentActive = computed(() => {
-  return steps.value.findIndex((step) => step.status === StepStatus.DONE) + 1
+const { result } = useQuery<GetProjectSteps, GetProjectFilesVariables>(GET_PROJECT_STEPS, {
+  project: props.project.slug
 })
 
-const getWidth = computed(() => {
-  return (currentActive.value / steps.value.length) * 100
-})
+const steps = computed(() => result.value?.project.steps || [])
 
-const isHiring = computed(() => {
-  return props.project.roles.filter((role) => !role.user).length > 0
-})
+const process = computed(() => steps.value.filter(step => step.status === StepStatus.DONE).length - 1)
 
-const getStatus = (index: number) => {
-  if (index <= currentActive.value) {
-    return 'done'
-  } else if (index === currentActive.value + 1) {
-    return 'doing'
+const activeStep = ref<number>()
+
+const toggleActiveStep = (index: number) => {
+  if (activeStep.value === index) {
+    activeStep.value = undefined
   } else {
-    return 'todo'
+    activeStep.value = index
   }
 }
+
+const containerRef = ref<HTMLElement>()
+const { width } = useElementSize(containerRef)
+
+const leftScale = ref(0)
+watch(() => activeStep.value, () => {
+  if(!width.value || activeStep.value === undefined) {
+    return
+  }
+
+  if(activeStep.value === 0) {
+    leftScale.value = 56/2 - 12/2
+  } else if (activeStep.value === steps.value.length - 1) {
+    leftScale.value = width.value - 56/2 - 12/2
+  } else {
+    leftScale.value = (width.value / (steps.value.length - 1)) * activeStep.value - 12/2
+  }
+})
+
+const contentStyle = computed(() => leftScale.value + 'px')
 </script>
 
-<style lang="css" scoped>
-._progress {
-  width: v-bind(getWidth);
+<style>
+.step-content:before {
+  position: absolute;
+  content: "";
+  bottom: 100%;
+  left: v-bind(contentStyle);
+  border-bottom: 7px solid #ebf0fe;
+  border-left: 6px dashed transparent;
+  border-right: 6px dashed transparent;
+  height: 0;
+  width: 0;
 }
 </style>

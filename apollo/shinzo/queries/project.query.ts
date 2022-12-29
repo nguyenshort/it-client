@@ -61,6 +61,46 @@ export const GET_PROJECT_FILES = gql`
     }
 `
 
+export const GET_PROJECT_STEPS = gql`
+    query GetProjectSteps($project: String!) {
+        project(project: $project) {
+            id
+            steps {
+                id
+                name
+                order
+                status
+                content
+            }
+        }
+    }
+`
+
+export const GET_PROJECT_MEMBERS = gql`
+    query GetProjectMembers($project: String!) {
+        project(project: $project) {
+            id
+            owner {
+                id
+                name
+                avatar
+                slug
+            }
+            roles {
+                id
+                name
+                group
+                user {
+                    id
+                    name
+                    avatar
+                    slug
+                }
+            }
+        }
+    }
+`
+
 export const GET_OWNER_PROJECT = gql`
   query GetOwnerProject($project: String!) {
     project(project: $project) {
