@@ -50,7 +50,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useAppStore, useCookie, watch } from '#imports'
+import { useAppStore, useCookie } from '#imports'
 import { getAuth, signOut } from 'firebase/auth'
 const kokiApp = useAppStore()
 

@@ -3,6 +3,7 @@
     event="proposal"
     :title="$t('resume.request')"
     @init="open"
+    @dispose="dispose"
   >
     <div v-auto-animate>
       <div
@@ -157,6 +158,10 @@
             type="primary"
             size="tini"
             class="ml-auto"
+            :disabled="disableSubmit"
+            :class="{
+              'opacity-50': disableSubmit
+            }"
             @click="submitProposal"
           >
             {{ form.id ? $t("resume.resend") : $t("resume.send") }}
@@ -217,7 +222,7 @@ import {
   ref,
   useAppStore,
   useNuxtApp,
-  reactive,
+  nextTick,
   useUpload,
   useFileDialog,
   watch,
@@ -228,9 +233,10 @@ import { ProjectItemDoc } from "~/apollo/shinzo/queries/__generated__/ProjectIte
 import { CreateProposalInput, ProposalStatus, UpdateProposalInput } from "~/apollo/__generated__/serverTypes";
 import { GetProposal_proposal } from "~/apollo/shinzo/queries/__generated__/GetProposal";
 import { CreateProposal, CreateProposalVariables } from "~/apollo/shinzo/mutates/__generated__/CreateProposal";
-import { SUBMIT_PROPOSAL } from "~/apollo/shinzo/mutates/proposal.mutate";
+import { SUBMIT_PROPOSAL, UPDATE_PROPOSAL } from "~/apollo/shinzo/mutates/proposal.mutate";
 import { GET_PROPOSAL } from "~/apollo/shinzo/queries/role.query";
 import Button from "~/components/theme/Button.vue";
+import { UpdateProposal, UpdateProposalVariables } from "~/apollo/shinzo/mutates/__generated__/UpdateProposal";
 
 enum STATUS {
   INPUT,
@@ -278,13 +284,13 @@ const getProposal = async (
   return data?.proposal;
 };
 
-const open = async ({ role, project }: OpenModalProp) => {
+const open = async ({ project }: OpenModalProp) => {
   const { data } = await $apollo.defaultClient.query({
     query: GET_PROJECT_MEMBERS,
     variables: {
       project
     }
-  });
+  })
 
   const _roles: GetProjectMembers_project_roles[] = data.project?.roles || [];
 
@@ -304,21 +310,33 @@ const open = async ({ role, project }: OpenModalProp) => {
 
   const pososal = await getProposal(data.project!.id);
   if (pososal) {
-    form.id = pososal.id
-    form.letter = pososal.letter
-    form.note = pososal.note
-    form.resume = pososal.resume
-    form.status = pososal.status
+
+    form.value = {
+      id: pososal.id,
+      letter: pososal.letter,
+      note: pososal.note,
+      resume: pososal.resume,
+      status: pososal.status
+    }
+    const indexGroup = positions.value.findIndex(group => group.find(item => item.id === pososal.role?.id))
+    if(indexGroup !== -1) {
+      form.value.role = String(indexGroup)
+    }
+
   }
 
 
-  currentStep.value = STATUS.INPUT
+  nextTick(() => {
+    setTimeout(() => {
+      currentStep.value = STATUS.INPUT;
+    }, 500)
+  })
 }
 
 type ProposalForm = CreateProposalInput &
   UpdateProposalInput &
   Pick<GetProposal_proposal, "status" | "note">
-const form = reactive<Partial<ProposalForm>>({
+const form = ref<Partial<ProposalForm>>({
   id: "",
   letter: "",
   resume: "",
@@ -327,7 +345,7 @@ const form = reactive<Partial<ProposalForm>>({
 });
 
 const currentRole = computed(() => {
-  return form.role !== "" ? positions.value[Number(form.role)]?.[0] : undefined;
+  return form.value.role !== "" ? positions.value[Number(form.value.role)]?.[0] : undefined;
 });
 
 
@@ -341,7 +359,7 @@ const uploadResume = async () => {
   try {
     const file = await upload.document(files.value![0], "resume");
     if (file) {
-      form.resume = file;
+      form.value.resume = file;
     }
   } catch (e) {
     //
@@ -355,234 +373,52 @@ const {
   loading: loadingCreate,
   mutate: createProposal,
   onDone: afterCreated
-} = useMutation<CreateProposal, CreateProposalVariables>(SUBMIT_PROPOSAL);
+} = useMutation<CreateProposal, CreateProposalVariables>(SUBMIT_PROPOSAL)
 
-const createProposalHandle = () => {
-  createProposal({
-    input: {
-      resume: form.resume,
-      letter: form.letter,
-      role: currentRole.value!.id
-    }
-  });
-};
+const { loading: loadingUpdate, mutate: updateProposal, onDone: afterUpdateProposal } = useMutation<UpdateProposal, UpdateProposalVariables>(UPDATE_PROPOSAL)
+
 
 afterCreated(() => {
   currentStep.value = STATUS.SUCCESS;
   setTimeout(() => {
-    $modal().off("proposal");
-  }, 5000);
-});
+    $modal().off("proposal")
+  }, 5000)
+})
+
+afterUpdateProposal(() => {
+  currentStep.value = STATUS.SUCCESS;
+  setTimeout(() => {
+    $modal().off("proposal")
+  }, 5000)
+})
 
 const submitProposal = () => {
-  if (form.id) {
-
+  if (form.value.id) {
+    updateProposal({
+        input: {
+          id: form.value.id,
+          letter: form.value.letter,
+          resume: form.value.resume,
+          role: currentRole.value!.id
+        }
+    })
+    //
   } else {
-    createProposalHandle();
+    createProposal({
+      input: {
+        resume: form.value.resume,
+        letter: form.value.letter,
+        role: currentRole.value!.id
+      }
+    })
   }
-};
+}
 
-// import {
-//   reactive,
-//   ref,
-//   toRaw,
-//   useFileDialog,
-//   useMutation,
-//   useNuxtApp,
-//   watch,
-//   useUpload,
-//   useAppStore
-// } from '#imports'
-// import { RoleDoc } from '~/apollo/shinzo/queries/__generated__/RoleDoc'
-// import {
-//   CreateProposal,
-//   CreateProposalVariables
-// } from '~/apollo/shinzo/mutates/__generated__/CreateProposal'
-// import {
-//   SUBMIT_PROPOSAL,
-//   UPDATE_PROPOSAL
-// } from '~/apollo/shinzo/mutates/proposal.mutate'
-// import { ProjectItemDoc_roles } from '~/apollo/shinzo/queries/__generated__/ProjectItemDoc'
-// import { GET_PROPOSAL, GET_ROLES } from '~/apollo/shinzo/queries/role.query'
-// import { GetRolesVariables } from '~/apollo/shinzo/queries/__generated__/GetRoles'
-// import {
-//   UpdateProposal,
-//   UpdateProposalVariables
-// } from '~/apollo/shinzo/mutates/__generated__/UpdateProposal'
-// import {
-//   CreateProposalInput,
-//   ProposalStatus,
-//   UpdateProposalInput
-// } from '~/__generated__/shinzoTypes'
-// import { GetProposal_proposal } from '~/apollo/shinzo/queries/__generated__/GetProposal'
-//
-// enum STATUS {
-//   INPUT,
-//   SUCCESS,
-//   LOADING,
-//   OWNER
-// }
-//
-// const appStore = useAppStore()
-//
-// const currentStep = ref<STATUS>(STATUS.LOADING)
-// const filter = reactive<GetRolesVariables>({
-//   filter: {
-//     project: ''
-//   }
-// })
-//
-// const jobPositions = ref<RoleDoc[]>([])
-//
-// type ProposalForm = CreateProposalInput &
-//   UpdateProposalInput &
-//   Pick<GetProposal_proposal, 'status' | 'note'>
-// const form = reactive<Partial<ProposalForm>>({
-//   id: '',
-//   letter: '',
-//   resume: '',
-//   role: ''
-// })
-//
-// interface OpenModalProp {
-//   role?: ProjectItemDoc_roles
-//   project: string
-// }
-//
-// const { $apollo } = useNuxtApp()
-//
-// // Todo: Merge to single query
-//
-// const getRoles = async (project: string) => {
-//   const { data } = await $apollo.defaultClient.query({
-//     query: GET_ROLES,
-//     variables: {
-//       filter: {
-//         project
-//       }
-//     }
-//   })
-//   return data?.roles || []
-// }
-//
-// const getProposal = async (
-//   project: string
-// ): Promise<GetProposal_proposal | undefined> => {
-//   const { data } = await $apollo.defaultClient.query({
-//     query: GET_PROPOSAL,
-//     variables: {
-//       filter: {
-//         project
-//       }
-//     },
-//     fetchPolicy: 'network-only'
-//   })
-//   return data?.proposal
-// }
-//
-// // const getProject = async (project: string) => {
-// //   const { data } = await $apollo.defaultClient.query({
-// //     query: GET_OWNER_PROJECT,
-// //     variables: {
-// //       project
-// //     }
-// //   })
-// //   return data?.project
-// // }
-//
-// const openModal = async ({ role, project }: OpenModalProp) => {
-//   try {
-//     const [roles, proposal] = await Promise.all([
-//       getRoles(project),
-//       getProposal(project)
-//     ])
-//
-//     jobPositions.value = roles
-//     if (proposal) {
-//       form.id = proposal.id
-//       form.letter = proposal.letter
-//       form.resume = proposal.resume
-//       form.role = proposal.role.id
-//       form.status = proposal.status
-//     } else {
-//       form.role = role?.id || ''
-//       form.letter = ''
-//       form.resume = ''
-//     }
-//     currentStep.value =
-//       proposal?.project.owner.id === appStore.user?.id
-//         ? STATUS.OWNER
-//         : STATUS.INPUT
-//   } catch (e) {
-//     //
-//   }
-// }
-//
-// const { $modal } = useNuxtApp()
-//
-// const afterSubmit = () => {
-//   console.log('afterSubmit')
-//   currentStep.value = STATUS.SUCCESS
-//   setTimeout(() => {
-//     $modal().off('proposal')
-//   }, 5000)
-// }
-//
-// const {
-//   loading,
-//   mutate: createProposal,
-//   onDone: afterCreated
-// } = useMutation<CreateProposal, CreateProposalVariables>(SUBMIT_PROPOSAL)
-// afterCreated(() => afterSubmit())
-//
-// const {
-//   loading: updating,
-//   mutate: updateProposal,
-//   onDone: afterUpdated
-// } = useMutation<UpdateProposal, UpdateProposalVariables>(UPDATE_PROPOSAL)
-// afterUpdated(() => afterSubmit())
-//
-// const submitProposal = () => {
-//   if (form?.id) {
-//     const _form = toRaw(form) as UpdateProposalInput
-//     updateProposal({
-//       input: {
-//         id: _form.id,
-//         letter: _form.letter,
-//         resume: _form.resume,
-//         role: _form.role
-//       }
-//     })
-//   } else {
-//     const _form = toRaw(form) as CreateProposalInput
-//     createProposal({
-//       input: {
-//         role: _form.role,
-//         letter: _form.letter,
-//         resume: _form.resume
-//       }
-//     })
-//   }
-// }
-//
-// // Upload file
-// const upload = useUpload()
-//
-// const { files, open: openUploadFile } = useFileDialog({
-//   accept: 'application/pdf',
-//   multiple: false
-// })
-//
-// const uploadResume = async () => {
-//   try {
-//     const file = await upload.document(files.value![0], 'resume')
-//     if (file) {
-//       form.resume = file
-//     }
-//   } catch (e) {
-//     //
-//   }
-// }
-//
-// watch(files, (file) => file && uploadResume())
+
+const disableSubmit = computed(() => !form.value.role || !loadingUpdate || !loadingCreate);
+
+
+const dispose = () => {
+  currentStep.value = STATUS.LOADING
+}
 </script>
