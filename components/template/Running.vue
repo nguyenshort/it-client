@@ -6,7 +6,7 @@
     <div class="flex justify-between">
       <div>
         <nuxt-link :to="$link().product(project)">
-          <h2 class="font-semibold text-[16px]">
+          <h2 class="font-semibold text-[16px] line-clamp-1">
             {{ project.name }}
           </h2>
         </nuxt-link>
@@ -74,7 +74,7 @@
           size="small"
           type="primary"
           icon="material-symbols:add-circle"
-          @click="$modal().open('proposal', { project: project.id })"
+          @click="$modal().open('proposal', { project: project.slug })"
         >
           {{ $t('general.join') }}
         </theme-button>

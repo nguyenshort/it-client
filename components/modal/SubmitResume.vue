@@ -415,7 +415,7 @@ const submitProposal = () => {
 }
 
 
-const disableSubmit = computed(() => !form.value.role || !loadingUpdate || !loadingCreate);
+const disableSubmit = computed(() => !form.value.role || form.value.status === ProposalStatus.APPROVED || !loadingUpdate || !loadingCreate);
 
 
 const dispose = () => {
