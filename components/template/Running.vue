@@ -71,6 +71,7 @@
         </div>
 
         <theme-button
+          v-if="roles.length !== filledRoles.length"
           size="small"
           type="primary"
           icon="material-symbols:add-circle"
