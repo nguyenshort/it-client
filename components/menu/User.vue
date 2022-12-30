@@ -61,6 +61,7 @@ const logOut = async () => {
   await kokiApp.logOut()
   await signOut(getAuth())
   counter.value = ''
+  window.location.reload()
 }
 </script>
 
