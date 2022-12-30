@@ -48,14 +48,16 @@
           {{ $t("resume.selectPosition") }}
         </h4>
 
-        <ul class="flex flex-wrap justify-between -mx-1.5 mt-2">
-          <li
+        <div class="flex flex-wrap justify-between -mx-1.5 mt-2">
+          <button
             v-for="(element, index) in Object.entries(positions)"
             :key="index"
             class="mx-1.5 transform transition w-[110px] my-2"
             :class="{
-                              'scale-95': element[0] !== form.role
-                          }"
+                'scale-95': element[0] !== form.role,
+                'pointer-events-none opacity-50': element[1].filter((item) => item.user).length === element[1].length,
+            }"
+            :disabled="element[1].filter((item) => item.user).length === element[1].length"
             @click.prevent="form.role = element[0]"
           >
             <label
@@ -69,8 +71,8 @@
                             </span>
               <span class="ml-2 transition line-clamp-1">{{ element[1][0].name }}</span>
             </label>
-          </li>
-        </ul>
+          </button>
+        </div>
 
         <div v-if="currentRole" class="mt-3">
           <h4 class="font-semibold">Chi tết vị trí công việc</h4>
@@ -228,6 +230,7 @@ import { GetProposal_proposal } from "~/apollo/shinzo/queries/__generated__/GetP
 import { CreateProposal, CreateProposalVariables } from "~/apollo/shinzo/mutates/__generated__/CreateProposal";
 import { SUBMIT_PROPOSAL } from "~/apollo/shinzo/mutates/proposal.mutate";
 import { GET_PROPOSAL } from "~/apollo/shinzo/queries/role.query";
+import Button from "~/components/theme/Button.vue";
 
 enum STATUS {
   INPUT,
