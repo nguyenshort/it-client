@@ -90,6 +90,7 @@ export const GET_PROJECT_MEMBERS = gql`
                 id
                 name
                 group
+                content
                 user {
                     id
                     name

@@ -11,7 +11,7 @@
       <div
         v-for="(role, index) in filledRoles.slice(0, 5)"
         :key="index"
-        class="flex items-center"
+        class="flex items-center mb-5"
       >
         <div
           class="w-12 h-12 rounded-full overflow-hidden shadow-default border border-white"
@@ -43,6 +43,7 @@
           :key="index"
           class="w-2/12"
           :roles="roles2"
+          @click="$modal().open('proposal', { project: project.slug, role: roles2 })"
         ></includes-role-avatar>
 
         <button

@@ -21,7 +21,7 @@
       </div>
       <div class="w-1/3 min-h-screen pr-4 pl-6">
         <lazy-project-members :project="project" />
-        <lazy-project-others class="mt-12" :exclude="[project?.id]" />
+        <lazy-project-others class="mt-8" :exclude="[project?.id]" />
       </div>
     </div>
 

@@ -28,6 +28,7 @@ export interface GetProjectMembers_project_roles {
   id: string;
   name: string;
   group: number | null;
+  content: string | null;
   user: GetProjectMembers_project_roles_user | null;
 }
 
