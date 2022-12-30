@@ -297,22 +297,20 @@ const open = async ({ role, project }: OpenModalProp) => {
     return;
   }
 
-  roles.value = _roles;
-  currentStep.value = STATUS.INPUT;
-  // checking if the current user is existing in the project
-  const index = _roles.findIndex(
-    (r) => r.user?.id === appStore.user?.id
-  );
+  roles.value = _roles
 
   const pososal = await getProposal(data.project!.id);
   if (pososal) {
-    form.id = pososal.id;
-    form.letter = pososal.letter;
-    form.note = pososal.note;
-    form.resume = pososal.resume;
-    form.status = pososal.status;
+    form.id = pososal.id
+    form.letter = pososal.letter
+    form.note = pososal.note
+    form.resume = pososal.resume
+    form.status = pososal.status
   }
-};
+
+
+  currentStep.value = STATUS.INPUT
+}
 
 type ProposalForm = CreateProposalInput &
   UpdateProposalInput &
