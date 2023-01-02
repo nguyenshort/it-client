@@ -134,6 +134,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth
 } from 'firebase/auth'
+import { updateProfile } from "firebase/auth";
 import type { FirebaseError } from 'firebase/app'
 import {
   AuthErrorCodes,
@@ -206,16 +207,13 @@ const login = async () => {
 
 const register = async () => {
   try {
-    const data = await createUserWithEmailAndPassword(
+   await createUserWithEmailAndPassword(
       getAuth(),
       email.value,
       password.value
     )
-
-    const db = getDatabase()
-    await dbSet(dbRef(db, 'users/' + data.user.uid), {
-      name: name,
-      email: email
+    await updateProfile(getAuth().currentUser!, {
+      displayName: name.value
     })
     message.value = 'Đăng ký thành công'
   } catch (e) {
