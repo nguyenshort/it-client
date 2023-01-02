@@ -14,7 +14,8 @@ export default defineNuxtPlugin((nuxtApp) => {
           search: 'Search...',
           job: 'Find Job',
           blog: 'Blog',
-          logout: 'Log Out'
+          logout: 'Log Out',
+          newProject: 'New Project',
         },
         home: {
           onBroad: 'On Broad',
@@ -84,7 +85,8 @@ export default defineNuxtPlugin((nuxtApp) => {
           ok: 'Ok',
           collect: 'We are collecting the data from the database',
           resend: 'Re Send',
-          send: 'Send'
+          send: 'Send',
+          jobDes: 'Chi tết vị trí công việc'
         },
         setting: {
           language: 'Language',

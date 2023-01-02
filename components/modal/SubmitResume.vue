@@ -76,7 +76,9 @@
         </div>
 
         <div v-if="currentRole" class="mt-3">
-          <h4 class="font-semibold">Chi tết vị trí công việc</h4>
+          <h4 class="font-semibold">
+            {{ $t("resume.jobDes") }}
+          </h4>
 
           <div class="bg-gray-100 rounded-md p-4 mt-3">
 
