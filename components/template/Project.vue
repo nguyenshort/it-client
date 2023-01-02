@@ -74,6 +74,7 @@
             :key="index"
             class="w-2/12"
             :roles="roles2"
+            @click.stop.prevent="$modal().open('proposal', { project: project.slug, role: roles2 })"
           ></includes-role-avatar>
 
           <button

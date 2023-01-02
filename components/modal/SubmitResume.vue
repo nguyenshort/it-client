@@ -249,7 +249,7 @@ enum STATUS {
 const currentStep = ref<STATUS>(STATUS.LOADING);
 
 interface OpenModalProp {
-  role?: GetProjectMembers_project_roles;
+  role?: GetProjectMembers_project_roles[];
   project: string;
 }
 
@@ -284,7 +284,7 @@ const getProposal = async (
   return data?.proposal;
 };
 
-const open = async ({ project }: OpenModalProp) => {
+const open = async ({ project, role }: OpenModalProp) => {
   const { data } = await $apollo.defaultClient.query({
     query: GET_PROJECT_MEMBERS,
     variables: {
@@ -322,7 +322,11 @@ const open = async ({ project }: OpenModalProp) => {
     if(indexGroup !== -1) {
       form.value.role = String(indexGroup)
     }
-
+  } else if (role) {
+    const indexGroup = positions.value.findIndex(group => group.find(item => item.id === role[0].id))
+    if(indexGroup !== -1) {
+      form.value.role = String(indexGroup)
+    }
   }
 
 

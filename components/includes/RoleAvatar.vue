@@ -14,15 +14,11 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "#imports"
 import { ProjectItemDoc } from "~/apollo/shinzo/queries/__generated__/ProjectItemDoc";
 
-const props = defineProps<{
+defineProps<{
   roles: ProjectItemDoc["roles"]
 }>()
-
-const count = computed(() => props.roles.length)
-const filledRoles = computed(() => props.roles.filter((role) => role.user))
 
 </script>
 
