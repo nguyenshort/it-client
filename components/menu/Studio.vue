@@ -11,7 +11,7 @@
 
 <script lang="ts" setup>
 const openStudio = () => {
-  window.open('https://studio.enlightenyourcapital.com/', '_blank')
+  window.open('https://it-admin.smileeye.edu.vn/', '_blank')
 }
 </script>
 
