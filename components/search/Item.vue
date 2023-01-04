@@ -6,7 +6,7 @@
     <div class="flex items-center justify-between">
       <div class="w-12 w-12 transition transform hover:scale-110">
         <img
-          :src="project.logo ? $cdn(project.logo) : '/images/logo.png'"
+          :src="project.logo ? $cdn(project.logo) : '/images/logo.svg'"
           alt=""
           class="w-full h-full"
         />

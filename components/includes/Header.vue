@@ -7,7 +7,7 @@
           <nuxt-link to="/" title="" class="logo">
             <img
                 class="mr-4 h-full w-full object-cover"
-                src="/images/logo.png"
+                src="/images/logo.svg"
                 alt=""
             />
           </nuxt-link>
