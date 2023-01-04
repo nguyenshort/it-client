@@ -2,7 +2,7 @@
   <div ref="target" class="relative h-[400px] overflow-hidden rounded-lg">
     <img
         class="relative z-0 h-full w-full rounded-lg object-cover"
-        src="/images/banner/bg.png"
+        src="/images/banner/bg-1.png"
         alt=""
     />
 
